@@ -1,328 +1,42 @@
-/* CSS Variables for Easy Theming */
-:root {
-    --gold: #E6D39E;
-    --black: #141414;
-    --red: #C8102E; /* Casino velvet red hint */
-    --white: #ffffff;
-    --font-heading: 'Playfair Display', serif;
-    --font-body: 'Roboto', sans-serif;
-    --transition: 0.3s ease;
+// Mobile Menu Toggle
+const hamburger = document.querySelector('.header__hamburger');
+const nav = document.querySelector('.header__nav');
+
+hamburger.addEventListener('click', () => {
+    nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+});
+
+// Form Validation (Contact Form Example)
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        if (!name || !email || !message) {
+            alert('Please fill all fields.');
+            e.preventDefault();
+        } else if (!/\S+@\S+\.\S+/.test(email)) {
+            alert('Invalid email.');
+            e.preventDefault();
+        }
+        // Placeholder for API submission: fetch('/api/contact', { method: 'POST', body: JSON.stringify({name, email, message}) });
+    });
 }
 
-/* Reset and Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+// Scroll to Top
+const scrollTop = document.querySelector('.scroll-top');
+window.addEventListener('scroll', () => {
+    scrollTop.style.display = window.scrollY > 200 ? 'block' : 'none';
+});
 
-body {
-    font-family: var(--font-body);
-    background: var(--black);
-    color: var(--white);
-    line-height: 1.6;
-}
+scrollTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 
-/* Header (BEM) */
-.header {
-    position: sticky;
-    top: 0;
-    background: var(--black);
-    z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
+// Placeholder for Collections Gallery (e.g., lazy-load more NFTs)
+// const collectionsGrid = document.querySelector('.collections__grid');
+// // Implement load more via XRP.Cafe API if provided
 
-.header__container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-}
-
-.header__logo {
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    color: var(--gold);
-    text-decoration: none;
-}
-
-.header__menu {
-    display: flex;
-    list-style: none;
-}
-
-.header__menu li {
-    margin: 0 1rem;
-}
-
-.header__menu a {
-    color: var(--white);
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.header__menu a:hover {
-    color: var(--gold);
-}
-
-.header__search input {
-    padding: 0.5rem;
-    border: 1px solid var(--gold);
-    background: var(--black);
-    color: var(--white);
-}
-
-.header__hamburger {
-    display: none;
-    font-size: 1.5rem;
-    background: none;
-    border: none;
-    color: var(--white);
-    cursor: pointer;
-}
-
-/* Buttons */
-.btn {
-    padding: 0.5rem 1rem;
-    border: none;
-    cursor: pointer;
-    transition: var(--transition);
-    text-decoration: none;
-    display: inline-block;
-    text-align: center;
-}
-
-.btn--cta {
-    background: var(--gold);
-    color: var(--black);
-}
-
-.btn:hover {
-    opacity: 0.9;
-}
-
-/* Hero Section */
-.hero {
-    position: relative;
-    height: 80vh;
-    overflow: hidden;
-}
-
-.hero__video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.hero__overlay {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    background: rgba(20, 20, 20, 0.8); /* Using --black with alpha */
-    padding: 2rem;
-    border-radius: 10px;
-    border: 1px solid var(--gold); /* Hint of gold */
-}
-
-.hero__title {
-    font-family: var(--font-heading);
-    font-size: 3rem;
-    color: var(--gold);
-}
-
-.hero__subtitle {
-    font-size: 1.5rem;
-    color: var(--red); /* Splash of red */
-}
-
-/* Carousel */
-.carousel {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 1rem;
-}
-
-.carousel__wrapper {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-}
-
-.carousel__item {
-    flex: 0 0 300px;
-    margin-right: 1rem;
-    background: rgba(230, 211, 158, 0.1); /* Subtle gold tint */
-    padding: 1rem;
-    text-align: center;
-    transition: transform var(--transition);
-}
-
-.carousel__item:hover {
-    transform: scale(1.05); /* Subtle animation */
-    /* Casino-themed: Card flip example */
-    /* For full flip, use perspective and rotateY */
-}
-
-/* Testimonials */
-.testimonials {
-    background: linear-gradient(to bottom, var(--black), var(--red));
-    padding: 2rem;
-    text-align: center;
-}
-
-.testimonials__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem;
-}
-
-/* CTA */
-.cta {
-    text-align: center;
-    padding: 2rem;
-    background: var(--gold);
-    color: var(--black);
-}
-
-/* Footer */
-.footer {
-    background: var(--black);
-    padding: 2rem;
-    text-align: center;
-}
-
-.footer__container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.footer__social {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    margin: 1rem 0;
-}
-
-.footer__social li {
-    margin: 0 1rem;
-}
-
-.footer__newsletter {
-    margin: 1rem 0;
-}
-
-.footer__links {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-}
-
-.footer__links li {
-    margin: 0 1rem;
-}
-
-/* Scroll to Top */
-.scroll-top {
-    position: fixed;
-    bottom: 1rem;
-    right: 1rem;
-    background: var(--gold);
-    color: var(--black);
-    padding: 0.5rem 1rem;
-    display: none;
-    cursor: pointer;
-}
-
-/* About Page Specific */
-.about, .blog, .community, .contact, .membership, .error {
-    max-width: 1200px;
-    margin: 2rem auto;
-    padding: 1rem;
-}
-
-.team__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-}
-
-/* Blog Specific */
-.blog__posts {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1rem;
-}
-
-.blog__categories {
-    float: left;
-    width: 20%;
-}
-
-/* Contact Form */
-.contact__form {
-    display: flex;
-    flex-direction: column;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.contact__form input, .contact__form textarea {
-    margin-bottom: 1rem;
-    padding: 0.5rem;
-    background: var(--black);
-    color: var(--white);
-    border: 1px solid var(--gold);
-}
-
-/* Dark Mode Toggle (Placeholder) */
-@media (prefers-color-scheme: dark) {
-    /* Already dark by default */
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-    .header__nav, .header__search {
-        display: none;
-    }
-
-    .header__hamburger {
-        display: block;
-    }
-
-    .header__menu {
-        flex-direction: column;
-    }
-
-    /* Show nav on toggle via JS */
-}
-
-/* Accessibility: High Contrast */
-[aria-hidden="true"] {
-    display: none;
-}
-
-/* Performance: Lazy loading is handled in HTML */
-/* For animations: Use CSS transitions */
-/* Example card flip on hover for carousel items */
-.carousel__item:hover {
-    transform: rotateY(180deg); /* Placeholder: Full implementation needs backface-visibility */
-    perspective: 1000px;
-}
-
-/* Gradients for luxury feel */
-body {
-    background: linear-gradient(to bottom, var(--black), #0a0a0a);
-}
-
-/* ARIA Attributes are in HTML */
-/* Red accents: Use --red for highlights, e.g., links or borders where appropriate */
-a:hover {
-    color: var(--red);
-}
+// Placeholder for Analytics Integration
+// e.g., Track events: gtag('event', 'click', { 'event_category': 'button', 'event_label': 'nft_explore' });
