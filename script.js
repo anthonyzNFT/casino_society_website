@@ -34,9 +34,19 @@ scrollTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Placeholder for Collections Gallery (e.g., lazy-load more NFTs)
-// const collectionsGrid = document.querySelector('.collections__grid');
-// // Implement load more via XRP.Cafe API if provided
+// Placeholder for Carousel Sliding (Vanilla JS)
+// const carouselWrapper = document.querySelector('.carousel__wrapper');
+// // Implement snap or arrows as needed
+
+// Placeholder for Infinite Scroll (Blog)
+// window.addEventListener('scroll', () => {
+//     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+//         // Load more posts via API
+//     }
+// });
 
 // Placeholder for Analytics Integration
-// e.g., Track events: gtag('event', 'click', { 'event_category': 'button', 'event_label': 'nft_explore' });
+// e.g., Track events: gtag('event', 'click', { 'event_category': 'button', 'event_label': 'join' });
+
+// Placeholder for API Integrations
+// e.g., Fetch blog posts: fetch('/api/posts').then(res => res.json()).then(data => { /* render */ });
