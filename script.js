@@ -2,12 +2,10 @@
 const hamburger = document.querySelector('.header__hamburger');
 const nav = document.querySelector('.header__nav');
 const search = document.querySelector('.header__search');
-const actions = document.querySelector('.header__actions');
 
 hamburger.addEventListener('click', () => {
     nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
     search.style.display = search.style.display === 'block' ? 'none' : 'block';
-    actions.style.display = actions.style.display === 'flex' ? 'none' : 'flex';
 });
 
 // Form Validation (Contact Form Example)
@@ -38,19 +36,27 @@ scrollTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Modal Toggle (Example for Sign-Up)
-const signupBtn = document.querySelector('.btn--signup');
-const modal = document.getElementById('signup-modal');
-const closeModal = document.querySelector('.modal__close');
+// Placeholder for Carousel Sliding (Vanilla JS)
+// const carouselWrapper = document.querySelector('.carousel__wrapper');
+// // Implement snap or arrows as needed
 
-if (signupBtn && modal) {
-    signupBtn.addEventListener('click', () => {
-        modal.style.display = 'flex';
-    });
-    closeModal.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.style.display = 'none';
-    });
-}
+// Placeholder for Infinite Scroll (Blog)
+// window.addEventListener('scroll', () => {
+//     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+//         // Load more posts via API
+//     }
+// });
+
+// Placeholder for Dark Mode Toggle
+// const toggle = document.createElement('button');
+// toggle.textContent = 'Dark Mode';
+// document.body.appendChild(toggle);
+// toggle.addEventListener('click', () => {
+//     document.body.classList.toggle('light-mode'); // Define light-mode in CSS
+// });
+
+// Placeholder for Analytics Integration
+// e.g., Track events: gtag('event', 'click', { 'event_category': 'button', 'event_label': 'signup' });
+
+// Placeholder for API Integrations
+// e.g., Fetch blog posts: fetch('/api/posts').then(res => res.json()).then(data => { /* render */ });
