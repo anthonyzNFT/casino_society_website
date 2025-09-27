@@ -21,8 +21,21 @@
 </head>
 <body>
     <header class="header">
-        <!-- Same header -->
-        <!-- ... -->
+        <div class="header__container">
+            <a href="index.html" class="header__logo">Casino Society</a>
+            <nav class="header__nav">
+                <ul class="header__menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header__search">
+                <input type="search" placeholder="Search..." aria-label="Search">
+            </div>
+            <button class="header__hamburger" aria-label="Toggle Menu">&#9776;</button>
+        </div>
     </header>
 
     <main>
@@ -43,7 +56,21 @@
     </main>
 
     <footer class="footer">
-        <!-- ... -->
+        <div class="footer__container">
+            <p>&copy; 2025 Casino Society. All rights reserved.</p>
+            <ul class="footer__social">
+                <li><a href="https://x.com/CasinoSociety_" aria-label="X (Twitter)">X</a></li>
+                <li><a href="https://discord.gg/68hXWT4VAZ" aria-label="Discord">Discord</a></li>
+            </ul>
+            <form class="footer__newsletter">
+                <input type="email" placeholder="Subscribe to Newsletter" aria-label="Email for Newsletter">
+                <button type="submit">Subscribe</button>
+            </form>
+            <ul class="footer__links">
+                <li><a href="privacy.html">Privacy Policy</a></li>
+                <li><a href="terms.html">Terms of Service</a></li>
+            </ul>
+        </div>
     </footer>
 
     <button class="scroll-top" aria-label="Scroll to Top">&uarr;</button>
