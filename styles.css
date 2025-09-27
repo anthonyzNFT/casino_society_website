@@ -1,8 +1,8 @@
 /* CSS Variables for Easy Theming */
 :root {
-    --black: #000000;
-    --gold: #d4af37;
-    --red: #cc0000;
+    --gold: #E6D39E;
+    --black: #141414;
+    --red: #C8102E; /* Casino velvet red hint */
     --white: #ffffff;
     --font-heading: 'Playfair Display', serif;
     --font-body: 'Roboto', sans-serif;
@@ -74,10 +74,6 @@ body {
     color: var(--white);
 }
 
-.header__actions .btn {
-    margin-left: 0.5rem;
-}
-
 .header__hamburger {
     display: none;
     font-size: 1.5rem;
@@ -93,14 +89,12 @@ body {
     border: none;
     cursor: pointer;
     transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
 }
 
-.btn--login {
-    background: var(--red);
-    color: var(--white);
-}
-
-.btn--signup, .btn--cta {
+.btn--cta {
     background: var(--gold);
     color: var(--black);
 }
@@ -131,18 +125,21 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(20, 20, 20, 0.8); /* Using --black with alpha */
     padding: 2rem;
     border-radius: 10px;
+    border: 1px solid var(--gold); /* Hint of gold */
 }
 
 .hero__title {
     font-family: var(--font-heading);
     font-size: 3rem;
+    color: var(--gold);
 }
 
 .hero__subtitle {
     font-size: 1.5rem;
+    color: var(--red); /* Splash of red */
 }
 
 /* Carousel */
@@ -161,7 +158,7 @@ body {
 .carousel__item {
     flex: 0 0 300px;
     margin-right: 1rem;
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(230, 211, 158, 0.1); /* Subtle gold tint */
     padding: 1rem;
     text-align: center;
     transition: transform var(--transition);
@@ -243,37 +240,6 @@ body {
     cursor: pointer;
 }
 
-/* Modal */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    justify-content: center;
-    align-items: center;
-}
-
-.modal__content {
-    background: var(--black);
-    padding: 2rem;
-    border-radius: 10px;
-    position: relative;
-}
-
-.modal__close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: none;
-    border: none;
-    color: var(--white);
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
 /* About Page Specific */
 .about, .blog, .community, .contact, .membership, .error {
     max-width: 1200px;
@@ -281,7 +247,7 @@ body {
     padding: 1rem;
 }
 
-.team__grid, .membership__tiers {
+.team__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 1rem;
@@ -322,7 +288,7 @@ body {
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
-    .header__nav, .header__search, .header__actions {
+    .header__nav, .header__search {
         display: none;
     }
 
@@ -352,7 +318,11 @@ body {
 
 /* Gradients for luxury feel */
 body {
-    background: linear-gradient(to bottom, var(--black), #111);
+    background: linear-gradient(to bottom, var(--black), #0a0a0a);
 }
 
 /* ARIA Attributes are in HTML */
+/* Red accents: Use --red for highlights, e.g., links or borders where appropriate */
+a:hover {
+    color: var(--red);
+}
