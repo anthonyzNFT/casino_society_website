@@ -34,17 +34,6 @@ scrollTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Placeholder for Carousel Sliding
-// const carouselWrapper = document.querySelector('.carousel__wrapper');
-// // Implement snap or arrows as needed
-
-// Placeholder for Infinite Scroll (Blog)
-// window.addEventListener('scroll', () => {
-//     if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
-//         // Load more posts via API
-//     }
-// });
-
 // Placeholder for Analytics Integration
 // e.g., Track events: gtag('event', 'click', { 'event_category': 'button', 'event_label': 'join' });
 
