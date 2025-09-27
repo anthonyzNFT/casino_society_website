@@ -3,20 +3,20 @@
 ## Overview
 This is the foundational structure for the "Casino Society" website, built with HTML5, CSS3, and vanilla JavaScript. It's designed for high traffic (millions of visitors), with optimizations for performance, SEO, accessibility (WCAG 2.1 AA), and mobile-first responsiveness. The theme incorporates luxury casino elements like gradients, subtle animations (e.g., hover flips), and a color palette of #E6D39E (gold), #141414 (dark), with hints of casino velvet red (#C8102E).
 
-Updates: Removed Community/Membership pages and nav tabs; removed login/signup; updated footer social links (X and Discord); revised hero section for NFT collections; updated color scheme.
+Updates: Removed search bar, newsletter signup, testimonials, and CTA sections; updated about page with new mission and founder; added NFT collections section on home with latest stats; revised footer text and styling; removed privacy policy references.
 
 ## Setup Instructions
 1. **Clone or Download**: Get the files (index.html, about.html, etc., styles.css, script.js).
 2. **Serve Locally**: Use a local server like `live-server` (npm install -g live-server) or open in browser (but some features like video may need a server).
 3. **Dependencies**: No external frameworks. Google Fonts are linked in HTML for typography.
-4. **Images/Videos**: Replace placeholders (e.g., `placeholder-image1.webp`, `hero-video.mp4`) with actual assets. Use WebP for images and optimize with tools like ImageOptim.
+4. **Images/Videos**: Replace placeholders (e.g., `b_garlinghouse.jpg`, `hero-video.mp4`) with actual assets. Use WebP for images and optimize with tools like ImageOptim.
 5. **Testing**: Check cross-browser (Chrome, Firefox, Safari, Edge) and devices. Use Lighthouse in Chrome DevTools for audits.
 
 ## How to Customize
 - **Content**: Replace placeholders like `<!-- Add your hero image here -->` or text excerpts with real content.
 - **Theming**: Edit CSS variables in `:root` (e.g., colors, fonts).
 - **Add Features**:
-  - API Integrations: Use comments in script.js for fetching data (e.g., blog posts).
+  - API Integrations: Use comments in script.js for fetching data (e.g., live NFT stats from xrp.cafe API).
   - Analytics: Uncomment Google Analytics in HTML heads.
   - Maps: Add Google Maps iframe or JS in contact.html's `#map-placeholder`.
   - Forms: Enhance submission with fetch() in script.js.
@@ -24,7 +24,7 @@ Updates: Removed Community/Membership pages and nav tabs; removed login/signup; 
   - Monetization: Add ad scripts (e.g., Google AdSense) in placeholders.
   - SEO: Update meta tags, add real structured data, generate sitemap.xml and robots.txt.
 - **Modular CSS**: Uses BEM naming for easy extension (e.g., `.header__logo`).
-- **JS Enhancements**: Add more interactivity, like carousel auto-slide or live search.
+- **JS Enhancements**: Add more interactivity, like carousel auto-slide.
 
 ## Deployment Tips
 - **Hosting**: Use Vercel, Netlify, or AWS for scalability. Enable CDN for assets.
