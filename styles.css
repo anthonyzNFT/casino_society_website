@@ -103,7 +103,7 @@ body {
     overflow: hidden;
 }
 
-.hero__video {
+.hero__image {
     position: absolute;
     top: 0;
     left: 0;
@@ -118,10 +118,10 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    background: rgba(20, 20, 20, 0.8); /* Using --black with alpha */
+    background: rgba(20, 20, 20, 0.8);
     padding: 2rem;
     border-radius: 10px;
-    border: 1px solid var(--gold); /* Hint of gold */
+    border: 1px solid var(--gold);
 }
 
 .hero__title {
@@ -132,7 +132,7 @@ body {
 
 .hero__subtitle {
     font-size: 1.5rem;
-    color: var(--red); /* Splash of red */
+    color: var(--red);
 }
 
 /* Carousel */
@@ -151,16 +151,14 @@ body {
 .carousel__item {
     flex: 0 0 300px;
     margin-right: 1rem;
-    background: rgba(230, 211, 158, 0.1); /* Subtle gold tint */
+    background: rgba(230, 211, 158, 0.1);
     padding: 1rem;
     text-align: center;
     transition: transform var(--transition);
 }
 
 .carousel__item:hover {
-    transform: scale(1.05); /* Subtle animation */
-    /* Casino-themed: Card flip example */
-    /* For full flip, use perspective and rotateY */
+    transform: scale(1.05);
 }
 
 /* Collections Section */
@@ -222,7 +220,7 @@ body {
 }
 
 .footer__social a {
-    color: var(--gold); /* #E6D39E for footer links */
+    color: var(--gold);
     text-decoration: none;
     transition: var(--transition);
 }
@@ -303,7 +301,18 @@ body {
         flex-direction: column;
     }
 
-    /* Show nav on toggle via JS */
+    .blog__categories {
+        float: none;
+        width: 100%;
+    }
+
+    .hero__title {
+        font-size: 2rem;
+    }
+
+    .hero__subtitle {
+        font-size: 1.2rem;
+    }
 }
 
 /* Accessibility: High Contrast */
@@ -312,10 +321,14 @@ body {
 }
 
 /* Performance: Lazy loading is handled in HTML */
-/* For animations: Use CSS transitions */
-/* Example card flip on hover for carousel items */
-.carousel__item:hover {
-    transform: rotateY(180deg); /* Placeholder: Full implementation needs backface-visibility */
+/* Card flip animation for NFT images */
+.collections__item img {
+    transition: transform var(--transition);
+    backface-visibility: hidden;
+}
+
+.collections__item img:hover {
+    transform: rotateY(10deg);
     perspective: 1000px;
 }
 
@@ -324,8 +337,7 @@ body {
     background: linear-gradient(to bottom, var(--black), #0a0a0a);
 }
 
-/* ARIA Attributes are in HTML */
-/* Red accents: Use --red for highlights, e.g., links or borders where appropriate */
+/* Red accents */
 a:hover {
     color: var(--red);
 }
