@@ -34,7 +34,7 @@ scrollTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Placeholder for Carousel Sliding (Vanilla JS)
+// Placeholder for Carousel Sliding
 // const carouselWrapper = document.querySelector('.carousel__wrapper');
 // // Implement snap or arrows as needed
 
@@ -49,4 +49,4 @@ scrollTop.addEventListener('click', () => {
 // e.g., Track events: gtag('event', 'click', { 'event_category': 'button', 'event_label': 'join' });
 
 // Placeholder for API Integrations
-// e.g., Fetch blog posts: fetch('/api/posts').then(res => res.json()).then(data => { /* render */ });
+// e.g., Fetch NFT stats: fetch('https://xrp.cafe/api/collections').then(res => res.json()).then(data => { /* render */ });
