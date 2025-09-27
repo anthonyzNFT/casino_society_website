@@ -1,7 +1,9 @@
 # Casino Society Website Base
 
 ## Overview
-This is the foundational structure for the "Casino Society" website, built with HTML5, CSS3, and vanilla JavaScript. It's designed for high traffic (millions of visitors), with optimizations for performance, SEO, accessibility (WCAG 2.1 AA), and mobile-first responsiveness. The theme incorporates luxury casino elements like gradients, subtle animations (e.g., hover flips), and a color palette of blacks, golds, reds, and whites.
+This is the foundational structure for the "Casino Society" website, built with HTML5, CSS3, and vanilla JavaScript. It's designed for high traffic (millions of visitors), with optimizations for performance, SEO, accessibility (WCAG 2.1 AA), and mobile-first responsiveness. The theme incorporates luxury casino elements like gradients, subtle animations (e.g., hover flips), and a color palette of #E6D39E (gold), #141414 (dark), with hints of casino velvet red (#C8102E).
+
+Updates: Removed Community/Membership pages and nav tabs; removed login/signup; updated footer social links (X and Discord); revised hero section for NFT collections; updated color scheme.
 
 ## Setup Instructions
 1. **Clone or Download**: Get the files (index.html, about.html, etc., styles.css, script.js).
@@ -14,7 +16,7 @@ This is the foundational structure for the "Casino Society" website, built with 
 - **Content**: Replace placeholders like `<!-- Add your hero image here -->` or text excerpts with real content.
 - **Theming**: Edit CSS variables in `:root` (e.g., colors, fonts).
 - **Add Features**:
-  - API Integrations: Use comments in script.js for fetching data (e.g., blog posts, forums).
+  - API Integrations: Use comments in script.js for fetching data (e.g., blog posts).
   - Analytics: Uncomment Google Analytics in HTML heads.
   - Maps: Add Google Maps iframe or JS in contact.html's `#map-placeholder`.
   - Forms: Enhance submission with fetch() in script.js.
