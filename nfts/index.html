@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Casino Society NFT Gallery: Explore exclusive collections from the casino floor to the blockchain.">
+    <meta name="description" content="Casino Society NFT Gallery: Exclusive collections from the casino floor to the blockchain.">
     <title>NFT Gallery - Casino Society</title>
     <link rel="canonical" href="https://anthonyzNFT.github.io/casino_society_website/nfts/">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Arial:wght@400;500&display=swap" rel="stylesheet">
@@ -13,13 +13,14 @@
     <header class="header">
         <div class="header__container">
             <h1 class="header__logo">Casino Society NFT Gallery</h1>
-            <nav class="header__nav">
+            <nav class="header__nav" id="mobile-menu">
                 <ul class="header__nav-list">
-                    <li><a href="../index.html" class="header__nav-link">Home</a></li>
-                    <li><a href="../about.html" class="header__nav-link">About</a></li>
-                    <li><a href="../solitaire/" class="header__nav-link">Solitaire</a></li>
+                    <li><a href="../index.html#hero" class="header__nav-link">Home</a></li>
+                    <li><a href="../index.html#nfts" class="header__nav-link">NFTs</a></li>
+                    <li><a href="../solitaire/" class="header__nav-link">Casino Solitaire</a></li>
                     <li><a href="../contact.html" class="header__nav-link">Contact</a></li>
                 </ul>
+                <button class="header__menu-toggle" aria-label="Toggle menu" id="menu-toggle">☰</button>
             </nav>
         </div>
     </header>
@@ -27,24 +28,23 @@
     <main class="main">
         <section class="nfts-gallery section">
             <div class="section__container">
-                <h1 class="section__title">Full NFT Gallery</h1>
-                <p class="section__subtitle">Explore our exclusive collections. From culture and discipline to generative banners for the Casino community.</p>
+                <h1 class="section__title">NFT Gallery</h1>
+                <p class="section__subtitle">Explore our exclusive collections from the blockchain casino floor.</p>
                 <div class="nfts-gallery__grid">
                     <div class="nfts__card">
                         <a href="https://xrp.cafe/collection/casino-society" class="nfts__link-wrapper">
-                            <img src="../assets/images/b_garlinghouse.png" alt="Casino Society PFPs Collection" loading="lazy" class="nfts__image">
+                            <img src="../assets/b_garlinghouse.png" alt="Casino Society PFPs Collection" loading="lazy" class="nfts__image">
                             <p class="nfts__name">Casino Society PFPs</p>
                         </a>
                         <p class="nfts__description">A nod towards culture, discipline, and effort. Each collectable is a 1 of 1 giving you access to the Casino. Choose your personality, and remember - no crying in the casino.</p>
                     </div>
                     <div class="nfts__card">
                         <a href="https://xrp.cafe/collection/casinobanners" class="nfts__link-wrapper">
-                            <img src="../assets/images/banner_collection_brand.png" alt="Casino Society Banners Collection" loading="lazy" class="nfts__image">
+                            <img src="../assets/banner_collection_brand.png" alt="Casino Society Banners Collection" loading="lazy" class="nfts__image">
                             <p class="nfts__name">Casino Society Banners</p>
                         </a>
                         <p class="nfts__description">A collection of generative banners inspired by Schizo Banners for the Casino community.</p>
                     </div>
-                    <!-- Add more from Softr (manual curation: name, desc, image, link) -->
                 </div>
             </div>
         </section>
@@ -54,12 +54,9 @@
         <div class="footer__container">
             <p>&copy; 2025 Casino Society. All rights reserved. Send ourselves and each other higher.</p>
             <div class="footer__social">
-                <a href="https://x.com/CasinoSociety_" aria-label="X (formerly Twitter)">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Twitter_new_X_logo.png" alt="X Logo" class="footer__icon" loading="lazy">
-                </a>
-                <a href="https://discord.gg/68hXWT4VAZ" aria-label="Discord">
-                    <img src="https://static.vecteezy.com/system/resources/previews/018/930/500/non_2x/discord-logo-discord-icon-transparent-free-png.png" alt="Discord Logo" class="footer__icon" loading="lazy">
-                </a>
+                <a href="https://x.com/CasinoSociety_" class="footer__social-link">X</a>
+                <span class="footer__social-divider">|</span>
+                <a href="https://discord.gg/68hXWT4VAZ" class="footer__social-link">Discord</a>
             </div>
         </div>
     </footer>
