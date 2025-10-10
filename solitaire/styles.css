@@ -1,36 +1,25 @@
-body {
-    margin: 0;
-    padding: 20px;
-    background-color: #141414;
-    color: #E6D39E;
-    font-family: 'Arial', sans-serif;
-    text-align: center;
+/* Solitaire-specific: Inherits global --gold, --black, --red */
+canvas {
+    display: block;
+    max-width: 100%;
+    max-height: 100vh;
+    touch-action: none;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    box-shadow: 0 0 20px var(--red);
 }
-.logo {
-    font-size: 48px;
-    font-family: serif;
-    color: #E6D39E;
-    margin: 0;
+
+#debug {
+    background: var(--black);
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
 }
-p {
-    font-size: 18px;
-}
-nav ul {
-    list-style: none;
-    padding: 0;
-}
-nav ul li {
-    margin: 10px 0;
-}
-nav ul li a {
-    color: #E6D39E;
-    text-decoration: none;
-    font-size: 24px;
-}
-nav ul li a:hover {
-    text-decoration: underline;
-}
+
+/* Responsive: Scale for mobile */
 @media (max-width: 600px) {
-    .logo { font-size: 36px; }
-    nav ul li a { font-size: 20px; }
+    canvas {
+        transform: scale(0.95);
+        margin: 0 auto;
+    }
 }
