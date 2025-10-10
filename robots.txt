@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Sitemap: https://anthonyzNFT.github.io/casino_society_website/sitemap.xml
