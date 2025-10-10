@@ -39,7 +39,7 @@ body {
 .header__logo {
     font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
-    color: var(--black);
+    color: var(--white); /* White for contrast */
     transition: var(--transition);
 }
 
@@ -55,7 +55,7 @@ body {
 }
 
 .header__nav-link {
-    color: var(--black);
+    color: var(--white); /* White for contrast */
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition);
@@ -70,7 +70,7 @@ body {
     display: none;
     background: none;
     border: none;
-    color: var(--black);
+    color: var(--white);
     font-size: 1.5rem;
     cursor: pointer;
 }
@@ -85,14 +85,10 @@ body {
     overflow: hidden;
 }
 
-.hero__video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+.hero__container {
     height: 100%;
-    object-fit: cover;
-    filter: brightness(0.5);
+    background: url('assets/casino_brand.png') no-repeat center center/cover;
+    background-color: var(--black); /* Fallback */
 }
 
 .hero__overlay {
@@ -117,6 +113,7 @@ body {
     color: var(--red);
     max-width: 600px;
     margin: 0 auto;
+    text-shadow: 1px 1px 2px var(--black);
 }
 
 .section {
@@ -171,8 +168,9 @@ body {
 
 .nfts__image {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
+    aspect-ratio: 1/1; /* Square for NFT images */
+    height: auto;
+    max-height: 200px;
     border-radius: 4px;
     margin-bottom: 1rem;
 }
