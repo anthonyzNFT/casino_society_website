@@ -39,7 +39,7 @@ body {
 .header__logo {
     font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
-    color: var(--gold);
+    color: var(--black);
     transition: var(--transition);
 }
 
@@ -55,7 +55,7 @@ body {
 }
 
 .header__nav-link {
-    color: var(--gold);
+    color: var(--black);
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition);
@@ -70,7 +70,7 @@ body {
     display: none;
     background: none;
     border: none;
-    color: var(--gold);
+    color: var(--black);
     font-size: 1.5rem;
     cursor: pointer;
 }
@@ -114,6 +114,7 @@ body {
 
 .hero__subtitle {
     font-size: 1.5rem;
+    color: var(--red);
     max-width: 600px;
     margin: 0 auto;
 }
@@ -143,7 +144,7 @@ body {
     color: var(--white);
 }
 
-.nfts__grid {
+.nfts__grid, .nfts-gallery__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
@@ -151,7 +152,7 @@ body {
 
 .nfts__card {
     background: var(--black);
-    padding: 2rem;
+    padding: 1rem;
     border: 1px solid var(--gold);
     border-radius: 8px;
     text-align: center;
@@ -160,6 +161,73 @@ body {
 
 .nfts__card:hover {
     box-shadow: 0 0 20px var(--red);
+}
+
+.nfts__link-wrapper {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.nfts__image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.nfts__name {
+    font-weight: 500;
+    color: var(--gold);
+    margin: 0;
+}
+
+.games__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.games__item {
+    text-align: center;
+}
+
+.games__link-wrapper {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.games__image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 2px solid var(--gold);
+}
+
+.games__name {
+    font-weight: 500;
+    color: var(--gold);
+    margin-bottom: 1rem;
+}
+
+.games__button {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.games__button:hover {
+    background: var(--red);
+    color: var(--white);
 }
 
 .games__link {
@@ -176,7 +244,6 @@ body {
 .games__link:hover {
     background: var(--red);
     color: var(--white);
-    box-shadow: 0 0 10px var(--gold);
 }
 
 .about__content {
@@ -193,49 +260,27 @@ body {
     border: 2px solid var(--gold);
 }
 
-.contact__form {
+.contact__section {
+    text-align: center;
     max-width: 600px;
-    margin: 0 auto 3rem;
+    margin: 0 auto;
 }
 
-.form__label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--gold);
-}
-
-.form__input, .form__textarea {
-    width: 100%;
-    padding: 1rem;
-    border: 1px solid var(--gold);
-    border-radius: 5px;
-    background: var(--black);
-    color: var(--white);
-    margin-bottom: 1rem;
-}
-
-.form__submit {
-    background: var(--red);
-    color: var(--white);
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: var(--transition);
-    width: 100%;
-}
-
-.form__submit:hover {
+.contact__button {
+    display: inline-block;
     background: var(--gold);
     color: var(--black);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: var(--transition);
+    margin-top: 2rem;
 }
 
-.contact__map {
-    text-align: center;
-    padding: 2rem;
-    border: 1px solid var(--gold);
-    border-radius: 5px;
+.contact__button:hover {
+    background: var(--red);
+    color: var(--white);
 }
 
 .footer {
@@ -251,7 +296,29 @@ body {
     padding: 0 2rem;
 }
 
-/* Mobile Menu */
+.footer__social {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.footer__social-link {
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: var(--transition);
+}
+
+.footer__social-link:hover {
+    color: var(--red);
+}
+
+.footer__social-divider {
+    color: var(--gold);
+    font-size: 1rem;
+}
+
 @media (max-width: 768px) {
     .header__nav-list {
         display: none;
@@ -262,6 +329,7 @@ body {
         background: var(--black);
         flex-direction: column;
         padding: 1rem;
+        z-index: 100;
     }
 
     .header__nav-list.active {
@@ -279,6 +347,8 @@ body {
     .about__content {
         grid-template-columns: 1fr;
     }
-}
 
-/* Solitaire Inheritance: Game-specific overrides in solitaire/styles.css */
+    .nfts__grid, .nfts-gallery__grid, .games__grid {
+        grid-template-columns: 1fr;
+    }
+}
