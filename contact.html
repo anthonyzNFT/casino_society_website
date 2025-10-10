@@ -3,75 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contact Casino Society for inquiries, partnerships, or support.">
-    <meta name="keywords" content="contact casino society, NFT support, XRP community">
-    <meta property="og:title" content="Casino Society - Contact">
-    <meta property="og:description" content="Get in touch with Casino Society for NFT inquiries or support.">
-    <meta property="og:image" content="https://casinosociety.com/zee_pfp.jpg">
-    <meta property="og:url" content="https://casinosociety.com/contact.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Casino Society - Contact">
-    <meta name="twitter:description" content="Get in touch with Casino Society for NFT inquiries or support.">
-    <meta name="twitter:image" content="https://casinosociety.com/zee_pfp.jpg">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ContactPage",
-      "name": "Contact Casino Society"
-    }
-    </script>
-    <title>Casino Society - Contact</title>
-    <link rel="canonical" href="https://casinosociety.com/contact.html">
+    <meta name="description" content="Contact Casino Society: Get in touch for partnerships, inquiries, or elite membership.">
+    <title>Contact - Casino Society</title>
+    <link rel="canonical" href="https://anthonyzNFT.github.io/casino_society_website/contact.html">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Arial:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header class="header">
         <div class="header__container">
-            <a href="index.html" class="header__logo">Casino Society</a>
-            <nav class="header__nav">
-                <ul class="header__menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+            <h1 class="header__logo">Casino Society</h1>
+            <nav class="header__nav" id="mobile-menu">
+                <ul class="header__nav-list">
+                    <li><a href="index.html" class="header__nav-link">Home</a></li>
+                    <li><a href="about.html" class="header__nav-link">About</a></li>
+                    <li><a href="solitaire/" class="header__nav-link">Solitaire</a></li>
+                    <li><a href="#contact" class="header__nav-link">Contact</a></li>
                 </ul>
+                <button class="header__menu-toggle" aria-label="Toggle menu" id="menu-toggle">☰</button>
             </nav>
-            <button class="header__hamburger" aria-label="Toggle Menu">&#9776;</button>
         </div>
     </header>
 
-    <main>
-        <section class="contact">
-            <h1>Contact Us</h1>
-            <form class="contact__form" id="contact-form">
-                <label for="name">Name</label>
-                <input type="text" id="name" required aria-required="true">
-                <label for="email">Email</label>
-                <input type="email" id="email" required aria-required="true">
-                <label for="message">Message</label>
-                <textarea id="message" required aria-required="true"></textarea>
-                <button type="submit">Send</button>
-            </form>
-            <!-- Map Integration Placeholder: e.g., Google Maps API -->
-            <div id="map-placeholder"> <!-- // Placeholder for map: Embed iframe or JS API --></div>
+    <main class="main">
+        <section id="contact" class="contact section">
+            <div class="section__container">
+                <h1 class="contact__title">Contact Us</h1>
+                <form class="contact__form" id="contact-form">
+                    <label for="name" class="form__label">Name</label>
+                    <input type="text" id="name" name="name" required aria-required="true">
+                    <label for="email" class="form__label">Email</label>
+                    <input type="email" id="email" name="email" required aria-required="true">
+                    <label for="message" class="form__label">Message</label>
+                    <textarea id="message" name="message" rows="5" required aria-required="true"></textarea>
+                    <button type="submit" class="form__submit">Send Message</button>
+                </form>
+                <div id="map-placeholder" class="contact__map">
+                    <!-- Google Maps iframe placeholder: Replace with <iframe src="https://www.google.com/maps/embed?pb=..."></iframe> -->
+                    <p>Map coming soon. Join the elite—contact us directly.</p>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer class="footer">
         <div class="footer__container">
-            <p>© 2025 Casino Society. All rights reserved. DYOR and invest responsibly. No Crying in the Casino</p>
-            <ul class="footer__social">
-                <li><a href="https://x.com/CasinoSociety_" aria-label="X (Twitter)">X</a></li>
-                <li><a href="https://discord.gg/68hXWT4VAZ" aria-label="Discord">Discord</a></li>
-            </ul>
+            <p>&copy; 2025 Casino Society. All rights reserved.</p>
         </div>
     </footer>
 
-    <button class="scroll-top" aria-label="Scroll to Top">&uarr;</button>
-
-    <script src="script.js" async></script>
+    <script src="script.js"></script>
 </body>
 </html>
