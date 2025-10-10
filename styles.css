@@ -39,7 +39,7 @@ body {
 .header__logo {
     font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
-    color: var(--white); /* White for contrast */
+    color: var(--black); /* Black for contrast */
     transition: var(--transition);
 }
 
@@ -55,7 +55,7 @@ body {
 }
 
 .header__nav-link {
-    color: var(--white); /* White for contrast */
+    color: var(--black); /* Black for contrast */
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition);
@@ -70,7 +70,7 @@ body {
     display: none;
     background: none;
     border: none;
-    color: var(--white);
+    color: var(--black);
     font-size: 1.5rem;
     cursor: pointer;
 }
@@ -98,6 +98,9 @@ body {
     transform: translate(-50%, -50%);
     text-align: center;
     z-index: 2;
+    background: rgba(20, 20, 20, 0.7); /* Semi-transparent grey for legibility */
+    padding: 2rem;
+    border-radius: 8px;
 }
 
 .hero__title {
@@ -167,10 +170,9 @@ body {
 }
 
 .nfts__image {
-    width: 100%;
-    aspect-ratio: 1/1; /* Square for NFT images */
-    height: auto;
-    max-height: 200px;
+    width: 200px;
+    height: 200px; /* Strict 1:1 for square images */
+    object-fit: contain; /* Preserve image without cropping */
     border-radius: 4px;
     margin-bottom: 1rem;
 }
@@ -342,11 +344,20 @@ body {
         font-size: 2.5rem;
     }
 
+    .hero__overlay {
+        padding: 1rem;
+    }
+
     .about__content {
         grid-template-columns: 1fr;
     }
 
     .nfts__grid, .nfts-gallery__grid, .games__grid {
         grid-template-columns: 1fr;
+    }
+
+    .nfts__image {
+        width: 150px;
+        height: 150px; /* Smaller square for mobile */
     }
 }
