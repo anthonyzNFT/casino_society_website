@@ -3,77 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn about Casino Society's mission and founder. Join our exclusive NFT community.">
-    <meta name="keywords" content="casino society, XRP NFT, casino mission, Zee founder">
-    <meta property="og:title" content="Casino Society - About">
-    <meta property="og:description" content="Discover the mission and founder behind Casino Society's NFT revolution.">
-    <meta property="og:image" content="https://casinosociety.com/zee_pfp.jpg">
-    <meta property="og:url" content="https://casinosociety.com/about.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Casino Society - About">
-    <meta name="twitter:description" content="Discover the mission and founder behind Casino Society's NFT revolution.">
-    <meta name="twitter:image" content="https://casinosociety.com/zee_pfp.jpg">
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "AboutPage",
-      "name": "About Casino Society",
-      "url": "https://casinosociety.com/about.html"
-    }
-    </script>
-    <title>Casino Society - About</title>
-    <link rel="canonical" href="https://casinosociety.com/about.html">
+    <meta name="description" content="About Casino Society: Our mission, founder Zee, and vision for elite gaming and NFTs.">
+    <title>About - Casino Society</title>
+    <link rel="canonical" href="https://anthonyzNFT.github.io/casino_society_website/about.html">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Arial:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header class="header">
         <div class="header__container">
-            <a href="index.html" class="header__logo">Casino Society</a>
-            <nav class="header__nav">
-                <ul class="header__menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+            <h1 class="header__logo">Casino Society</h1>
+            <nav class="header__nav" id="mobile-menu">
+                <ul class="header__nav-list">
+                    <li><a href="index.html" class="header__nav-link">Home</a></li>
+                    <li><a href="#about" class="header__nav-link">About</a></li>
+                    <li><a href="solitaire/" class="header__nav-link">Solitaire</a></li>
+                    <li><a href="contact.html" class="header__nav-link">Contact</a></li>
                 </ul>
+                <button class="header__menu-toggle" aria-label="Toggle menu" id="menu-toggle">☰</button>
             </nav>
-            <button class="header__hamburger" aria-label="Toggle Menu">&#9776;</button>
         </div>
     </header>
 
-    <main>
-        <section class="about">
-            <h1>About Casino Society</h1>
-            <p>Our brand story: Blending Las Vegas glamour with Monte Carlo sophistication.</p>
-            <h2>Mission</h2>
-            <p>Send ourselves and each other higher.</p>
-            <h2>Our Founder</h2>
-            <div class="team__grid">
-                <article class="team__member">
-                    <img loading="lazy" src="zee_pfp.jpg" alt="Zee - Founder of Casino Society">
-                    <h3>Zee</h3>
-                    <p>Founder</p>
-                    <a href="https://x.com/zbits33" class="founder__handle">@zbits33</a>
-                </article>
+    <main class="main">
+        <section id="about" class="about section">
+            <div class="section__container">
+                <h1 class="about__title">About Casino Society</h1>
+                <div class="about__content">
+                    <img src="assets/images/zee_pfp.webp" alt="Founder Zee Profile" class="about__image" loading="lazy">
+                    <div class="about__text">
+                        <h2 class="about__subtitle">Our Mission</h2>
+                        <p>At Casino Society, we believe in sending ourselves and each other higher. We're building an exclusive society where elite gamers, NFT collectors, and visionaries converge for high-stakes experiences that transcend the ordinary.</p>
+                        <h3 class="about__founder">Founder: Zee</h3>
+                        <p>Visionary leader driving innovation in luxury gaming and blockchain. Zee's journey from traditional casinos to digital empires shapes our velvet-rope world.</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
         <div class="footer__container">
-            <p>© 2025 Casino Society. All rights reserved. DYOR and invest responsibly. No Crying in the Casino</p>
-            <ul class="footer__social">
-                <li><a href="https://x.com/CasinoSociety_" aria-label="X (Twitter)">X</a></li>
-                <li><a href="https://discord.gg/68hXWT4VAZ" aria-label="Discord">Discord</a></li>
-            </ul>
+            <p>&copy; 2025 Casino Society. All rights reserved.</p>
         </div>
     </footer>
 
-    <button class="scroll-top" aria-label="Scroll to Top">&uarr;</button>
-
-    <script src="script.js" async></script>
+    <script src="script.js"></script>
 </body>
 </html>
