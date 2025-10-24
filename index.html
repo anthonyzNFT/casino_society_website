@@ -46,7 +46,7 @@
     </header>
 
     <main class="main">
-        <section class="hero">
+        <section id="hero" class="hero">
             <div class="hero__container">
                 <div class="hero__overlay">
                     <h1 class="hero__title">Casino Society</h1>
@@ -60,14 +60,14 @@
             </div>
         </section>
 
-        <section class="section about" id="about">
+        <section id="about" class="section about">
             <div class="section__container">
                 <h2 class="section__title">About Casino Society</h2>
                 <p>At Casino Society, we believe in sending ourselves and each other higher. We're building an exclusive society where elite players, NFT collectors, and visionaries converge for high-stakes experiences that transcend the ordinary.</p>
             </div>
         </section>
 
-        <section class="section ethos" id="ethos">
+        <section id="ethos" class="section ethos">
             <div class="section__container">
                 <h2 class="section__title">Ethos: No Crying in the Casino</h2>
                 <ol>
@@ -80,7 +80,7 @@
             </div>
         </section>
 
-        <section class="section collections" id="collections">
+        <section id="collections" class="section collections">
             <div class="section__container">
                 <h2 class="section__title">NFT Collections</h2>
                 <div class="nfts__grid">
@@ -103,11 +103,13 @@
                         </a>
                     </div>
                 </div>
-                <a href="NFTs/" class="games__link">View Full NFT Gallery</a>
+                <div class="collections__gallery">
+                    <a href="NFTs/" class="btn">View Full NFT Gallery</a>
+                </div>
             </div>
         </section>
 
-        <section class="section memes" id="memes">
+        <section id="memes" class="section memes">
             <div class="section__container">
                 <h2 class="section__title">Casino Society Memes</h2>
                 <div class="memes__carousel">
@@ -127,22 +129,22 @@
             </div>
         </section>
 
-        <section class="section games" id="games">
+        <section id="games" class="section games">
             <div class="section__container">
                 <h2 class="section__title">Featured Games</h2>
                 <div class="games__grid">
                     <div class="games__item">
                         <a href="Solitaire/" class="games__link-wrapper">
-                            <img src="assets/solitaire_game.png" alt="Casino Society Solitaire" loading="lazy" class="games__image">
+                            <img loading="lazy" src="assets/solitaire_game.png" alt="Casino Society Solitaire" class="games__image">
                             <p class="games__name">Casino Society Solitaire</p>
                         </a>
-                        <a href="Solitaire/" class="games__link">Play Now</a>
+                        <a href="Solitaire/" class="games__button">Play Now</a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section faq" id="faq">
+        <section id="faq" class="section faq">
             <div class="section__container">
                 <h2 class="section__title">Frequently Asked Questions</h2>
                 <details>
@@ -168,6 +170,12 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js" async></script>
 </body>
 </html>
+</xaiArtifact>
+
+---
+
+**File 2: NFTs/index.html**
+
