@@ -3,90 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Casino Society: No Crying in the Casino. Luxury gaming, NFTs, and high-stakes experiences.">
+    <meta name="description" content="Casino Society: Exclusive NFT collections blending casino culture with blockchain innovation.">
+    <meta name="keywords" content="casino society, XRP NFT, casino PFP, casino banners, casino cards, solitaire game">
+    <meta property="og:title" content="Casino Society - Home">
+    <meta property="og:description" content="Discover unique NFT collections and play exclusive Solitaire. No crying in the casino.">
+    <meta property="og:image" content="https://anthonyznft.github.io/casino_society_website/assets/casino_brand.png">
+    <meta property="og:url" content="https://anthonyznft.github.io/casino_society_website/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Casino Society - Home">
+    <meta name="twitter:description" content="Discover unique NFT collections and play exclusive Solitaire. No crying in the casino.">
+    <meta name="twitter:image" content="https://anthonyznft.github.io/casino_society_website/assets/casino_brand.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Casino Society",
+      "url": "https://anthonyznft.github.io/casino_society_website/"
+    }
+    </script>
     <title>Casino Society</title>
-    <link rel="canonical" href="https://anthonyzNFT.github.io/casino_society_website/">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Arial:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="canonical" href="https://anthonyznft.github.io/casino_society_website/">
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header class="header">
         <div class="header__container">
-            <h1 class="header__logo">Casino Society</h1>
-            <nav class="header__nav" id="mobile-menu">
-                <ul class="header__nav-list">
-                    <li><a href="#hero" class="header__nav-link">Home</a></li>
-                    <li><a href="about.html" class="header__nav-link">About</a></li>
-                    <li><a href="#nfts" class="header__nav-link">NFTs</a></li>
-                    <li><a href="nfts/" class="header__nav-link">NFT Gallery</a></li>
-                    <li><a href="solitaire/" class="header__nav-link">Casino Solitaire</a></li>
-                    <li><a href="contact.html" class="header__nav-link">Contact</a></li>
+            <a href="index.html" class="header__logo">Casino Society</a>
+            <nav class="header__nav" aria-label="Main navigation">
+                <ul class="header__menu">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#ethos">Ethos</a></li>
+                    <li><a href="#collections">NFT Collections</a></li>
+                    <li><a href="#memes">Memes</a></li>
+                    <li><a href="#faq">FAQ</a></li>
                 </ul>
-                <button class="header__menu-toggle" aria-label="Toggle menu" id="menu-toggle">☰</button>
             </nav>
+            <button class="header__hamburger" aria-label="Toggle Menu" aria-expanded="false">&#9776;</button>
         </div>
     </header>
 
-    <main class="main">
-        <section id="hero" class="hero">
-            <div class="hero__container">
-                <div class="hero__overlay">
-                    <h2 class="hero__title">Casino Society</h2>
-                    <p class="hero__subtitle">No Crying in the Casino</p>
+    <main>
+        <section class="hero">
+            <img class="hero__image" loading="lazy" src="assets/casino_brand.png" alt="Casino Society Hero Image">
+            <div class="hero__overlay">
+                <h1 class="hero__title">Casino Society</h1>
+                <p class="hero__subtitle">No Crying in the Casino</p>
+                <div class="hero__social">
+                    <a href="https://x.com/CasinoSociety_" class="btn btn--social">Follow on X</a>
+                    <a href="https://discord.gg/68hXWT4VAZ" class="btn btn--social">Join Discord</a>
+                    <a href="#collections" class="btn btn--social">Get Casino NFTs</a>
                 </div>
             </div>
         </section>
 
-        <section id="nfts" class="nfts section">
-            <div class="section__container">
-                <h2 class="section__title">NFT Collections</h2>
-                <div class="nfts__grid">
-                    <div class="nfts__card">
-                        <a href="https://xrp.cafe/collection/casino-society" class="nfts__link-wrapper">
-                            <img src="assets/b_garlinghouse.png" alt="Casino Society PFPs Collection" loading="lazy" class="nfts__image">
-                            <p class="nfts__name">Casino Society PFPs</p>
-                        </a>
-                    </div>
-                    <div class="nfts__card">
-                        <a href="https://xrp.cafe/collection/casinobanners" class="nfts__link-wrapper">
-                            <img src="assets/banner_collection_brand.png" alt="Casino Society Banners Collection" loading="lazy" class="nfts__image">
-                            <p class="nfts__name">Casino Society Banners</p>
-                        </a>
-                    </div>
-                </div>
-                <a href="nfts/" class="games__link">View Full NFT Gallery</a>
+        <section class="about" id="about">
+            <h2>About Casino Society</h2>
+            <p>At Casino Society, we believe in sending ourselves and each other higher. We're building an exclusive society where elite players, NFT collectors, and visionaries converge for high-stakes experiences that transcend the ordinary.</p>
+        </section>
+
+        <section class="ethos" id="ethos">
+            <h2>Ethos: No Crying in the Casino</h2>
+            <ol>
+                <li>A code of stoicism to endure wins and losses with unshaken composure.</li>
+                <li>A reminder that respect, loyalty, and discipline outweigh emotion in high-stakes arenas.</li>
+                <li>A mindset where weakness holds no value, and only strength, silence, and legacy remain.</li>
+                <li>The Law of Influence: never beg for fortune, always bet on yourself.</li>
+            </ol>
+            <p><strong>Synonyms:</strong> stoic resolve, silent strength, unshaken discipline.</p>
+        </section>
+
+        <section class="collections" id="collections">
+            <h2>NFT Collections</h2>
+            <div class="collections__grid">
+                <article class="collections__item">
+                    <a href="https://xrp.cafe/collection/casino-society">
+                        <img loading="lazy" src="assets/b_garlinghouse.png" alt="Casino Society PFP Collection">
+                        <h3>Casino Society PFPs</h3>
+                    </a>
+                </article>
+                <article class="collections__item">
+                    <a href="https://xrp.cafe/collection/casinobanners">
+                        <img loading="lazy" src="assets/banner_collection_brand.png" alt="Casino Banners Collection">
+                        <h3>Casino Society Banners</h3>
+                    </a>
+                </article>
+                <article class="collections__item">
+                    <a href="https://xrp.cafe/collection/casinocards">
+                        <img loading="lazy" src="assets/casino_cards_nft_thumbnail.png" alt="Casino Cards Collection">
+                        <h3>Casino Society Cards</h3>
+                    </a>
+                </article>
+            </div>
+            <div class="collections__gallery">
+                <a href="NFTs/" class="btn btn--cta">View Full NFT Gallery</a>
             </div>
         </section>
 
-        <section id="games" class="games section">
-            <div class="section__container">
-                <h2 class="section__title">Featured Games</h2>
-                <div class="games__grid">
-                    <div class="games__item">
-                        <a href="solitaire/" class="games__link-wrapper">
-                            <img src="assets/solitaire-hero.png" alt="Casino Solitaire Game" loading="lazy" class="games__image">
-                            <p class="games__name">Casino Solitaire</p>
-                            <button class="games__button">Play Now</button>
-                        </a>
-                    </div>
+        <section class="memes" id="memes">
+            <h2>Casino Society Memes</h2>
+            <div class="memes__carousel">
+                <div class="memes__wrapper">
+                    <img loading="lazy" src="assets/meme1.png" alt="Casino Society Meme 1">
+                    <img loading="lazy" src="assets/meme2.png" alt="Casino Society Meme 2">
+                    <img loading="lazy" src="assets/meme3.png" alt="Casino Society Meme 3">
+                    <img loading="lazy" src="assets/meme4.png" alt="Casino Society Meme 4">
+                    <img loading="lazy" src="assets/meme5.png" alt="Casino Society Meme 5">
+                    <img loading="lazy" src="assets/meme6.png" alt="Casino Society Meme 6">
+                    <img loading="lazy" src="assets/meme7.png" alt="Casino Society Meme 7">
+                    <img loading="lazy" src="assets/meme8.png" alt="Casino Society Meme 8">
+                    <img loading="lazy" src="assets/meme9.png" alt="Casino Society Meme 9">
+                    <img loading="lazy" src="assets/meme10.png" alt="Casino Society Meme 10">
                 </div>
             </div>
+        </section>
+
+        <section class="games" id="games">
+            <h2>Featured Games</h2>
+            <div class="games__grid">
+                <article class="games__item">
+                    <a href="Solitaire/">
+                        <img loading="lazy" src="assets/solitaire_game.png" alt="Casino Society Solitaire">
+                        <h3>Casino Society Solitaire</h3>
+                    </a>
+                    <a href="Solitaire/" class="btn btn--cta">Play Now</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="faq" id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <details>
+                <summary>Question 1</summary>
+                <p>Answer placeholder. Provide details later.</p>
+            </details>
+            <details>
+                <summary>Question 2</summary>
+                <p>Answer placeholder. Provide details later.</p>
+            </details>
         </section>
     </main>
 
     <footer class="footer">
         <div class="footer__container">
-            <p>&copy; 2025 Casino Society. All rights reserved. Send ourselves and each other higher.</p>
-            <div class="footer__social">
-                <a href="https://x.com/CasinoSociety_" class="footer__social-link">X</a>
-                <span class="footer__social-divider">|</span>
-                <a href="https://discord.gg/68hXWT4VAZ" class="footer__social-link">Discord</a>
-            </div>
+            <p>© 2025 Casino Society. All rights reserved. Send ourselves and each other higher. No Crying in the Casino.</p>
+            <ul class="footer__social">
+                <li><a href="https://x.com/CasinoSociety_" aria-label="X (Twitter)">X</a></li>
+                <li><a href="https://discord.gg/68hXWT4VAZ" aria-label="Discord">Discord</a></li>
+            </ul>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <button class="scroll-top" aria-label="Scroll to Top">&uarr;</button>
+
+    <script src="script.js" async></script>
 </body>
 </html>
