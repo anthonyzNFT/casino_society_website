@@ -1,94 +1,119 @@
+/* CSS Variables for Easy Theming */
 :root {
     --gold: #E6D39E;
     --black: #141414;
     --red: #C8102E;
-    --white: #FFFFFF;
-    --transition: all 0.3s ease-in-out;
+    --white: #ffffff;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Roboto', sans-serif;
+    --transition: 0.3s ease;
 }
 
+/* Reset and Base Styles */
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: var(--black);
-    color: var(--gold);
+    font-family: var(--font-body);
+    background: var(--black);
+    color: var(--white);
     line-height: 1.6;
 }
 
+/* Header (BEM) */
 .header {
-    background: linear-gradient(to bottom, var(--black), var(--gold)10%);
-    padding: 1rem 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    background: var(--black);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .header__container {
-    max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
 }
 
 .header__logo {
-    font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
-    color: var(--black); /* Black for contrast */
-    transition: var(--transition);
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    color: var(--gold);
+    text-decoration: none;
 }
 
-.header__logo:hover {
-    color: var(--red);
-    text-shadow: 0 0 10px var(--gold);
-}
-
-.header__nav-list {
+.header__menu {
     display: flex;
     list-style: none;
-    gap: 2rem;
 }
 
-.header__nav-link {
-    color: var(--black); /* Black for contrast */
+.header__menu li {
+    margin: 0 1rem;
+}
+
+.header__menu a {
+    color: var(--white);
     text-decoration: none;
-    font-weight: 500;
     transition: var(--transition);
 }
 
-.header__nav-link:hover {
-    color: var(--red);
-    text-shadow: 0 0 5px var(--gold);
+.header__menu a:hover {
+    color: var(--gold);
 }
 
-.header__menu-toggle {
+.header__hamburger {
     display: none;
+    font-size: 1.5rem;
     background: none;
     border: none;
-    color: var(--black);
-    font-size: 1.5rem;
+    color: var(--white);
     cursor: pointer;
 }
 
-.main {
-    min-height: 100vh;
+/* Buttons */
+.btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
 }
 
+.btn--cta {
+    background: var(--gold);
+    color: var(--black);
+}
+
+.btn--social {
+    background: var(--black);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    margin: 0.5rem;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Hero Section */
 .hero {
     position: relative;
-    height: 100vh;
+    height: 80vh;
     overflow: hidden;
 }
 
-.hero__container {
+.hero__image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     height: 100%;
-    background: url('assets/casino_brand.png') no-repeat center center/cover;
-    background-color: var(--black); /* Fallback */
+    object-fit: cover;
 }
 
 .hero__overlay {
@@ -97,267 +122,310 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    z-index: 2;
-    background: rgba(20, 20, 20, 0.7); /* Semi-transparent grey for legibility */
+    background: rgba(20, 20, 20, 0.8);
     padding: 2rem;
-    border-radius: 8px;
+    border-radius: 10px;
+    border: 1px solid var(--gold);
 }
 
 .hero__title {
-    font-family: 'Playfair Display', serif;
-    font-size: 4rem;
+    font-family: var(--font-heading);
+    font-size: 3rem;
     color: var(--gold);
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px var(--black);
 }
 
 .hero__subtitle {
     font-size: 1.5rem;
     color: var(--red);
-    max-width: 600px;
-    margin: 0 auto;
-    text-shadow: 1px 1px 2px var(--black);
 }
 
-.section {
-    padding: 4rem 0;
-}
-
-.section__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.section__title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--gold);
-}
-
-.section__subtitle {
-    text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 3rem;
-    color: var(--white);
-}
-
-.nfts__grid, .nfts-gallery__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-}
-
-.nfts__card {
-    background: var(--black);
-    padding: 1rem;
-    border: 1px solid var(--gold);
-    border-radius: 8px;
-    text-align: center;
-    transition: var(--transition);
-}
-
-.nfts__card:hover {
-    box-shadow: 0 0 20px var(--red);
-}
-
-.nfts__link-wrapper {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
-.nfts__image {
-    width: 200px;
-    height: 200px; /* Strict 1:1 for square images */
-    object-fit: contain; /* Preserve image without cropping */
-    border-radius: 4px;
-    margin-bottom: 1rem;
-}
-
-.nfts__name {
-    font-weight: 500;
-    color: var(--gold);
-    margin: 0;
-}
-
-.games__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-}
-
-.games__item {
-    text-align: center;
-}
-
-.games__link-wrapper {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
-
-.games__image {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 1rem;
-    border: 2px solid var(--gold);
-}
-
-.games__name {
-    font-weight: 500;
-    color: var(--gold);
-    margin-bottom: 1rem;
-}
-
-.games__button {
-    background: var(--gold);
-    color: var(--black);
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: var(--transition);
-    font-weight: 500;
-}
-
-.games__button:hover {
-    background: var(--red);
-    color: var(--white);
-}
-
-.games__link {
-    display: inline-block;
-    background: var(--gold);
-    color: var(--black);
-    padding: 1rem 2rem;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 500;
-    transition: var(--transition);
-}
-
-.games__link:hover {
-    background: var(--red);
-    color: var(--white);
-}
-
-.about__content {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 3rem;
-    align-items: center;
-}
-
-.about__image {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-    border: 2px solid var(--gold);
-}
-
-.contact__section {
-    text-align: center;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.contact__button {
-    display: inline-block;
-    background: var(--gold);
-    color: var(--black);
-    padding: 1rem 2rem;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 500;
-    transition: var(--transition);
-    margin-top: 2rem;
-}
-
-.contact__button:hover {
-    background: var(--red);
-    color: var(--white);
-}
-
-.footer {
-    background: var(--black);
-    padding: 2rem 0;
-    text-align: center;
-    border-top: 1px solid var(--gold);
-}
-
-.footer__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.footer__social {
-    margin-top: 1rem;
+.hero__social {
     display: flex;
     justify-content: center;
     gap: 1rem;
 }
 
-.footer__social-link {
+/* About, Ethos, Collections, Memes, Games, FAQ, NFT Gallery Sections */
+.about, .ethos, .collections, .memes, .games, .faq, .nfts-gallery, .error {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+.about h3, .ethos h3, .nfts-gallery h3 {
+    font-family: var(--font-heading);
     color: var(--gold);
-    text-decoration: none;
-    font-size: 1rem;
+    margin: 1rem 0;
+}
+
+/* Ethos */
+.ethos ol {
+    text-align: left;
+    max-width: 800px;
+    margin: 1rem auto;
+}
+
+.ethos p {
+    font-style: italic;
+}
+
+/* Collections */
+.collections__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.collections__item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
     transition: var(--transition);
 }
 
-.footer__social-link:hover {
+.collections__item img:hover {
+    transform: scale(1.05);
+}
+
+.collections__item h3 {
+    margin: 0.5rem 0;
+}
+
+.collections__gallery {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+/* NFT Gallery */
+.nfts-gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.nfts__card img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.nfts__card img:hover {
+    transform: scale(1.05);
+}
+
+.nfts__card p {
+    margin: 0.5rem 0;
+}
+
+/* Memes Carousel */
+.memes__carousel {
+    overflow: hidden;
+}
+
+.memes__wrapper {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 1rem;
+}
+
+.memes__wrapper img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: var(--transition);
+}
+
+.memes__wrapper img:hover {
+    transform: scale(1.05);
+}
+
+/* Games */
+.games__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+.games__item img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.games__item h3 {
+    margin: 0.5rem 0;
+}
+
+/* FAQ */
+.faq details {
+    margin: 1rem 0;
+    text-align: left;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.faq summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--gold);
+    padding: 0.5rem;
+}
+
+.faq p {
+    padding: 0.5rem;
+}
+
+/* Footer */
+.footer {
+    background: var(--black);
+    padding: 2rem;
+    text-align: center;
+}
+
+.footer__container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer__social {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0;
+}
+
+.footer__social li {
+    margin: 0 1rem;
+}
+
+.footer__social a {
+    color: var(--gold);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer__social a:hover {
     color: var(--red);
 }
 
-.footer__social-divider {
-    color: var(--gold);
-    font-size: 1rem;
+/* Scroll to Top */
+.scroll-top {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    background: var(--gold);
+    color: var(--black);
+    padding: 0.5rem 1rem;
+    display: none;
+    cursor: pointer;
 }
 
+/* Mobile Responsiveness */
 @media (max-width: 768px) {
-    .header__nav-list {
+    .header__nav {
         display: none;
+    }
+
+    .header__nav--open {
+        display: flex;
+        flex-direction: column;
         position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
         background: var(--black);
-        flex-direction: column;
         padding: 1rem;
-        z-index: 100;
     }
 
-    .header__nav-list.active {
-        display: flex;
+    .header__menu {
+        flex-direction: column;
+        align-items: center;
     }
 
-    .header__menu-toggle {
+    .header__menu li {
+        margin: 0.5rem 0;
+    }
+
+    .header__hamburger {
         display: block;
     }
 
     .hero__title {
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
 
-    .hero__overlay {
-        padding: 1rem;
+    .hero__subtitle {
+        font-size: 1.2rem;
     }
 
-    .about__content {
+    .hero__social {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .collections__grid, .nfts-gallery__grid {
         grid-template-columns: 1fr;
     }
 
-    .nfts__grid, .nfts-gallery__grid, .games__grid {
-        grid-template-columns: 1fr;
+    .memes__wrapper img {
+        width: 300px;
+        height: 300px;
     }
 
-    .nfts__image {
-        width: 150px;
-        height: 150px; /* Smaller square for mobile */
+    .games__grid {
+        grid-template-columns: 1fr;
     }
+}
+
+/* Tablet */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .hero__social {
+        flex-direction: row;
+        gap: 0.5rem;
+    }
+
+    .collections__grid, .nfts-gallery__grid {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    }
+}
+
+/* Accessibility */
+[aria-hidden="true"] {
+    display: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.about, .ethos, .collections, .memes, .games, .faq, .nfts-gallery {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Card flip for NFT images */
+.collections__item img, .nfts__card img {
+    transition: transform var(--transition);
+    backface-visibility: hidden;
+}
+
+.collections__item img:hover, .nfts__card img:hover {
+    transform: rotateY(10deg);
+    perspective: 1000px;
+}
+
+/* Gradients for luxury feel */
+body {
+    background: linear-gradient(to bottom, var(--black), #0a0a0a);
+}
+
+/* Red accents */
+a:hover {
+    color: var(--red);
 }
