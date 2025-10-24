@@ -120,6 +120,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .section {
@@ -194,22 +195,6 @@ body {
 .collections__gallery {
     margin-top: 2rem;
     text-align: center;
-}
-
-.btn {
-    background: var(--gold);
-    color: var(--black);
-    padding: 1rem 2rem;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 500;
-    transition: var(--transition);
-    display: inline-block;
-}
-
-.btn:hover {
-    background: var(--red);
-    color: var(--white);
 }
 
 .memes__carousel {
@@ -372,7 +357,7 @@ body {
         align-items: center;
     }
 
-    .nfts__grid, .games__grid {
+    .nfts__grid, .memes__wrapper, .games__grid {
         grid-template-columns: 1fr;
     }
 
