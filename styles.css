@@ -120,7 +120,6 @@ body {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    flex-wrap: wrap;
 }
 
 .section {
@@ -197,7 +196,24 @@ body {
     text-align: center;
 }
 
+.btn {
+    background: var(--gold);
+    color: var(--black);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.btn:hover {
+    background: var(--red);
+    color: var(--white);
+}
+
 .memes__carousel {
+    position: relative;
     overflow: hidden;
 }
 
@@ -206,18 +222,52 @@ body {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     gap: 1rem;
+    animation: autoSlide 45s linear infinite;
+    will-change: transform;
 }
 
 .memes__wrapper img {
     width: 200px;
-    height: 200px;
-    object-fit: contain;
+    height: 280px;
+    object-fit: cover;
     border-radius: 4px;
     transition: var(--transition);
 }
 
 .memes__wrapper img:hover {
     box-shadow: 0 0 10px var(--red);
+}
+
+.memes__arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    z-index: 10;
+    border-radius: 4px;
+}
+
+.memes__arrow--left {
+    left: 10px;
+}
+
+.memes__arrow--right {
+    right: 10px;
+}
+
+.memes__arrow:hover {
+    background: var(--red);
+    color: var(--white);
+}
+
+@keyframes autoSlide {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-3000px); } /* Adjust based on 15 images */
 }
 
 .games__grid {
@@ -323,6 +373,55 @@ body {
     font-size: 1rem;
 }
 
+/* Solitaire-specific styles */
+.solitaire-game canvas {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    touch-action: none;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    box-shadow: 0 0 20px var(--red);
+    background: var(--black);
+    margin: 0 auto;
+}
+
+.solitaire-game #debug {
+    background: var(--black);
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.solitaire-game .landscape-prompt {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 400px;
+    background: var(--black);
+    color: var(--gold);
+    text-align: center;
+    z-index: 1000;
+    padding: 20px;
+    border: 2px solid var(--red);
+    box-shadow: 0 0 20px var(--gold);
+    opacity: 1;
+    transition: opacity 1s ease-out;
+}
+
+.solitaire-game .landscape-prompt.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.solitaire-game .landscape-prompt p {
+    font-size: 1.5rem;
+    font-family: 'Playfair Display', serif;
+}
+
 @media (max-width: 768px) {
     .header__nav-list {
         display: none;
@@ -357,16 +456,41 @@ body {
         align-items: center;
     }
 
-    .nfts__grid, .memes__wrapper, .games__grid {
+    .nfts__grid, .games__grid {
         grid-template-columns: 1fr;
     }
 
     .nfts__image, .memes__wrapper img {
         width: 150px;
-        height: 150px;
+        height: 210px;
     }
 
     .section__title {
         font-size: 2rem;
+    }
+
+    .solitaire-game canvas, .solitaire-game .header, .solitaire-game .footer {
+        display: none;
+    }
+
+    .solitaire-game .landscape-prompt {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .solitaire-game .landscape-prompt {
+        display: none;
+    }
+}
+
+@media (min-width: 769px) {
+    .solitaire-game canvas {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .solitaire-game .landscape-prompt {
+        display: none;
     }
 }
