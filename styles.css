@@ -70,7 +70,6 @@ body {
     color: var(--black);
     font-size: 1.5rem;
     cursor: pointer;
-    z-index: 1100;
 }
 
 .main {
@@ -79,20 +78,22 @@ body {
 
 .hero {
     position: relative;
-    background-color: var(--black);
+    overflow: hidden;
 }
 
 .hero__container {
     width: 100%;
     height: 100vh;
     background: url('assets/casino_brand.png') no-repeat center center/cover;
+    background-color: var(--black);
 }
 
 .hero__content {
     background: var(--black);
     text-align: center;
     padding: 2rem 0;
-    display: block;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .hero__title {
@@ -117,22 +118,6 @@ body {
     gap: 1rem;
 }
 
-.btn--social {
-    background: var(--gold);
-    color: var(--black);
-    padding: 1rem 2rem;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: 500;
-    transition: var(--transition);
-    display: inline-block;
-}
-
-.btn--social:hover {
-    background: var(--red);
-    color: var(--white);
-}
-
 .section {
     padding: 4rem 0;
 }
@@ -146,31 +131,64 @@ body {
 .section__title {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
-    text-align: left;
-    margin-bottom: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
     color: var(--gold);
+}
+
+.section__subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 3rem;
+    color: var(--white);
 }
 
 .about__content, .ethos__content {
     display: flex;
     gap: 2rem;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .about__text, .ethos__text {
     flex: 1;
+    order: 1;
+}
+
+.about__text p, .ethos__text ol, .ethos__text p {
+    font-size: 1.1rem; /* Increased body text size for readability */
+}
+
+.ethos__text ol {
+    list-style-position: inside;
+    text-align: left;
+}
+
+.ethos__title-group {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.ethos__title-group .section__title {
+    margin-bottom: 0.5rem;
+}
+
+.ethos__title-group .section__subtitle {
+    font-size: 1.5rem;
+    color: var(--red);
+    margin-bottom: 0;
 }
 
 .about__image, .ethos__image {
     flex: 1;
     display: flex;
     justify-content: center;
+    order: 2;
 }
 
 .about__image img, .ethos__image img {
-    width: 200px;
-    height: 280px;
+    width: 300px;
+    height: 300px;
     object-fit: cover;
     border-radius: 8px;
     border: 2px solid var(--gold);
@@ -234,6 +252,12 @@ body {
     font-weight: 500;
     transition: var(--transition);
     display: inline-block;
+    width: 200px; /* Uniform size for social buttons */
+}
+
+.btn--social {
+    margin: 0.5rem;
+    width: 200px; /* Uniform size */
 }
 
 .btn:hover {
@@ -242,15 +266,17 @@ body {
 }
 
 .memes__carousel {
+    position: relative;
+    overflow: hidden;
     max-width: 1200px;
     margin: 0 auto;
     border: 2px solid var(--gold);
     border-radius: 8px;
-    overflow: hidden;
 }
 
 .memes__wrapper {
     display: flex;
+    overflow-x: hidden;
     gap: 2rem;
     animation: autoSlide 120s linear infinite;
     will-change: transform;
@@ -261,6 +287,7 @@ body {
     height: 280px;
     object-fit: cover;
     border-radius: 4px;
+    transition: var(--transition);
     flex-shrink: 0;
 }
 
@@ -270,7 +297,7 @@ body {
 
 @keyframes autoSlide {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-3600px); }
+    100% { transform: translateX(-3600px); } /* 15 images x (200px + 2rem = 224px) * 15 = 3360px, rounded up for buffer */
 }
 
 .games__grid {
@@ -290,8 +317,8 @@ body {
 }
 
 .games__image {
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     object-fit: contain;
     border-radius: 8px;
     margin-bottom: 1rem;
@@ -427,19 +454,14 @@ body {
 @media (max-width: 768px) {
     .header__nav-list {
         display: none;
-        position: fixed;
-        top: 4rem;
+        position: absolute;
+        top: 100%;
         left: 0;
         width: 100%;
         background: var(--black);
         flex-direction: column;
         padding: 1rem;
-        z-index: 1000;
-        border: 1px solid var(--gold);
-    }
-
-    .header__nav-list.active {
-        display: flex;
+        z-index: 100;
     }
 
     .header__menu-toggle {
@@ -472,11 +494,6 @@ body {
         margin-bottom: 1rem;
     }
 
-    .about__image img, .ethos__image img {
-        width: 150px;
-        height: 210px;
-    }
-
     .nfts__grid, .games__grid {
         grid-template-columns: 1fr;
     }
@@ -487,8 +504,8 @@ body {
     }
 
     .games__image {
-        width: 200px;
-        height: 200px;
+        width: 300px;
+        height: 300px;
     }
 
     .section__title {
@@ -514,6 +531,11 @@ body {
     .header__nav-link {
         font-family: 'Playfair Display', serif;
         font-size: 1.2rem;
+    }
+
+    .about__image img, .ethos__image img {
+        width: 300px;
+        height: 300px;
     }
 
     .solitaire-game canvas {
