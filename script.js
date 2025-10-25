@@ -41,15 +41,11 @@ document.addEventListener('DOMContentLoaded', () => {
         images.forEach(img => observer.observe(img));
     }
 
-    // Meme carousel arrow controls
+    // Meme carousel auto-scroll control
     const carousel = document.querySelector('.memes__carousel');
     const wrapper = document.querySelector('.memes__wrapper');
-    const leftArrow = document.querySelector('.memes__arrow--left');
-    const rightArrow = document.querySelector('.memes__arrow--right');
-    if (carousel && wrapper && leftArrow && rightArrow) {
+    if (carousel && wrapper) {
         let isPaused = false;
-
-        // Pause auto-scroll on hover
         carousel.addEventListener('mouseenter', () => {
             isPaused = true;
             wrapper.style.animationPlayState = 'paused';
@@ -58,16 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
             isPaused = false;
             wrapper.style.animationPlayState = 'running';
         });
-
-        // Arrow controls
-        leftArrow.addEventListener('click', () => {
-            wrapper.scrollBy({ left: -224, behavior: 'smooth' }); // 200px image + 2rem (24px) gap
-        });
-        rightArrow.addEventListener('click', () => {
-            wrapper.scrollBy({ left: 224, behavior: 'smooth' });
-        });
-
-        // Auto-scroll when in view
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !isPaused) {
@@ -78,10 +64,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, { threshold: 0.5 });
         observer.observe(carousel);
-
-        // Reset scroll for seamless loop
         wrapper.addEventListener('animationiteration', () => {
-            wrapper.scrollLeft = 0;
+            wrapper.style.animation = 'none';
+            wrapper.offsetHeight; // Trigger reflow
+            wrapper.style.animation = 'autoSlide 120s linear infinite';
         });
     }
 });
