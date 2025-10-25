@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
         images.forEach(img => observer.observe(img));
     }
 
-    // Meme carousel auto-scroll control
     const carousel = document.querySelector('.memes__carousel');
     const wrapper = document.querySelector('.memes__wrapper');
     if (carousel && wrapper) {
@@ -66,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(carousel);
         wrapper.addEventListener('animationiteration', () => {
             wrapper.style.animation = 'none';
-            wrapper.offsetHeight; // Trigger reflow
+            wrapper.offsetHeight;
             wrapper.style.animation = 'autoSlide 120s linear infinite';
         });
     }
