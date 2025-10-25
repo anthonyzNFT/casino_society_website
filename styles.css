@@ -215,14 +215,16 @@ body {
 .memes__carousel {
     position: relative;
     overflow: hidden;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .memes__wrapper {
     display: flex;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    gap: 1rem;
-    animation: autoSlide 45s linear infinite;
+    gap: 2rem;
+    animation: autoSlide 60s linear infinite;
     will-change: transform;
 }
 
@@ -267,12 +269,12 @@ body {
 
 @keyframes autoSlide {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-4500px); } /* Adjusted for 15 images */
+    100% { transform: translateX(-3600px); } /* 15 images x (200px + 2rem gap) */
 }
 
 .games__grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
 }
 
@@ -287,9 +289,9 @@ body {
 }
 
 .games__image {
-    width: 100%;
+    width: 200px;
     height: 200px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 8px;
     margin-bottom: 1rem;
     border: 2px solid var(--gold);
@@ -463,6 +465,11 @@ body {
     .nfts__image, .memes__wrapper img {
         width: 150px;
         height: 210px;
+    }
+
+    .games__image {
+        width: 150px;
+        height: 150px;
     }
 
     .section__title {
