@@ -7,7 +7,7 @@
     <meta property="og:title" content="Casino Society - Solitaire">
     <meta property="og:description" content="Play Casino Society’s exclusive Solitaire game with a luxurious casino twist.">
     <meta property="og:image" content="https://anthonyznft.github.io/casino_society_website/assets/casino_brand.png">
-    <meta property="og:url" content="https://anthonyznft.github.io/casino_society_website/Solitaire/">
+    <meta property="og:url" content="https://anthonyznft.github.io/casino_society_website/solitaire/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Casino Society - Solitaire">
@@ -18,11 +18,11 @@
       "@context": "https://schema.org",
       "@type": "WebPage",
       "name": "Casino Society Solitaire",
-      "url": "https://anthonyznft.github.io/casino_society_website/Solitaire/"
+      "url": "https://anthonyznft.github.io/casino_society_website/solitaire/"
     }
     </script>
     <title>Casino Solitaire - Casino Society</title>
-    <link rel="canonical" href="https://anthonyznft.github.io/casino_society_website/Solitaire/">
+    <link rel="canonical" href="https://anthonyznft.github.io/casino_society_website/solitaire/">
     <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Arial&display=swap" rel="stylesheet">
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
@@ -48,7 +48,16 @@
     </header>
 
     <main class="main">
+        <div class="game-info">
+            <p>Score: <span id="score">0</span> | Moves: <span id="moves">0</span> | Time: <span id="time">0</span> | Rank: <span id="rank">Bronze Chip</span></p>
+        </div>
         <canvas id="gameCanvas" role="region" aria-label="Solitaire Game Board"></canvas>
+        <div class="game-controls">
+            <button id="new-game" aria-label="Start New Game">New Game</button>
+            <button id="undo" aria-label="Undo Move" disabled>Undo</button>
+            <button id="hint" aria-label="Show Hint">Hint</button>
+            <button id="settings" aria-label="Open Settings">Settings</button>
+        </div>
         <div id="aria-announcer" role="alert" aria-live="polite" style="position: absolute; left: -9999px;"></div>
         <div id="debug" style="color: var(--red); position: absolute; top: 10px; left: 10px; z-index: 1000;"></div>
     </main>
@@ -65,6 +74,6 @@
     </footer>
 
     <script src="../script.js" async></script>
-    <script src="app.min.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
