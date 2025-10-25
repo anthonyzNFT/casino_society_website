@@ -267,7 +267,7 @@ body {
 
 @keyframes autoSlide {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-3000px); } /* Adjust based on 15 images */
+    100% { transform: translateX(-4500px); } /* Adjusted for 15 images */
 }
 
 .games__grid {
@@ -485,6 +485,11 @@ body {
 }
 
 @media (min-width: 769px) {
+    .header__nav-link {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.2rem;
+    }
+
     .solitaire-game canvas {
         max-width: 100%;
         max-height: 100%;
