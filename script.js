@@ -61,10 +61,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Arrow controls
         leftArrow.addEventListener('click', () => {
-            wrapper.scrollBy({ left: -300, behavior: 'smooth' });
+            wrapper.scrollBy({ left: -224, behavior: 'smooth' }); // 200px image + 2rem (24px) gap
         });
         rightArrow.addEventListener('click', () => {
-            wrapper.scrollBy({ left: 300, behavior: 'smooth' });
+            wrapper.scrollBy({ left: 224, behavior: 'smooth' });
         });
 
         // Auto-scroll when in view
@@ -78,6 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }, { threshold: 0.5 });
         observer.observe(carousel);
+
+        // Reset scroll for seamless loop
+        wrapper.addEventListener('animationiteration', () => {
+            wrapper.scrollLeft = 0;
+        });
     }
 });
 
