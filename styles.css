@@ -70,6 +70,7 @@ body {
     color: var(--black);
     font-size: 1.5rem;
     cursor: pointer;
+    z-index: 1100;
 }
 
 .main {
@@ -78,19 +79,20 @@ body {
 
 .hero {
     position: relative;
-    height: 100vh;
-    overflow: hidden;
-}
-
-.hero__container {
-    height: 100%;
-    background: url('assets/casino_brand.png') no-repeat center center/cover;
     background-color: var(--black);
 }
 
+.hero__container {
+    width: 100%;
+    height: 100vh;
+    background: url('assets/casino_brand.png') no-repeat center center/cover;
+}
+
 .hero__content {
+    background: var(--black);
     text-align: center;
-    padding: 2rem;
+    padding: 2rem 0;
+    display: block;
 }
 
 .hero__title {
@@ -105,7 +107,7 @@ body {
     font-size: 1.5rem;
     color: var(--red);
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 2rem;
     text-shadow: 1px 1px 2px var(--black);
 }
 
@@ -113,7 +115,22 @@ body {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin-top: 2rem;
+}
+
+.btn--social {
+    background: var(--gold);
+    color: var(--black);
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: var(--transition);
+    display: inline-block;
+}
+
+.btn--social:hover {
+    background: var(--red);
+    color: var(--white);
 }
 
 .section {
@@ -129,82 +146,34 @@ body {
 .section__title {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
-    text-align: center;
-    margin-bottom: 2rem;
+    text-align: left;
+    margin-bottom: 1rem;
     color: var(--gold);
 }
 
-.section__subtitle {
-    text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 3rem;
-    color: var(--white);
-}
-
-.about .section__container {
+.about__content, .ethos__content {
     display: flex;
     gap: 2rem;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
-.about .section__title {
-    text-align: left;
-    margin-bottom: 1rem;
-}
-
-.about .about__text {
+.about__text, .ethos__text {
     flex: 1;
 }
 
-.about .about__image {
+.about__image, .ethos__image {
     flex: 1;
-}
-
-.about img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    border: 2px solid var(--gold);
-    max-width: 300px;
-}
-
-.ethos .section__container {
     display: flex;
-    gap: 2rem;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
 }
 
-.ethos .ethos__image {
-    flex: 1;
-}
-
-.ethos .ethos__text {
-    flex: 1;
-}
-
-.ethos .section__title {
-    text-align: left;
-    margin-bottom: 1rem;
-}
-
-.ethos ol {
-    text-align: left;
-    max-width: 800px;
-    margin: 1rem auto;
-}
-
-.ethos p {
-    font-style: italic;
-}
-
-.ethos img {
-    width: 100%;
-    height: auto;
+.about__image img, .ethos__image img {
+    width: 200px;
+    height: 280px;
+    object-fit: cover;
     border-radius: 8px;
     border: 2px solid var(--gold);
-    max-width: 300px;
 }
 
 .nfts__grid {
@@ -278,7 +247,6 @@ body {
     border: 2px solid var(--gold);
     border-radius: 8px;
     overflow: hidden;
-    position: relative;
 }
 
 .memes__wrapper {
@@ -293,7 +261,6 @@ body {
     height: 280px;
     object-fit: cover;
     border-radius: 4px;
-    transition: var(--transition);
     flex-shrink: 0;
 }
 
@@ -303,7 +270,7 @@ body {
 
 @keyframes autoSlide {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-3600px); } /* 15 images * (200px + 2rem = 224px) * 15 = 3360px, rounded up for buffer */
+    100% { transform: translateX(-3600px); }
 }
 
 .games__grid {
@@ -323,8 +290,8 @@ body {
 }
 
 .games__image {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
     object-fit: contain;
     border-radius: 8px;
     margin-bottom: 1rem;
@@ -409,7 +376,6 @@ body {
     font-size: 1rem;
 }
 
-/* Solitaire-specific styles */
 .solitaire-game canvas {
     display: block;
     width: 100vw;
@@ -461,14 +427,15 @@ body {
 @media (max-width: 768px) {
     .header__nav-list {
         display: none;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 4rem;
         left: 0;
         width: 100%;
         background: var(--black);
         flex-direction: column;
         padding: 1rem;
-        z-index: 100;
+        z-index: 1000;
+        border: 1px solid var(--gold);
     }
 
     .header__nav-list.active {
@@ -483,8 +450,8 @@ body {
         font-size: 2.5rem;
     }
 
-    .hero__overlay {
-        padding: 1rem;
+    .hero__content {
+        padding: 1rem 0;
     }
 
     .hero__social {
@@ -492,8 +459,22 @@ body {
         align-items: center;
     }
 
-    .about .section__container, .ethos .section__container {
+    .about__content, .ethos__content {
         flex-direction: column;
+    }
+
+    .about__text, .ethos__text {
+        order: 2;
+    }
+
+    .about__image, .ethos__image {
+        order: 1;
+        margin-bottom: 1rem;
+    }
+
+    .about__image img, .ethos__image img {
+        width: 150px;
+        height: 210px;
     }
 
     .nfts__grid, .games__grid {
@@ -503,6 +484,11 @@ body {
     .nfts__image, .memes__wrapper img {
         width: 150px;
         height: 210px;
+    }
+
+    .games__image {
+        width: 200px;
+        height: 200px;
     }
 
     .section__title {
