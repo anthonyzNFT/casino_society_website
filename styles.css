@@ -70,6 +70,7 @@ body {
     color: var(--black);
     font-size: 1.5rem;
     cursor: pointer;
+    z-index: 1100;
 }
 
 .main {
@@ -78,14 +79,13 @@ body {
 
 .hero {
     position: relative;
-    overflow: hidden;
+    background-color: var(--black);
 }
 
 .hero__container {
     width: 100%;
     height: 100vh;
     background: url('assets/casino_brand.png') no-repeat center center/cover;
-    background-color: var(--black);
 }
 
 .hero__content {
@@ -96,26 +96,18 @@ body {
     margin: 0 auto;
 }
 
-.hero__title {
+.section__title {
     font-family: 'Playfair Display', serif;
-    font-size: 4rem;
+    font-size: 3rem;
     color: var(--gold);
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px var(--black);
-}
-
-.hero__subtitle {
-    font-size: 1.5rem;
-    color: var(--red);
-    max-width: 600px;
-    margin: 0 auto 2rem;
-    text-shadow: 1px 1px 2px var(--black);
+    margin-bottom: 2rem;
 }
 
 .hero__social {
     display: flex;
     justify-content: center;
     gap: 1rem;
+    margin-top: 2rem;
 }
 
 .section {
@@ -128,26 +120,18 @@ body {
     padding: 0 2rem;
 }
 
-.section__title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    text-align: center;
-    margin-bottom: 2rem;
-    color: var(--gold);
-}
-
 .section__subtitle {
     text-align: center;
-    font-size: 1.2rem;
-    margin-bottom: 3rem;
-    color: var(--white);
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--red);
 }
 
 .about__content, .ethos__content {
     display: flex;
     gap: 2rem;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .about__text, .ethos__text {
@@ -156,7 +140,7 @@ body {
 }
 
 .about__text p, .ethos__text ol, .ethos__text p {
-    font-size: 1.1rem; /* Increased body text size for readability */
+    font-size: 1.1rem;
 }
 
 .ethos__text ol {
@@ -171,6 +155,7 @@ body {
 
 .ethos__title-group .section__title {
     margin-bottom: 0.5rem;
+    text-align: center;
 }
 
 .ethos__title-group .section__subtitle {
@@ -252,12 +237,12 @@ body {
     font-weight: 500;
     transition: var(--transition);
     display: inline-block;
-    width: 200px; /* Uniform size for social buttons */
+    width: 200px;
 }
 
 .btn--social {
     margin: 0.5rem;
-    width: 200px; /* Uniform size */
+    width: 200px;
 }
 
 .btn:hover {
@@ -266,17 +251,15 @@ body {
 }
 
 .memes__carousel {
-    position: relative;
-    overflow: hidden;
     max-width: 1200px;
     margin: 0 auto;
     border: 2px solid var(--gold);
     border-radius: 8px;
+    overflow: hidden;
 }
 
 .memes__wrapper {
     display: flex;
-    overflow-x: hidden;
     gap: 2rem;
     animation: autoSlide 120s linear infinite;
     will-change: transform;
@@ -287,7 +270,6 @@ body {
     height: 280px;
     object-fit: cover;
     border-radius: 4px;
-    transition: var(--transition);
     flex-shrink: 0;
 }
 
@@ -297,7 +279,7 @@ body {
 
 @keyframes autoSlide {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-3600px); } /* 15 images x (200px + 2rem = 224px) * 15 = 3360px, rounded up for buffer */
+    100% { transform: translateX(-3600px); }
 }
 
 .games__grid {
@@ -349,7 +331,7 @@ body {
 
 .faq details {
     margin: 1rem 0;
-    text-align: left;
+    text-align: center;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -360,6 +342,7 @@ body {
     font-weight: bold;
     color: var(--gold);
     padding: 0.5rem;
+    text-align: center;
 }
 
 .faq p {
@@ -405,8 +388,10 @@ body {
 
 .solitaire-game canvas {
     display: block;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    aspect-ratio: 4 / 3;
     touch-action: none;
     border: 2px solid var(--gold);
     border-radius: 8px;
@@ -415,11 +400,41 @@ body {
     margin: 0 auto;
 }
 
+.solitaire-game .game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.solitaire-game .game-controls button {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.solitaire-game .game-controls button:hover {
+    background: var(--red);
+    color: var(--white);
+}
+
+.solitaire-game .game-info {
+    text-align: center;
+    color: var(--gold);
+    margin: 1rem 0;
+}
+
 .solitaire-game #debug {
     background: var(--black);
     padding: 0.5rem;
     border-radius: 4px;
     font-size: 0.9rem;
+    color: var(--red);
 }
 
 .solitaire-game .landscape-prompt {
@@ -454,22 +469,27 @@ body {
 @media (max-width: 768px) {
     .header__nav-list {
         display: none;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 4rem;
         left: 0;
         width: 100%;
         background: var(--black);
         flex-direction: column;
         padding: 1rem;
-        z-index: 100;
+        z-index: 1000;
+        border: 1px solid var(--gold);
+    }
+
+    .header__nav-list.active {
+        display: flex;
     }
 
     .header__menu-toggle {
         display: block;
     }
 
-    .hero__title {
-        font-size: 2.5rem;
+    .section__title {
+        font-size: 2rem;
     }
 
     .hero__content {
@@ -504,12 +524,8 @@ body {
     }
 
     .games__image {
-        width: 300px;
-        height: 300px;
-    }
-
-    .section__title {
-        font-size: 2rem;
+        width: 200px;
+        height: 200px;
     }
 
     .solitaire-game canvas, .solitaire-game .header, .solitaire-game .footer {
