@@ -90,7 +90,7 @@ body {
 
 .hero__content {
     text-align: center;
-    padding: 2rem;
+    padding: 2rem 0;
 }
 
 .hero__title {
@@ -105,7 +105,7 @@ body {
     font-size: 1.5rem;
     color: var(--red);
     max-width: 600px;
-    margin: 0 auto 2rem;
+    margin: 0 auto;
     text-shadow: 1px 1px 2px var(--black);
 }
 
@@ -113,6 +113,7 @@ body {
     display: flex;
     justify-content: center;
     gap: 1rem;
+    margin-top: 2rem;
 }
 
 .section {
@@ -143,6 +144,8 @@ body {
 .about .section__container, .ethos .section__container {
     display: flex;
     gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .about .section__container > div, .ethos .section__container > div {
@@ -222,15 +225,15 @@ body {
 }
 
 .memes__carousel {
-    position: relative;
-    overflow: hidden;
     max-width: 1200px;
     margin: 0 auto;
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .memes__wrapper {
     display: flex;
-    overflow: hidden;
     gap: 2rem;
     animation: autoSlide 120s linear infinite;
     will-change: transform;
@@ -251,7 +254,7 @@ body {
 
 @keyframes autoSlide {
     0% { transform: translateX(0); }
-    100% { transform: translateX(-3600px); } /* 15 images x (200px + 2rem gap = 224px) * 15 = 3360px, rounded up for buffer */
+    100% { transform: translateX(-3600px); } /* 15 images * (200px + 2rem = 224px) * 15 = 3360px, rounded up for buffer */
 }
 
 .games__grid {
