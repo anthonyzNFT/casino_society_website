@@ -1,3 +1,10 @@
+<!-- Integration Instructions:
+- Place this file in /solitaire/ folder.
+- Ensure /solitaire/solitaire.css and /solitaire/js/ files (deck.js, gameLogic.js, ui.js, dragDrop.js, storage.js, utils.js) are present.
+- Link to ../styles.css for global styling and solitaire.css for game-specific styles.
+- Deploy on GitHub Pages; test at https://anthonyznft.github.io/casino_society_website/solitaire/.
+- Verify responsiveness, gameplay, and LocalStorage functionality across Chrome, Safari, Firefox, Edge, and Mobile browsers.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +31,7 @@
     <title>Casino Solitaire - Casino Society</title>
     <link rel="canonical" href="https://anthonyznft.github.io/casino_society_website/solitaire/">
     <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="solitaire.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Arial&display=swap" rel="stylesheet">
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
 </head>
@@ -47,7 +55,7 @@
         </div>
     </header>
 
-    <main class="main">
+    <main class="main solitaire">
         <div class="game-info">
             <p>Score: <span id="score">0</span> | Moves: <span id="moves">0</span> | Time: <span id="time">0</span> | Rank: <span id="rank">Bronze Chip</span></p>
         </div>
@@ -55,11 +63,12 @@
         <div class="game-controls">
             <button id="new-game" aria-label="Start New Game">New Game</button>
             <button id="undo" aria-label="Undo Move" disabled>Undo</button>
+            <button id="redo" aria-label="Redo Move" disabled>Redo</button>
             <button id="hint" aria-label="Show Hint">Hint</button>
+            <button id="auto-complete" aria-label="Auto Complete" disabled>Auto Complete</button>
             <button id="settings" aria-label="Open Settings">Settings</button>
         </div>
         <div id="aria-announcer" role="alert" aria-live="polite" style="position: absolute; left: -9999px;"></div>
-        <div id="debug" style="color: var(--red); position: absolute; top: 10px; left: 10px; z-index: 1000;"></div>
     </main>
 
     <footer class="footer">
@@ -73,7 +82,13 @@
         </div>
     </footer>
 
-    <script src="../script.js" async></script>
-    <script src="app.js"></script>
+    <script src="../script.js"></script>
+    <script src="js/deck.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/gameLogic.js"></script>
+    <script src="js/dragDrop.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="app.min.js"></script>
 </body>
 </html>
