@@ -1,0 +1,135 @@
+.solitaire {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+.solitaire-game canvas {
+    display: block;
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    touch-action: none;
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    box-shadow: 0 0 20px var(--red);
+    background: var(--black);
+    margin: 0 auto;
+}
+
+.solitaire-game .game-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.solitaire-game .game-controls button {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.solitaire-game .game-controls button:hover {
+    background: var(--red);
+    color: var(--white);
+}
+
+.solitaire-game .game-controls button:disabled {
+    background: var(--black);
+    color: var(--white);
+    cursor: not-allowed;
+}
+
+.solitaire-game .game-info {
+    text-align: center;
+    color: var(--gold);
+    margin: 1rem 0;
+    font-size: 1.1rem;
+}
+
+.solitaire-game .settings-panel {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--black);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    padding: 1rem;
+    z-index: 1000;
+    max-width: 300px;
+    text-align: center;
+    color: var(--gold);
+}
+
+.solitaire-game .settings-panel button {
+    margin: 0.5rem;
+}
+
+.solitaire-game .landscape-prompt {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 400px;
+    background: var(--black);
+    color: var(--gold);
+    text-align: center;
+    z-index: 1000;
+    padding: 20px;
+    border: 2px solid var(--red);
+    box-shadow: 0 0 20px var(--gold);
+    opacity: 1;
+    transition: opacity 1s ease-out;
+}
+
+.solitaire-game .landscape-prompt.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.solitaire-game .landscape-prompt p {
+    font-size: 1.5rem;
+    font-family: 'Playfair Display', serif;
+}
+
+@media (max-width: 768px) {
+    .solitaire {
+        padding: 1rem;
+    }
+
+    .solitaire-game canvas, .solitaire-game .header, .solitaire-game .footer {
+        display: none;
+    }
+
+    .solitaire-game .landscape-prompt {
+        display: block;
+    }
+}
+
+@media (max-width: 768px) and (orientation: landscape) {
+    .solitaire-game .landscape-prompt {
+        display: none;
+    }
+
+    .solitaire-game canvas, .solitaire-game .header, .solitaire-game .footer {
+        display: block;
+    }
+
+    .solitaire-game canvas {
+        max-width: 100%;
+        height: auto;
+    }
+}
