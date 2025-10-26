@@ -1,12 +1,26 @@
 document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('menu-toggle');
     const navList = document.querySelector('.header__nav-list');
-    if (menuToggle && navList) {
-        menuToggle.addEventListener('click', () => {
+
+    function toggleMenu() {
+        if (navList) {
             const isOpen = navList.classList.toggle('active');
             menuToggle.textContent = isOpen ? '✕' : '☰';
             menuToggle.setAttribute('aria-expanded', isOpen);
+            console.log('Menu toggled:', isOpen ? 'Opened' : 'Closed');
+        } else {
+            console.error('Navigation list not found');
+        }
+    }
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', toggleMenu);
+        menuToggle.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            toggleMenu();
         });
+    } else {
+        console.error('Menu toggle button not found');
     }
 
     const navLinks = document.querySelectorAll('.header__nav-link[href^="#"]');
