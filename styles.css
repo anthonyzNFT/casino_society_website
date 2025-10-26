@@ -22,7 +22,6 @@ body {
 .header {
     background: linear-gradient(to bottom, var(--black), var(--gold)10%);
     padding: 1rem 0;
-    position: relative;
 }
 
 .header__container {
@@ -80,13 +79,14 @@ body {
 
 .hero {
     position: relative;
-    background-color: var(--black);
+    overflow: hidden;
 }
 
 .hero__container {
     width: 100%;
     height: 100vh;
     background: url('assets/casino_brand.png') no-repeat center center/cover;
+    background-color: var(--black);
 }
 
 .hero__content {
@@ -125,16 +125,16 @@ body {
 .section__title {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
-    color: var(--gold);
-    margin-bottom: 2rem;
     text-align: center;
+    margin-bottom: 2rem;
+    color: var(--gold);
 }
 
 .section__subtitle {
     text-align: center;
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
-    color: var(--red);
+    font-size: 1.5rem;
+    margin-bottom: 3rem;
+    color: var(--white);
 }
 
 .about__content, .ethos__content {
@@ -146,11 +146,6 @@ body {
 
 .about__text, .ethos__text {
     flex: 1;
-    text-align: center;
-}
-
-.about__text .section__title, .ethos__text .section__title {
-    text-align: center;
 }
 
 .about__text p, .ethos__text ol, .ethos__text p {
@@ -160,23 +155,6 @@ body {
 .ethos__text ol {
     list-style-position: inside;
     text-align: left;
-    margin: 0 auto;
-    max-width: 600px;
-}
-
-.ethos__title-group {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.ethos__title-group .section__title {
-    margin-bottom: 0.5rem;
-}
-
-.ethos__title-group .section__subtitle {
-    font-size: 1.8rem;
-    color: var(--red);
-    margin-bottom: 0;
 }
 
 .about__image, .ethos__image {
@@ -251,12 +229,6 @@ body {
     font-weight: 500;
     transition: var(--transition);
     display: inline-block;
-    width: 200px;
-}
-
-.btn--social {
-    margin: 0.5rem;
-    width: 200px;
 }
 
 .btn:hover {
@@ -402,10 +374,8 @@ body {
 
 .solitaire-game canvas {
     display: block;
-    width: 100%;
-    max-width: 800px;
-    height: auto;
-    aspect-ratio: 4 / 3;
+    width: 100vw;
+    height: 100vh;
     touch-action: none;
     border: 2px solid var(--gold);
     border-radius: 8px;
@@ -414,41 +384,11 @@ body {
     margin: 0 auto;
 }
 
-.solitaire-game .game-controls {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1rem 0;
-}
-
-.solitaire-game .game-controls button {
-    background: var(--gold);
-    color: var(--black);
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: var(--transition);
-    font-weight: 500;
-}
-
-.solitaire-game .game-controls button:hover {
-    background: var(--red);
-    color: var(--white);
-}
-
-.solitaire-game .game-info {
-    text-align: center;
-    color: var(--gold);
-    margin: 1rem 0;
-}
-
 .solitaire-game #debug {
     background: var(--black);
     padding: 0.5rem;
     border-radius: 4px;
     font-size: 0.9rem;
-    color: var(--red);
 }
 
 .solitaire-game .landscape-prompt {
@@ -483,15 +423,14 @@ body {
 @media (max-width: 768px) {
     .header__nav-list {
         display: none;
-        position: fixed;
-        top: 4rem;
+        position: absolute;
+        top: 100%;
         left: 0;
         width: 100%;
         background: var(--black);
         flex-direction: column;
         padding: 1rem;
-        z-index: 1000;
-        border: 1px solid var(--gold);
+        z-index: 100;
     }
 
     .header__nav-list.active {
@@ -556,33 +495,4 @@ body {
     }
 }
 
-@media (max-width: 768px) and (orientation: landscape) {
-    .solitaire-game .landscape-prompt {
-        display: none;
-    }
-
-    .solitaire-game canvas {
-        display: block;
-    }
-}
-
-@media (min-width: 769px) {
-    .header__nav-link {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.2rem;
-    }
-
-    .about__image img, .ethos__image img {
-        width: 300px;
-        height: 300px;
-    }
-
-    .solitaire-game canvas {
-        max-width: 100%;
-        max-height: 100%;
-    }
-
-    .solitaire-game .landscape-prompt {
-        display: none;
-    }
-}
+@media (max-width: 768px)
