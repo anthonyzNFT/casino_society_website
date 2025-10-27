@@ -8,211 +8,34 @@
   <link rel="stylesheet" href="../styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Arial&display=swap" rel="stylesheet">
   <link rel="icon" href="../favicon.ico" type="image/x-icon">
-
-  <!-- Papa Parse CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js" defer></script>
-
   <style>
-    /* Gallery-specific styles (keeps using your variables from styles.css) */
-    .pfps-section {
-      padding-top: 2rem;
-      padding-bottom: 4rem;
-    }
-    .gallery-controls {
-      display:flex;
-      gap:1rem;
-      justify-content:center;
-      align-items:center;
-      margin-bottom:1.25rem;
-      flex-wrap:wrap;
-      position: sticky;
-      top: 80px;
-      z-index: 800;
-      background: linear-gradient(180deg, rgba(20,20,20,0.95), rgba(20,20,20,0.85));
-      padding: 0.75rem;
-      border-bottom: 1px solid rgba(230,211,158,0.06);
-      backdrop-filter: blur(2px);
-    }
-    .gallery-controls input,
-    .gallery-controls select {
-      padding: 0.6rem 0.8rem;
-      border-radius:6px;
-      border:1px solid rgba(230,211,158,0.12);
-      background: rgba(20,20,20,0.6);
-      color: var(--gold);
-    }
-    .gallery__grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1.25rem;
-      align-items: start;
-    }
-
-    /* Flip card */
-    .flip-card {
-      perspective: 1200px;
-    }
-    .flip-inner {
-      position: relative;
-      width:100%;
-      height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.7s cubic-bezier(.2,.9,.2,1);
-      cursor: pointer;
-    }
-    .flip-card.is-flipped .flip-inner {
-      transform: rotateY(180deg);
-    }
-    .flip-front, .flip-back {
-      position: relative;
-      backface-visibility: hidden;
-      min-height: 280px;
-      border-radius: 8px;
-      padding: 0.75rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 0.5rem;
-      border: 1px solid rgba(230,211,158,0.12);
-      background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.2));
-      box-shadow: 0 6px 20px rgba(200,30,30,0.03);
-    }
-    .flip-front img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-      border-radius: 6px;
-      background: #111;
-    }
-    .flip-back {
-      transform: rotateY(180deg);
-      color: var(--gold);
-      text-align: left;
-      overflow: auto;
-    }
-    .nft-title {
-      font-weight:700;
-      color: var(--gold);
-      font-size: 1rem;
-      text-align:center;
-      margin-top: 0.25rem;
-    }
-    .nft-meta { font-size: 0.85rem; color: var(--white); }
-    .card-short-desc { font-size:0.82rem; color:var(--white); margin-top:0.25rem; }
-
-    /* Modal */
-    .nft-modal-overlay {
-      position: fixed;
-      inset:0;
-      background: rgba(0,0,0,0.75);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      z-index: 2000;
-      padding: 1rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 220ms ease;
-    }
-    .nft-modal-overlay.open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-    .nft-modal {
-      width: min(950px, 96%);
-      max-height: 90vh;
-      overflow:auto;
-      border-radius: 12px;
-      border: 2px solid var(--gold);
-      background: linear-gradient(180deg, #080808, #0f0f0f);
-      padding: 1.25rem;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
-    }
-    .nft-modal .modal-grid {
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap:1rem;
-      align-items:start;
-    }
-    .nft-modal img {
-      width:100%;
-      height:auto;
-      border-radius:8px;
-      border:1px solid rgba(230,211,158,0.08);
-    }
-    .modal-close {
-      position:absolute;
-      top:1rem;
-      right:1rem;
-      background:transparent;
-      border:1px solid rgba(255,255,255,0.06);
-      color:var(--gold);
-      padding:0.4rem 0.55rem;
-      border-radius:6px;
-      cursor:pointer;
-    }
-    .modal-actions {
-      margin-top:1rem;
-      display:flex;
-      gap:0.5rem;
-      flex-wrap:wrap;
-    }
-    .btn-ghost {
-      background:transparent;
-      border: 1px solid rgba(230,211,158,0.12);
-      color:var(--gold);
-      padding:0.6rem 0.9rem;
-      border-radius:6px;
-      cursor:pointer;
-    }
-    .btn-primary {
-      background:var(--gold);
-      color:var(--black);
-      padding:0.6rem 0.9rem;
-      border-radius:6px;
-      border:none;
-      cursor:pointer;
-    }
-
-    /* Back to top */
-    .back-to-top {
-      position: fixed;
-      right: 18px;
-      bottom: 18px;
-      z-index: 1500;
-      width:48px;
-      height:48px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background: linear-gradient(180deg,var(--gold), #c8b680);
-      color:var(--black);
-      border:none;
-      cursor:pointer;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-      transform: translateY(120%);
-      transition: transform 240ms ease, opacity 240ms ease;
-      opacity:0;
-    }
-    .back-to-top.visible {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    /* loading / sentinel */
-    #loading { text-align:center; margin:1rem 0; color:var(--white); }
-    .small-muted { color: rgba(230,211,158,0.6); font-size:0.9rem; }
-
-    @media (max-width: 800px) {
-      .nft-modal .modal-grid { grid-template-columns: 1fr; }
-      .flip-front img { height: 140px; }
-      .flip-front, .flip-back { min-height: 230px; }
-    }
+    .pfps-section{padding-top:2rem;padding-bottom:4rem}
+    .gallery-controls{display:flex;gap:1rem;justify-content:center;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;position:sticky;top:80px;z-index:800;background:linear-gradient(180deg,rgba(20,20,20,.95),rgba(20,20,20,.85));padding:.75rem;border-bottom:1px solid rgba(230,211,158,.06);backdrop-filter:blur(2px)}
+    .gallery-controls input{padding:.6rem .8rem;border-radius:6px;border:1px solid rgba(230,211,158,.12);background:rgba(20,20,20,.6);color:var(--gold);width:280px}
+    .gallery__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.25rem;align-items:start}
+    .flip-card{perspective:1200px}
+    .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.9,.2,1);cursor:pointer}
+    .flip-card.is-flipped .flip-inner{transform:rotateY(180deg)}
+    .flip-front,.flip-back{position:relative;backface-visibility:hidden;min-height:280px;border-radius:8px;padding:.75rem;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:.5rem;border:1px solid rgba(230,211,158,.12);background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.2));box-shadow:0 6px 20px rgba(200,30,30,.03)}
+    .flip-front img{width:100%;height:180px;object-fit:cover;border-radius:6px;background:#111}
+    .flip-back{transform:rotateY(180deg);color:var(--gold);text-align:left;overflow:auto}
+    .nft-title{font-weight:700;color:var(--gold);font-size:1rem;text-align:center;margin-top:.25rem}
+    .small-muted{color:rgba(230,211,158,.6);font-size:.85rem}
+    .nft-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);display:flex;align-items:center;justify-content:center;z-index:2000;padding:1rem;opacity:0;pointer-events:none;transition:opacity 220ms ease}
+    .nft-modal-overlay.open{opacity:1;pointer-events:auto}
+    .nft-modal{width:min(950px,96%);max-height:90vh;overflow:auto;border-radius:12px;border:2px solid var(--gold);background:linear-gradient(180deg,#080808,#0f0f0f);padding:1.25rem;box-shadow:0 20px 60px rgba(0,0,0,.7);position:relative}
+    .nft-modal img{width:100%;border-radius:8px;border:1px solid rgba(230,211,158,.08)}
+    .modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .modal-close{position:absolute;top:1rem;right:1rem;background:transparent;border:1px solid rgba(255,255,255,.1);color:var(--gold);padding:.4rem .6rem;border-radius:6px;cursor:pointer}
+    .modal-actions{margin-top:1rem;display:flex;gap:.5rem;flex-wrap:wrap}
+    .btn-ghost{background:transparent;border:1px solid rgba(230,211,158,.12);color:var(--gold);padding:.6rem .9rem;border-radius:6px;cursor:pointer}
+    .btn-primary{background:var(--gold);color:var(--black);padding:.6rem .9rem;border-radius:6px;border:none;cursor:pointer}
+    .back-to-top{position:fixed;right:18px;bottom:18px;z-index:1500;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,var(--gold),#c8b680);color:var(--black);border:none;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,.6);transform:translateY(120%);transition:transform 240ms ease,opacity 240ms ease;opacity:0}
+    .back-to-top.visible{transform:translateY(0);opacity:1}
+    #loading{text-align:center;margin:1rem 0;color:var(--white)}
+    @media(max-width:800px){.modal-grid{grid-template-columns:1fr}.flip-front img{height:140px}.flip-front,.flip-back{min-height:230px}}
   </style>
 </head>
-
 <body>
   <header class="header">
     <div class="header__container">
@@ -229,67 +52,49 @@
       </nav>
     </div>
   </header>
-
   <main class="main">
-    <!-- Top collection cards (keeps your original 3) -->
     <section class="section nfts-gallery">
       <div class="section__container">
         <h1 class="section__title">NFT Gallery</h1>
         <p class="section__subtitle">Explore our exclusive collections from the blockchain casino floor.</p>
         <div class="nfts__grid">
           <div class="nfts__card">
-            <a href="pfps-gallery.html" class="nfts__link-wrapper">
+            <a href="#pfps-gallery" class="nfts__link-wrapper">
               <img src="../assets/b_garlinghouse.png" alt="Casino Society PFP Collection" loading="lazy" class="nfts__image">
               <p class="nfts__name">Casino Society PFPs</p>
             </a>
-            <p class="nfts__description">A nod towards culture, discipline, and effort. Click or scroll down to explore the full gallery.</p>
+            <p class="nfts__description">A nod towards culture, discipline, and effort. Scroll down to explore the full PFP gallery.</p>
           </div>
           <div class="nfts__card">
             <a href="https://xrp.cafe/collection/casinobanners" class="nfts__link-wrapper" target="_blank" rel="noopener">
-              <img src="../assets/banner_collection_brand.png" alt="Casino Society Banners Collection" loading="lazy" class="nfts__image">
+              <img src="../assets/banner_collection_brand.png" alt="Casino Society Banners" loading="lazy" class="nfts__image">
               <p class="nfts__name">Casino Society Banners</p>
             </a>
-            <p class="nfts__description">A collection of generative banners inspired by Schizo Banners for the Casino community.</p>
+            <p class="nfts__description">Generative banners inspired by Schizo Banners for the Casino community.</p>
           </div>
           <div class="nfts__card">
             <a href="https://xrp.cafe/collection/casinocards" class="nfts__link-wrapper" target="_blank" rel="noopener">
-              <img src="../assets/casino_cards_nft_thumbnail.png" alt="Casino Cards Collection" loading="lazy" class="nfts__image">
+              <img src="../assets/casino_cards_nft_thumbnail.png" alt="Casino Society Cards" loading="lazy" class="nfts__image">
               <p class="nfts__name">Casino Society Cards</p>
             </a>
-            <p class="nfts__description">Fueling unbreakable resolve with the “no crying ethos.” Each card merges casino flair and self-mastery archetypes.</p>
+            <p class="nfts__description">Fueling unbreakable resolve with the “no crying ethos.” Merging casino flair & self-mastery archetypes.</p>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- PFP Gallery -->
     <section class="section pfps-section" id="pfps-gallery">
       <div class="section__container">
         <h2 class="section__title">Casino Society PFP Gallery</h2>
-        <p class="section__subtitle">Browse — click a photo to flip it, or open full details in the center modal.</p>
-
-        <div class="gallery-controls" role="toolbar" aria-label="Gallery controls">
-          <input id="search-input" placeholder="Search by name, trait, description..." aria-label="Search NFTs" />
-          <select id="rarity-filter" aria-label="Filter by rarity">
-            <option value="">All Rarity</option>
-            <option>Common</option>
-            <option>Rare</option>
-            <option>Epic</option>
-            <option>Legendary</option>
-          </select>
-          <select id="trait-filter" aria-label="Filter by trait">
-            <option value="">All Traits</option>
-          </select>
+        <p class="section__subtitle">Click a photo to flip it — or open full details in the center modal.</p>
+        <div class="gallery-controls">
+          <input id="search-input" placeholder="Search NFTs..." aria-label="Search NFTs">
         </div>
-
         <div id="gallery-grid" class="gallery__grid" aria-live="polite"></div>
         <div id="loading">Loading NFTs…</div>
-        <!-- sentinel for infinite loading -->
         <div id="scroll-sentinel" style="height:1px;"></div>
       </div>
     </section>
   </main>
-
   <footer class="footer">
     <div class="footer__container">
       <p>© 2025 Casino Society. All rights reserved. Send ourselves and each other higher. No Crying in the Casino.</p>
@@ -300,379 +105,33 @@
       </div>
     </div>
   </footer>
-
-  <!-- Modal (hidden by default) -->
   <div id="nft-modal-overlay" class="nft-modal-overlay" aria-hidden="true">
     <div class="nft-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
       <button id="modal-close" class="modal-close" aria-label="Close">✕</button>
       <div id="modal-content"></div>
     </div>
   </div>
-
   <button id="back-to-top" class="back-to-top" title="Back to top" aria-label="Back to top">↑</button>
-
   <script>
-    // Wait for Papa to be available
-    window.addEventListener('DOMContentLoaded', () => {
-      if (!window.Papa) {
-        console.error('Papa Parse not loaded.');
-        document.getElementById('loading').textContent = 'CSV parser not available.';
-        return;
-      }
-
-      const CSV_PATH = 'NFTs.csv'; // file from your nfts folder
-      const PAGE_SIZE = 20;
-      let allNfts = [];
-      let filtered = [];
-      let visibleCount = 0;
-      let imageFieldKey = null;
-      let cafeLinkKey = null;
-      const galleryGrid = document.getElementById('gallery-grid');
-      const loadingEl = document.getElementById('loading');
-      const sentinel = document.getElementById('scroll-sentinel');
-
-      // controls
-      const searchInput = document.getElementById('search-input');
-      const rarityFilter = document.getElementById('rarity-filter');
-      const traitFilter = document.getElementById('trait-filter');
-
-      // modal
-      const modalOverlay = document.getElementById('nft-modal-overlay');
-      const modalContent = document.getElementById('modal-content');
-      const modalClose = document.getElementById('modal-close');
-
-      // back to top
-      const backToTop = document.getElementById('back-to-top');
-
-      // Helper: robustly extract image URL from many formats
-      function extractImageUrl(val) {
-        if (!val) return '../assets/b_garlinghouse.png';
-        // If the CSV field contains a URL in parentheses: "name (https://...)" - capture it
-        const parenMatch = val.match(/\((https?:\/\/[^)]+)\)/);
-        if (parenMatch) return parenMatch[1];
-
-        // If it contains a raw http(s) URL anywhere
-        const urlMatch = val.match(/https?:\/\/[^\s,"]+/);
-        if (urlMatch) return urlMatch[0];
-
-        // If it's just a filename hosted in assets
-        if (val.endsWith('.png') || val.endsWith('.jpg') || val.endsWith('.jpeg') || val.endsWith('.svg')) {
-          return '../assets/' + val;
-        }
-
-        return '../assets/b_garlinghouse.png';
-      }
-
-      // Determine cafe/link key heuristically
-      function detectSpecialKeys(record) {
-        const keys = Object.keys(record || {});
-        for (const k of keys) {
-          const lk = k.toLowerCase();
-          if (!imageFieldKey && (lk.includes('image') || lk.includes('img') || lk.includes('art'))) imageFieldKey = k;
-          if (!cafeLinkKey && (lk.includes('cafe') || lk.includes('xrp') || lk.includes('link') || lk.includes('url'))) cafeLinkKey = k;
-        }
-        // fallback: ensure they are set
-        if (!imageFieldKey) imageFieldKey = keys.find(k => k.toLowerCase().includes('image')) || keys[0];
-        if (!cafeLinkKey) cafeLinkKey = keys.find(k => k.toLowerCase().includes('cafe')) || keys.find(k => k.toLowerCase().includes('link')) || null;
-      }
-
-      // Render a single NFT card (flip-card)
-      function createNftCard(nft, idx) {
-        const title = nft.name || nft.NFT || nft.nft_number || `#${idx+1}`;
-        const imageUrl = extractImageUrl(nft[imageFieldKey] || nft.image || '');
-        const rarity = nft.Rarity || nft.rarity || nft.Rarity?? nft.rarity?? (nft.rarity || '');
-        // Build traits — try a few common column names
-        const traitsRaw = nft.Traits || nft.traits || nft.trait || nft.character || '';
-        const traits = Array.isArray(traitsRaw) ? traitsRaw.join(', ') : (traitsRaw || '');
-        const shortDesc = (nft.description || nft.Description || '').slice(0,170);
-        const quote = nft.Quotes || nft.Quote || nft.quotes || '';
-
-        // Create elements
-        const wrapper = document.createElement('div');
-        wrapper.className = 'flip-card';
-
-        const inner = document.createElement('div');
-        inner.className = 'flip-inner';
-        inner.setAttribute('tabindex', '0'); // keyboard focus
-
-        // front
-        const front = document.createElement('div');
-        front.className = 'flip-front';
-        front.innerHTML = `
-          <img src="${imageUrl}" alt="${escapeHtml(title)}" loading="lazy">
-          <div class="nft-title">${escapeHtml(title)}</div>
-          <div class="card-short-desc small-muted">${escapeHtml(shortDesc || (traits || 'No description'))}</div>
-        `;
-
-        // back
-        const back = document.createElement('div');
-        back.className = 'flip-back';
-        // prepare a small set of fields to show on the back
-        const metaHtml = `
-          <div style="width:100%">
-            <div style="display:flex;justify-content:space-between;align-items:center;">
-              <strong style="font-size:1.05rem">${escapeHtml(title)}</strong>
-              <span class="small-muted">${escapeHtml(rarity || '')}</span>
-            </div>
-            <div class="nft-meta" style="margin-top:0.5rem;">
-              <div><strong>Traits:</strong> ${escapeHtml(traits || '—')}</div>
-              <div style="margin-top:0.5rem;"><strong>Quote:</strong> ${escapeHtml(quote || '—')}</div>
-              <div style="margin-top:0.5rem;"><strong>ID:</strong> ${escapeHtml(nft.nft_number || nft.NFT || nft.nft_rec_id || '')}</div>
-            </div>
-            <div style="margin-top:0.8rem; display:flex; gap:0.5rem; justify-content:flex-end;">
-              <button class="btn-ghost btn-flip-more">View full details</button>
-            </div>
-          </div>
-        `;
-        back.innerHTML = metaHtml;
-
-        inner.appendChild(front);
-        inner.appendChild(back);
-
-        // clicking flips the card
-        wrapper.addEventListener('click', e => {
-          // avoid flip when clicking the "View full details" button
-          const target = e.target;
-          if (target.closest('.btn-flip-more')) {
-            openModalForNft(nft);
-            return;
-          }
-          wrapper.classList.toggle('is-flipped');
-        });
-        // allow Enter key to flip
-        inner.addEventListener('keydown', (ev) => {
-          if (ev.key === 'Enter' || ev.key === ' ') {
-            ev.preventDefault();
-            wrapper.classList.toggle('is-flipped');
-          }
-        });
-
-        wrapper.appendChild(inner);
-        return wrapper;
-      }
-
-      // Render next PAGE_SIZE items (from filtered or allNfts)
-      function renderNextBatch() {
-        if (!filtered.length) {
-          loadingEl.style.display = 'none';
-          return;
-        }
-        const start = visibleCount;
-        const end = Math.min(filtered.length, start + PAGE_SIZE);
-        const fragment = document.createDocumentFragment();
-        for (let i = start; i < end; i++) {
-          const nft = filtered[i];
-          const card = createNftCard(nft, i);
-          fragment.appendChild(card);
-        }
-        galleryGrid.appendChild(fragment);
-        visibleCount = end;
-        loadingEl.style.display = visibleCount < filtered.length ? 'block' : 'none';
-      }
-
-      // Apply filters / search
-      function applyFilters() {
-        const q = (searchInput.value || '').trim().toLowerCase();
-        const rarityVal = (rarityFilter.value || '').trim().toLowerCase();
-        const traitVal = (traitFilter.value || '').trim().toLowerCase();
-
-        filtered = allNfts.filter(nft => {
-          // combine searchable strings
-          const name = (nft.name || nft.NFT || '').toString().toLowerCase();
-          const desc = (nft.description || nft.Description || '').toString().toLowerCase();
-          const traits = (nft.Traits || nft.traits || nft.character || '').toString().toLowerCase();
-          const rarity = (nft.Rarity || nft.rarity || '').toString().toLowerCase();
-          const matchQ = !q || name.includes(q) || desc.includes(q) || traits.includes(q);
-          const matchR = !rarityVal || rarity === rarityVal;
-          const matchT = !traitVal || traits.includes(traitVal);
-          return matchQ && matchR && matchT;
-        });
-
-        // reset gallery
-        galleryGrid.innerHTML = '';
-        visibleCount = 0;
-        renderNextBatch();
-      }
-
-      // Fill trait select from CSV data
-      function populateTraitOptions() {
-        const traitSet = new Set();
-        allNfts.forEach(nft => {
-          const t = nft.Traits || nft.traits || nft.character || '';
-          if (!t) return;
-          // if comma separated
-          if (typeof t === 'string' && t.includes(',')) {
-            t.split(',').map(s => s.trim()).filter(Boolean).forEach(x => traitSet.add(x));
-          } else {
-            traitSet.add(String(t).trim());
-          }
-        });
-        // append to traitFilter select
-        const keys = Array.from(traitSet).sort();
-        keys.forEach(k => {
-          const opt = document.createElement('option');
-          opt.value = k;
-          opt.textContent = k;
-          traitFilter.appendChild(opt);
-        });
-      }
-
-      // Modal content builder
-      function openModalForNft(nft) {
-        // choose link field if any
-        let cafeLink = '';
-        if (cafeLinkKey && nft[cafeLinkKey]) cafeLink = nft[cafeLinkKey];
-        // try detecting URL inside fields
-        if (!cafeLink) {
-          const values = Object.values(nft).join(' ');
-          const urlMatch = values.match(/https?:\/\/[^\s,"]+/);
-          if (urlMatch) cafeLink = urlMatch[0];
-        }
-
-        const imageUrl = extractImageUrl(nft[imageFieldKey] || nft.image || '');
-        const title = nft.name || nft.NFT || `#${nft.nft_number || ''}`;
-        const rarity = nft.Rarity || nft.rarity || '';
-        const traits = nft.Traits || nft.traits || nft.character || '';
-        const desc = nft.description || nft.Description || '';
-        const quotes = nft.Quotes || nft.Quote || '';
-
-        modalContent.innerHTML = `
-          <div style="position:relative;">
-            <h3 id="modal-title" style="margin-bottom:0.5rem;color:var(--gold)">${escapeHtml(title)}</h3>
-            <div class="modal-grid">
-              <div>
-                <img src="${imageUrl}" alt="${escapeHtml(title)}">
-              </div>
-              <div>
-                <div style="color:var(--white);font-size:0.95rem;">
-                  <div style="margin-bottom:0.6rem;"><strong>Rarity:</strong> ${escapeHtml(rarity || '—')}</div>
-                  <div style="margin-bottom:0.6rem;"><strong>Traits:</strong> ${escapeHtml(traits || '—')}</div>
-                  <div style="margin-bottom:0.6rem;"><strong>ID:</strong> ${escapeHtml(nft.nft_number || nft.NFT || '')}</div>
-                  <div style="margin-top:0.75rem;"><strong>Description / Quote:</strong>
-                    <p style="margin-top:0.4rem;color:var(--white);">${escapeHtml(desc || quotes || 'No extra information')}</p>
-                  </div>
-                </div>
-                <div class="modal-actions">
-                  ${cafeLink ? `<a class="btn-primary" href="${escapeAttr(cafeLink)}" target="_blank" rel="noopener">View on xrp.cafe</a>` : ''}
-                  <button class="btn-ghost" id="modal-close-btn">Close</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-
-        // open overlay
-        modalOverlay.classList.add('open');
-        modalOverlay.setAttribute('aria-hidden', 'false');
-        // attach close button inside content
-        const closeBtn = document.getElementById('modal-close-btn');
-        if (closeBtn) closeBtn.addEventListener('click', closeModal);
-      }
-      function closeModal() {
-        modalOverlay.classList.remove('open');
-        modalOverlay.setAttribute('aria-hidden', 'true');
-      }
-
-      // small escaping helpers
-      function escapeHtml(s) {
-        if (s === undefined || s === null) return '';
-        return String(s)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#39;');
-      }
-      function escapeAttr(s) {
-        return escapeHtml(s).replace(/\n/g, '').replace(/\r/g, '');
-      }
-
-      // infinite loading via IntersectionObserver
-      const io = new IntersectionObserver(entries => {
-        entries.forEach(ent => {
-          if (ent.isIntersecting) {
-            renderNextBatch();
-          }
-        });
-      }, { root: null, rootMargin: '400px', threshold: 0.01 });
-
-      // show/hide back to top
-      window.addEventListener('scroll', () => {
-        const show = window.scrollY > (window.innerHeight * 1.5);
-        if (show) backToTop.classList.add('visible'); else backToTop.classList.remove('visible');
-      });
-
-      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-      modalClose.addEventListener('click', closeModal);
-      modalOverlay.addEventListener('click', e => {
-        if (e.target === modalOverlay) closeModal();
-      });
-
-      // search and filter events (debounced)
-      let searchTimer = null;
-      searchInput.addEventListener('input', () => {
-        clearTimeout(searchTimer);
-        searchTimer = setTimeout(applyFilters, 180);
-      });
-      rarityFilter.addEventListener('change', applyFilters);
-      traitFilter.addEventListener('change', applyFilters);
-
-      // Fetch CSV and initialize
-      async function init() {
-        try {
-          const resp = await fetch(CSV_PATH);
-          if (!resp.ok) throw new Error('CSV fetch failed: ' + resp.status);
-          const text = await resp.text();
-          const parsed = Papa.parse(text, { header: true, skipEmptyLines: true });
-          allNfts = parsed.data || [];
-          if (!allNfts.length) {
-            loadingEl.textContent = 'No NFTs found in CSV.';
-            return;
-          }
-          detectSpecialKeys(allNfts[0]);
-          // Try to parse potential JSON arrays in certain fields (if present)
-          allNfts = allNfts.map(r => {
-            const copy = {...r};
-            // attempt to normalize traits: if 'Traits' value looks like a JSON array string or comma-separated
-            if (copy.Traits && typeof copy.Traits === 'string' && copy.Traits.startsWith('[')) {
-              try { copy.Traits = JSON.parse(copy.Traits); } catch(e) {}
-            }
-            return copy;
-          });
-
-          // populate trait options
-          populateTraitOptions();
-
-          // initial filter
-          applyFilters();
-
-          // connect observer to sentinel for infinite load
-          io.observe(sentinel);
-
-          loadingEl.style.display = 'none';
-        } catch (err) {
-          console.error(err);
-          loadingEl.textContent = 'Error loading NFTs — check console.';
-        }
-      }
-
-      // run init
-      init();
-    });
-  </script>
-
-  <script>
-    // Small mobile nav toggle using your existing markup
-    document.addEventListener('DOMContentLoaded', () => {
-      const menuToggle = document.getElementById('menu-toggle');
-      const navList = document.querySelector('.header__nav-list');
-      if (menuToggle && navList) {
-        menuToggle.addEventListener('click', () => {
-          navList.classList.toggle('active');
-        });
-      }
-    });
+    (function(){
+      const CSV_PATH='NFTs.csv',PAGE_SIZE=20;
+      let all=[],filtered=[],visible=0,imgKey=null,linkKey=null;
+      const grid=document.getElementById('gallery-grid'),loadEl=document.getElementById('loading'),sentinel=document.getElementById('scroll-sentinel'),search=document.getElementById('search-input'),modalO=document.getElementById('nft-modal-overlay'),modalC=document.getElementById('modal-content'),modalX=document.getElementById('modal-close'),topB=document.getElementById('back-to-top');
+      const ps=document.createElement('script');ps.src='https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js';ps.onload=()=>init();document.head.appendChild(ps);
+      function stripBOM(s){return s?s.replace(/^\uFEFF/,''):s}
+      function imgUrl(v){if(!v)return'../assets/b_garlinghouse.png';const s=String(v);const p=s.match(/\((https?:\/\/[^)]+)\)/);if(p)return p[1];const u=s.match(/https?:\/\/[^\s,"]+/);if(u)return u[0];if(s.match(/\.(png|jpg|jpeg|svg|webp)$/i))return'../assets/'+s.trim();return'../assets/b_garlinghouse.png'}
+      function detect(r){const k=Object.keys(r);for(const x of k){const l=x.toLowerCase();if(!imgKey&&(l.includes('image')||l.includes('img')))imgKey=x;if(!linkKey&&(l.includes('cafe')||l.includes('link')||l.includes('url')))linkKey=x}if(!imgKey)imgKey=k.find(x=>x.toLowerCase().includes('image'))||k[0]}
+      function render(){const s=visible,e=Math.min(filtered.length,s+PAGE_SIZE),f=document.createDocumentFragment();for(let i=s;i<e;i++)f.appendChild(card(filtered[i],i));grid.append(f);visible=e;loadEl.style.display=visible<filtered.length?'block':'none'}
+      function searchFn(){const q=(search.value||'').toLowerCase();filtered=all.filter(n=>Object.values(n).join(' ').toLowerCase().includes(q));grid.innerHTML='';visible=0;render()}
+      function card(n,i){const t=n.name||n.NFT||n.nft_number||`#${i+1}`,img=imgUrl(n[imgKey]||n.image),d=(n.description||'').slice(0,160),q=n.Quote||n.Quotes||'',tr=n.Traits||'',r=n.Rarity||'';const c=document.createElement('div');c.className='flip-card';const inner=document.createElement('div');inner.className='flip-inner';const f=document.createElement('div');f.className='flip-front';f.innerHTML=`<img src="${img}" alt="${t}"><div class="nft-title">${t}</div><div class="small-muted">${d||tr||'—'}</div>`;const b=document.createElement('div');b.className='flip-back';b.innerHTML=`<strong>${t}</strong><p class="small-muted">${r}</p><p><strong>Traits:</strong> ${tr||'—'}</p><p><strong>Quote:</strong> ${q||'—'}</p><button class="btn-ghost btn-flip-more">View full details</button>`;inner.append(f,b);c.append(inner);c.addEventListener('click',e=>{if(e.target.classList.contains('btn-flip-more')){modal(n);return}c.classList.toggle('is-flipped')});return c}
+      function modal(n){const img=imgUrl(n[imgKey]||n.image),t=n.name||n.NFT||'NFT',d=n.description||n.Description||'',tr=n.Traits||'',r=n.Rarity||'',q=n.Quote||n.Quotes||'';let l='';if(linkKey&&n[linkKey])l=n[linkKey];if(!l){const v=Object.values(n).join(' ');const m=v.match(/https?:\/\/[^\s,"]+/);if(m)l=m[0]}modalC.innerHTML=`<div class="modal-grid"><div><img src="${img}" alt="${t}"></div><div><h3 style="color:var(--gold)">${t}</h3><p><strong>Rarity:</strong> ${r||'—'}</p><p><strong>Traits:</strong> ${tr||'—'}</p><p><strong>Description / Quote:</strong></p><p>${d||q||'No extra information'}</p><div class="modal-actions">${l?`<a class="btn-primary" href="${l}" target="_blank" rel="noopener">View on xrp.cafe</a>`:''}<button class="btn-ghost" id="close2">Close</button></div></div></div>`;modalO.classList.add('open');modalO.setAttribute('aria-hidden','false');document.getElementById('close2').onclick=close}
+      function close(){modalO.classList.remove('open');modalO.setAttribute('aria-hidden','true')}
+      const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)render()})},{root:null,rootMargin:'400px',threshold:.01})
+      window.addEventListener('scroll',()=>{topB.classList.toggle('visible',window.scrollY>window.innerHeight*1.5)});topB.onclick=()=>window.scrollTo({top:0,behavior:'smooth'})
+      modalX.onclick=close;modalO.onclick=e=>{if(e.target===modalO)close()}
+      search.addEventListener('input',()=>{clearTimeout(search._t);search._t=setTimeout(searchFn,160)})
+      async function init(){try{const r=await fetch(CSV_PATH);if(!r.ok)throw new Error('fetch fail');const t=await r.text();const p=Papa.parse(t,{header:true,skipEmptyLines:true});p.meta.fields=p.meta.fields.map(f=>stripBOM(f));all=(p.data||[]).map(o=>{const x={};for(const k in o)x[stripBOM(k)]=o[k];return x});if(!all.length){loadEl.textContent='No NFTs found';return}detect(all[0]);searchFn();io.observe(sentinel);loadEl.style.display='none'}catch(e){loadEl.textContent='Error loading NFTs';console.error(e)}}
+    })();
   </script>
 </body>
 </html>
