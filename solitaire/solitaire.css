@@ -1,0 +1,394 @@
+/* Casino Society Solitaire Styles */
+
+:root {
+    --gold: #E6D39E;
+    --black: #141414;
+    --red: #C8102E;
+    --white: #FFFFFF;
+    --dark-black: #000000;
+}
+
+.solitaire-page {
+    background: var(--black);
+    color: var(--gold);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.solitaire-main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem;
+    width: 100%;
+}
+
+.game-header {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.game-header h1 {
+    font-size: 2rem;
+    color: var(--gold);
+    margin: 0;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--dark-black);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 2px solid var(--gold);
+}
+
+.stat {
+    text-align: center;
+    min-width: 80px;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    opacity: 0.8;
+    color: var(--gold);
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--gold);
+    margin-top: 0.25rem;
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    border: 3px solid var(--gold);
+    border-radius: 8px;
+    background: var(--black);
+    cursor: pointer;
+    touch-action: none;
+    box-shadow: 0 0 20px rgba(230, 211, 158, 0.3);
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: 1.5rem 0;
+}
+
+.controls button {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.controls button:hover:not(:disabled) {
+    background: var(--red);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(200, 16, 46, 0.3);
+}
+
+.controls button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.controls button:disabled {
+    background: #333;
+    color: #666;
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.message {
+    text-align: center;
+    padding: 1rem;
+    margin: 1rem auto;
+    max-width: 600px;
+    background: var(--dark-black);
+    border-radius: 8px;
+    color: var(--gold);
+    font-size: 1.1rem;
+    border: 2px solid var(--gold);
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.message.show {
+    opacity: 1;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: var(--black);
+    border: 3px solid var(--gold);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    animation: slideUp 0.3s ease;
+    box-shadow: 0 0 30px rgba(230, 211, 158, 0.5);
+}
+
+@keyframes slideUp {
+    from { 
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to { 
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content h2 {
+    margin-bottom: 1.5rem;
+    color: var(--gold);
+    font-size: 1.8rem;
+}
+
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: var(--dark-black);
+    border-radius: 5px;
+    color: var(--gold);
+}
+
+.toggle-btn {
+    padding: 0.5rem 1rem;
+    min-width: 100px;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+    background: var(--red);
+    color: var(--white);
+}
+
+.modal-close {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: var(--red);
+    color: var(--white);
+}
+
+/* Win Modal Specific */
+.win-content {
+    max-width: 500px;
+}
+
+.win-message {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    animation: bounce 1s infinite;
+    color: var(--gold);
+}
+
+@keyframes bounce {
+    0%, 100% { 
+        transform: scale(1); 
+    }
+    50% { 
+        transform: scale(1.1); 
+    }
+}
+
+.win-content p {
+    font-size: 1.2rem;
+    margin: 0.75rem 0;
+    color: var(--gold);
+}
+
+.win-content span {
+    font-weight: bold;
+    color: var(--white);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .game-info {
+        gap: 0.5rem;
+        padding: 0.75rem;
+    }
+
+    .stat-value {
+        font-size: 1.2rem;
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+    }
+
+    .controls button {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .message {
+        font-size: 1rem;
+        padding: 0.75rem;
+    }
+
+    .modal-content {
+        padding: 1.5rem;
+    }
+
+    .win-message {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-header h1 {
+        font-size: 1.2rem;
+    }
+
+    .controls {
+        gap: 0.3rem;
+    }
+
+    .controls button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .stat {
+        min-width: 60px;
+    }
+
+    .stat-value {
+        font-size: 1rem;
+    }
+
+    .setting-row {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .toggle-btn {
+        min-width: 80px;
+        font-size: 0.85rem;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .game-header {
+        padding: 0.5rem 0;
+    }
+
+    .game-header h1 {
+        font-size: 1.2rem;
+    }
+
+    .game-info {
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .controls {
+        margin: 0.75rem 0;
+    }
+
+    .controls button {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+    }
+
+    .message {
+        display: none;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .modal-content,
+    .modal,
+    .controls button,
+    .win-message {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+
+/* Focus styles for accessibility */
+button:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+}
+
+#gameCanvas:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 4px;
+}
