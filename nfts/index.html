@@ -10,11 +10,11 @@
   <link rel="icon" href="../favicon.ico" type="image/x-icon">
   <style>
     .pfps-section{padding-top:2rem;padding-bottom:4rem}
-    .gallery-controls{display:flex;gap:1rem;justify-content:center;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;background:linear-gradient(180deg,rgba(20,20,20,.95),rgba(20,20,20,.85));padding:.75rem;border-bottom:1px solid rgba(230,211,158,.06);backdrop-filter:blur(2px);position:sticky;top:0;z-index:100}
+    .gallery-controls{display:flex;gap:1rem;justify-content:center;align-items:center;margin-bottom:1.25rem;flex-wrap:wrap;background:linear-gradient(180deg,rgba(20,20,20,.95),rgba(20,20,20,.85));padding:.75rem;border-bottom:1px solid rgba(230,211,158,.06);backdrop-filter:blur(2px)}
     .gallery-controls input{padding:.6rem .8rem;border-radius:6px;border:1px solid rgba(230,211,158,.12);background:rgba(20,20,20,.6);color:var(--gold);width:280px}
     .gallery__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.25rem;align-items:start}
-    .flip-card{perspective:1200px;transition:transform .18s ease}
-    .flip-card:hover{transform:translateY(-6px);box-shadow:0 0 24px rgba(200,16,40,0.35);border-radius:8px}
+    .flip-card{perspective:1200px;transition:transform .18s ease;border-radius:8px;overflow:visible}
+    .flip-card:hover{transform:translateY(-6px);box-shadow:0 0 24px rgba(200,16,40,0.25);border-radius:8px;border:1px solid rgba(200,16,40,0.18)}
     .flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.2,.9,.2,1);cursor:pointer}
     .flip-card.is-flipped .flip-inner{transform:rotateY(180deg)}
     .flip-front,.flip-back{position:relative;backface-visibility:hidden;min-height:280px;border-radius:8px;padding:.75rem;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:.5rem;border:1px solid rgba(230,211,158,.12);background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.2));box-shadow:0 6px 20px rgba(0,0,0,.04)}
@@ -139,33 +139,63 @@
       const modalCloseBtn = document.getElementById('modal-close');
       const backToTop = document.getElementById('back-to-top');
 
-      const papaScript = document.createElement('script');
-      papaScript.src = 'https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js';
-      papaScript.onload = () => init();
-      papaScript.onerror = () => { loadingEl.textContent = 'Failed to load CSV parser.'; };
-      document.head.appendChild(papaScript);
-
       function stripBOM(s){ return s ? s.replace(/^\uFEFF/, '') : s; }
 
-      function extractImageUrl(v){
-        if(!v) return '../assets/b_garlinghouse.png';
+      function extractImageUrlFromValue(v){
+        if(!v) return '';
         const s = String(v).trim();
         const paren = s.match(/\((https?:\/\/[^)]+)\)/);
-        if(paren) return encodeURI(paren[1].trim());
+        if(paren) return paren[1].trim();
         const urlMatch = s.match(/https?:\/\/[^\s)"]+/);
-        if(urlMatch) return encodeURI(urlMatch[0].trim());
-        if(s.match(/\.(png|jpg|jpeg|svg|webp)$/i)) return '../assets/' + s.trim();
-        return '../assets/b_garlinghouse.png';
+        if(urlMatch) return urlMatch[0].trim();
+        if(s.match(/\.(png|jpg|jpeg|svg|webp)$/i)) return s.trim();
+        return '';
       }
 
-      function detectKeys(record){
-        const keys = Object.keys(record || {});
-        for(const k of keys){
-          const lk = k.toLowerCase();
-          if(!imageFieldKey && (lk.includes('image') || lk.includes('img') || lk.includes('art'))) imageFieldKey = k;
-          if(!cafeLinkKey && (lk.includes('cafe') || lk.includes('xrp') || lk.includes('link') || lk.includes('url'))) cafeLinkKey = k;
+      function makeImageSrc(value){
+        const candidate = extractImageUrlFromValue(value);
+        if(!candidate) return '../assets/b_garlinghouse.png';
+        if(candidate.startsWith('http')) return encodeURI(candidate);
+        if(candidate.startsWith('/')) return candidate;
+        return '../assets/' + candidate;
+      }
+
+      function detectImageField(rows, fields){
+        const score = {};
+        const IMAGE_RE = /https?:\/\/.*\.(png|jpe?g|svg|webp)|\.(png|jpe?g|svg|webp)$/i;
+        for(const f of fields){
+          score[f] = 0;
         }
-        if(!imageFieldKey) imageFieldKey = keys.find(k => k.toLowerCase().includes('image')) || keys[0];
+        const sampleCount = Math.min(rows.length, 60);
+        for(let i=0;i<sampleCount;i++){
+          const row = rows[i];
+          for(const f of fields){
+            const v = (row[f] || '').toString();
+            if(!v) continue;
+            if(v.match(/https?:\/\/\S+/i)) score[f] += 3;
+            const extMatch = v.match(/\.(png|jpe?g|svg|webp)/i);
+            if(extMatch) score[f] += 2;
+            if(v.match(/\(https?:\/\/\S+\)/i)) score[f] += 2;
+          }
+        }
+        const entries = Object.entries(score).sort((a,b)=>b[1]-a[1]);
+        if(entries.length && entries[0][1] > 0) return entries[0][0];
+        const fallback = fields.find(f => f.toLowerCase().includes('image') || f.toLowerCase().includes('img')) || fields[0];
+        return fallback;
+      }
+
+      function detectCafeField(rows, fields){
+        for(const f of fields){
+          if(f.toLowerCase().includes('cafe') || f.toLowerCase().includes('xrp') || f.toLowerCase().includes('link') || f.toLowerCase().includes('url')) return f;
+        }
+        // otherwise check sample values for urls
+        for(const f of fields){
+          for(let i=0;i<Math.min(rows.length,40);i++){
+            const v = (rows[i][f]||'').toString();
+            if(/https?:\/\/xrp\.cafe/i.test(v) || /https?:\/\/[^\s]+/i.test(v)) return f;
+          }
+        }
+        return null;
       }
 
       function createImageElement(src){
@@ -179,12 +209,11 @@
 
       function createCard(nft, idx){
         const title = nft.name || nft.NFT || nft['nft_number'] || `#${idx+1}`;
-        const imageUrl = extractImageUrl(nft[imageFieldKey] || nft.image || '');
-        const short = (nft.description || nft.Description || '').slice(0, 140);
-        const traits = nft.Traits || '';
+        const rawImageVal = nft[imageFieldKey] || nft.image || '';
+        const imageSrc = makeImageSrc(rawImageVal);
         const front = document.createElement('div');
         front.className = 'flip-front';
-        const imgEl = createImageElement(imageUrl);
+        const imgEl = createImageElement(imageSrc);
         front.appendChild(imgEl);
         const titleEl = document.createElement('div');
         titleEl.className = 'nft-title';
@@ -192,19 +221,16 @@
         front.appendChild(titleEl);
         const metaEl = document.createElement('div');
         metaEl.className = 'small-muted';
-        metaEl.textContent = short || traits || '—';
+        metaEl.textContent = (nft.character || nft.Character || nft.Traits || '').toString().slice(0,140) || (nft.description || nft.Description || '').toString().slice(0,140) || '—';
         front.appendChild(metaEl);
 
         const wrapper = document.createElement('div');
         wrapper.className = 'flip-card';
-        wrapper.appendChild(front);
+        wrapper.appendChild((function(){ const inner=document.createElement('div'); inner.className='flip-inner'; inner.appendChild(front); return inner; })());
 
         wrapper.addEventListener('click', () => openModalForNft(nft));
         wrapper.addEventListener('keydown', (ev) => {
-          if (ev.key === 'Enter' || ev.key === ' ') {
-            ev.preventDefault();
-            openModalForNft(nft);
-          }
+          if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); openModalForNft(nft); }
         });
 
         return wrapper;
@@ -215,9 +241,7 @@
         const start = visibleCount;
         const end = Math.min(filtered.length, start + PAGE_SIZE);
         const frag = document.createDocumentFragment();
-        for(let i=start;i<end;i++){
-          frag.appendChild(createCard(filtered[i], i));
-        }
+        for(let i=start;i<end;i++) frag.appendChild(createCard(filtered[i], i));
         galleryGrid.appendChild(frag);
         visibleCount = end;
         loadingEl.style.display = visibleCount < filtered.length ? 'block' : 'none';
@@ -228,21 +252,22 @@
         filtered = allNfts.filter(nft => {
           const name = (nft.name || nft.NFT || '').toString().toLowerCase();
           const desc = (nft.description || nft.Description || '').toString().toLowerCase();
-          const traits = (nft.Traits || nft.traits || nft.character || '').toString().toLowerCase();
-          return !q || name.includes(q) || desc.includes(q) || traits.includes(q);
+          const character = (nft.character || nft.Character || '').toString().toLowerCase();
+          const movie = (nft.movie_tv || nft.movie || '').toString().toLowerCase();
+          return !q || name.includes(q) || desc.includes(q) || character.includes(q) || movie.includes(q);
         });
         galleryGrid.innerHTML = '';
         visibleCount = 0;
         renderNextBatch();
       }
 
-      function buildModalCardFront(nft){
+      function buildModalFront(nft){
         const title = nft.name || nft.NFT || nft['nft_number'] || 'NFT';
-        const imageUrl = extractImageUrl(nft[imageFieldKey] || nft.image || '');
+        const imageSrc = makeImageSrc(nft[imageFieldKey] || nft.image || '');
         const container = document.createElement('div');
         container.className = 'modal-front';
         const left = document.createElement('div');
-        const img = createImageElement(imageUrl);
+        const img = createImageElement(imageSrc);
         left.appendChild(img);
         const right = document.createElement('div');
         const h = document.createElement('h3');
@@ -253,24 +278,28 @@
         const info = document.createElement('div');
         info.style.color = 'var(--white)';
         info.style.marginTop = '8px';
-        info.innerHTML = `<p><strong>ID:</strong> ${escapeHtml(nft.nft_number || '')}</p><p><strong>Character:</strong> ${escapeHtml(nft.character || nft.Character || '')}</p><p><strong>Appears In:</strong> ${escapeHtml(nft.movie_tv || nft.movie || nft.movie_tv || '')}</p>`;
+        info.innerHTML = `<p><strong>ID:</strong> ${escapeHtml(nft.nft_number || '')}</p>
+                          <p><strong>Name:</strong> ${escapeHtml(nft.name || '')}</p>
+                          <p><strong>Character:</strong> ${escapeHtml(nft.character || nft.Character || '')}</p>
+                          <p><strong>Appears In:</strong> ${escapeHtml(nft.movie_tv || nft.movie || '')}</p>`;
         right.appendChild(info);
         container.appendChild(left);
         container.appendChild(right);
         return container;
       }
 
-      function buildModalCardBack(nft){
+      function buildModalBack(nft){
         const container = document.createElement('div');
         container.className = 'modal-back';
         const details = document.createElement('div');
         details.style.color = 'var(--gold)';
         details.innerHTML = `<h3 style="margin-top:0">${escapeHtml(nft.name || nft.NFT || '')}</h3>
-        <p><strong>NFT Number:</strong> ${escapeHtml(nft.nft_number || '')}</p>
-        <p><strong>Character:</strong> ${escapeHtml(nft.character || nft.Character || '')}</p>
-        <p><strong>Appears In:</strong> ${escapeHtml(nft.movie_tv || nft.movie || '')}</p>
-        <p><strong>Quote:</strong></p>
-        <p style="color:var(--white);margin-top:6px;">${escapeHtml(nft.quotes || nft.Quote || nft.Quotes || '')}</p>`;
+                             <p><strong>NFT Number:</strong> ${escapeHtml(nft.nft_number || '')}</p>
+                             <p><strong>Name:</strong> ${escapeHtml(nft.name || '')}</p>
+                             <p><strong>Character:</strong> ${escapeHtml(nft.character || nft.Character || '')}</p>
+                             <p><strong>Appears In:</strong> ${escapeHtml(nft.movie_tv || nft.movie || '')}</p>
+                             <p><strong>Quote:</strong></p>
+                             <p style="color:var(--white);margin-top:6px;">${escapeHtml(nft.quotes || nft.Quote || nft.Quotes || '')}</p>`;
         container.appendChild(details);
         return container;
       }
@@ -282,11 +311,8 @@
         modalCard.className = 'modal-card';
         const inner = document.createElement('div');
         inner.className = 'modal-inner';
-        const front = buildModalCardFront(nft);
-        const back = buildModalCardBack(nft);
-
-        inner.appendChild(front);
-        inner.appendChild(back);
+        inner.appendChild(buildModalFront(nft));
+        inner.appendChild(buildModalBack(nft));
         modalCard.appendChild(inner);
 
         const actions = document.createElement('div');
@@ -303,7 +329,7 @@
 
         actions.appendChild(flipBtn);
 
-        if (cafeLink) {
+        if(cafeLink){
           const cafeA = document.createElement('a');
           cafeA.className = 'btn-primary';
           cafeA.href = cafeLink;
@@ -320,14 +346,13 @@
         wrapper.appendChild(actions);
 
         modalInner.appendChild(wrapper);
-
         modalOverlay.classList.add('open');
-        modalOverlay.setAttribute('aria-hidden', 'false');
+        modalOverlay.setAttribute('aria-hidden','false');
       }
 
       function closeModal(){
         modalOverlay.classList.remove('open');
-        modalOverlay.setAttribute('aria-hidden', 'true');
+        modalOverlay.setAttribute('aria-hidden','true');
         modalInner.innerHTML = '';
       }
 
@@ -335,27 +360,26 @@
 
       function findCafeLink(nft){
         let link = '';
-        if (cafeLinkKey && nft[cafeLinkKey]) link = nft[cafeLinkKey];
-        if (!link) {
-          const values = Object.values(nft).join(' ');
-          const match = values.match(/https?:\/\/[^\s,"]+/);
-          if (match) link = match[0];
+        if(cafeLinkKey && nft[cafeLinkKey]) link = nft[cafeLinkKey];
+        if(!link){
+          const vals = Object.values(nft).join(' ');
+          const m = vals.match(/https?:\/\/[^\s,"]+/);
+          if(m) link = m[0];
         }
         return link || '';
       }
 
       const io = new IntersectionObserver(entries => {
-        entries.forEach(ent => { if (ent.isIntersecting) renderNextBatch(); });
-      }, { root: null, rootMargin: '400px', threshold: 0.01 });
+        entries.forEach(ent => { if(ent.isIntersecting) renderNextBatch(); });
+      }, { root:null, rootMargin:'400px', threshold:0.01 });
 
       window.addEventListener('scroll', () => {
-        const show = window.scrollY > (window.innerHeight * 1.5);
-        backToTop.classList.toggle('visible', show);
+        backToTop.classList.toggle('visible', window.scrollY > (window.innerHeight * 1.5));
       });
 
-      backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      backToTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
       modalCloseBtn.addEventListener('click', closeModal);
-      modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+      modalOverlay.addEventListener('click', (e) => { if(e.target === modalOverlay) closeModal(); });
 
       let searchTimer = null;
       searchInput.addEventListener('input', () => {
@@ -366,18 +390,21 @@
       async function init(){
         try{
           const resp = await fetch(CSV_PATH);
-          if(!resp.ok){ loadingEl.textContent = 'Could not fetch CSV (check filename)'; return; }
+          if(!resp.ok){ loadingEl.textContent = 'Could not fetch CSV (check filename and case)'; return; }
           const text = await resp.text();
           if(!window.Papa){ loadingEl.textContent = 'CSV parser not available.'; return; }
-          const parsed = Papa.parse(text, { header: true, skipEmptyLines: true });
+          const parsed = Papa.parse(text, { header:true, skipEmptyLines:true });
           if(parsed.meta && parsed.meta.fields) parsed.meta.fields = parsed.meta.fields.map(f => stripBOM(f));
-          allNfts = (parsed.data || []).map(r => {
+          const rows = (parsed.data || []).map(r => {
             const normalized = {};
             Object.keys(r).forEach(k => { normalized[stripBOM(k)] = r[k]; });
             return normalized;
           });
-          if (!allNfts.length){ loadingEl.textContent = 'No NFTs found in CSV.'; return; }
-          detectKeys(allNfts[0]);
+          if(!rows.length){ loadingEl.textContent = 'No NFTs found in CSV.'; return; }
+          const fields = parsed.meta && parsed.meta.fields ? parsed.meta.fields.map(stripBOM) : Object.keys(rows[0]);
+          imageFieldKey = detectImageField(rows, fields);
+          cafeLinkKey = detectCafeField(rows, fields);
+          allNfts = rows;
           applySearch();
           io.observe(sentinel);
           loadingEl.style.display = 'none';
@@ -386,6 +413,12 @@
           console.error(err);
         }
       }
+
+      const papaScript = document.createElement('script');
+      papaScript.src = 'https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js';
+      papaScript.onload = () => init();
+      papaScript.onerror = () => { loadingEl.textContent = 'Failed to load CSV parser.'; console.error('Failed to load Papa Parse'); };
+      document.head.appendChild(papaScript);
     })();
   </script>
 
