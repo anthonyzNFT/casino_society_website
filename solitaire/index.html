@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Casino Society Solitaire: Epic Klondike with luxury casino twists.">
+    <meta property="og:title" content="Casino Society - Solitaire">
+    <meta property="og:description" content="Play Casino Society's exclusive Solitaire game with a luxurious casino twist.">
+    <meta property="og:image" content="https://anthonyznft.github.io/casino_society_website/assets/casino_brand.png">
+    <meta property="og:url" content="https://anthonyznft.github.io/casino_society_website/Solitaire/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Casino Society - Solitaire">
+    <meta name="twitter:description" content="Play Casino Society's exclusive Solitaire game with a luxurious casino twist.">
+    <meta name="twitter:image" content="https://anthonyznft.github.io/casino_society_website/assets/casino_brand.png">
+    <title>Casino Solitaire - Casino Society</title>
+    <link rel="canonical" href="https://anthonyznft.github.io/casino_society_website/Solitaire/">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="solitaire.css">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+</head>
+<body class="solitaire-page">
+    <header class="header">
+        <div class="header__container">
+            <a href="../index.html" class="header__logo">Casino Society</a>
+            <nav class="header__nav" id="mobile-menu">
+                <ul class="header__nav-list">
+                    <li><a href="../index.html#about" class="header__nav-link">About</a></li>
+                    <li><a href="../index.html#ethos" class="header__nav-link">Ethos</a></li>
+                    <li><a href="../index.html#collections" class="header__nav-link">NFT Collections</a></li>
+                    <li><a href="../index.html#memes" class="header__nav-link">Memes</a></li>
+                    <li><a href="../index.html#faq" class="header__nav-link">FAQ</a></li>
+                </ul>
+                <button class="header__menu-toggle" aria-label="Toggle Menu" id="menu-toggle">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main solitaire-main">
+        <div class="game-header">
+            <h1>♠️ Casino Society Solitaire ♥️</h1>
+        </div>
+
+        <div class="game-info">
+            <div class="stat">
+                <div class="stat-label">Score</div>
+                <div class="stat-value" id="score">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Moves</div>
+                <div class="stat-value" id="moves">0</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Time</div>
+                <div class="stat-value" id="time">0:00</div>
+            </div>
+            <div class="stat">
+                <div class="stat-label">Rank</div>
+                <div class="stat-value" id="rank">Bronze Chip</div>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas" aria-label="Solitaire Game Board"></canvas>
+
+        <div class="controls">
+            <button id="newGame">New Game</button>
+            <button id="undo" disabled>Undo</button>
+            <button id="redo" disabled>Redo</button>
+            <button id="hint">Hint</button>
+            <button id="autoComplete" disabled>Auto Complete</button>
+            <button id="settings">Settings</button>
+            <button id="stats">Stats</button>
+        </div>
+
+        <div id="message" class="message" role="alert" aria-live="polite"></div>
+    </main>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <h2>⚙️ Settings</h2>
+            <div class="setting-row">
+                <span>Draw Mode</span>
+                <button class="toggle-btn" id="drawToggle">Draw 1</button>
+            </div>
+            <div class="setting-row">
+                <span>Timed Mode</span>
+                <button class="toggle-btn" id="timedToggle">Off</button>
+            </div>
+            <div class="setting-row">
+                <span>Hints</span>
+                <button class="toggle-btn" id="hintsToggle">On</button>
+            </div>
+            <div class="setting-row">
+                <span>Animations</span>
+                <button class="toggle-btn" id="animToggle">On</button>
+            </div>
+            <button id="closeSettings" class="modal-close">Close</button>
+        </div>
+    </div>
+
+    <!-- Stats Modal -->
+    <div id="statsModal" class="modal">
+        <div class="modal-content">
+            <h2>📊 Statistics</h2>
+            <div class="setting-row">
+                <span>Games Played</span>
+                <span id="gamesPlayed">0</span>
+            </div>
+            <div class="setting-row">
+                <span>Games Won</span>
+                <span id="gamesWon">0</span>
+            </div>
+            <div class="setting-row">
+                <span>Win Rate</span>
+                <span id="winRate">0%</span>
+            </div>
+            <div class="setting-row">
+                <span>Current Streak</span>
+                <span id="currentStreak">0</span>
+            </div>
+            <div class="setting-row">
+                <span>Best Streak</span>
+                <span id="bestStreak">0</span>
+            </div>
+            <div class="setting-row">
+                <span>Best Score</span>
+                <span id="bestScore">0</span>
+            </div>
+            <button id="resetStats" class="modal-close" style="background: var(--red, #C8102E); margin-top: 1rem;">Reset Stats</button>
+            <button id="closeStats" class="modal-close">Close</button>
+        </div>
+    </div>
+
+    <!-- Win Modal -->
+    <div id="winModal" class="modal">
+        <div class="modal-content win-content">
+            <div class="win-message">🎉 YOU WIN! 🎉</div>
+            <p>Score: <span id="winScore">0</span></p>
+            <p>Time: <span id="winTime">0:00</span></p>
+            <p>Moves: <span id="winMoves">0</span></p>
+            <button id="playAgain" class="modal-close">Play Again</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <p>© 2025 Casino Society. All rights reserved. Send ourselves and each other higher. No Crying in the Casino.</p>
+            <div class="footer__social">
+                <a href="https://x.com/CasinoSociety_" class="footer__social-link">X</a>
+                <span class="footer__social-divider">|</span>
+                <a href="https://discord.gg/68hXWT4VAZ" class="footer__social-link">Discord</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="solitaire.js"></script>
+</body>
+</html>
