@@ -48,7 +48,7 @@ let stats = {
 let dragState = null;
 
 // Canvas Dimensions
-let cardSize = { width: 70, height: 100 };
+let cardSize = { width: 80, height: 115 };
 let scale = 1;
 let layoutPositions = {};
 
@@ -108,42 +108,53 @@ function init() {
     document.getElementById('resetStats').addEventListener('click', resetStats);
 }
 
-// Canvas Resize
+// Canvas Resize - BETTER SPACE USAGE
 function resizeCanvas() {
     const container = canvas.parentElement;
-    const maxWidth = Math.min(container.clientWidth - 32, 900);
+    const maxWidth = Math.min(container.clientWidth - 16, 1100);
     const dpr = window.devicePixelRatio || 1;
     
     canvas.width = maxWidth * dpr;
-    canvas.height = (maxWidth * 0.75) * dpr;
+    canvas.height = (maxWidth * 0.7) * dpr;
     
     canvas.style.width = maxWidth + 'px';
-    canvas.style.height = (maxWidth * 0.75) + 'px';
+    canvas.style.height = (maxWidth * 0.7) + 'px';
     
-    scale = maxWidth / 900;
-    cardSize.width = 70 * scale;
-    cardSize.height = 100 * scale;
+    scale = maxWidth / 1100;
+    cardSize.width = 80 * scale;
+    cardSize.height = 115 * scale;
     
     ctx.scale(dpr, dpr);
     calculateLayout();
     render();
 }
 
-// Calculate Card Positions
+// Calculate Card Positions - PROPER SOLITAIRE LAYOUT
 function calculateLayout() {
     const w = canvas.width / (window.devicePixelRatio || 1);
     const h = canvas.height / (window.devicePixelRatio || 1);
-    const padding = 10 * scale;
+    const padding = 12 * scale;
     const cardSpacing = cardSize.width + padding;
     
+    // Total width for 7 columns
     const totalWidth = cardSpacing * 7 - padding;
     const startX = (w - totalWidth) / 2;
     
+    // PROPER LAYOUT: Stock/Waste on left, Foundations on right, same row
+    const topRowY = 20 * scale;
+    const tableauY = topRowY + cardSize.height + 30 * scale;
+    
     layoutPositions = {
-        foundationY: 20 * scale,
-        stockY: 20 * scale + cardSize.height + 20 * scale,
-        tableauY: 20 * scale + cardSize.height * 2 + 40 * scale,
-        startX: startX,
+        // Stock and waste on LEFT side
+        stockX: startX,
+        wasteX: startX + cardSpacing,
+        
+        // Foundations on RIGHT side (4 piles)
+        foundationStartX: startX + cardSpacing * 3,
+        
+        topRowY: topRowY,
+        tableauY: tableauY,
+        tableauStartX: startX,
         cardSpacing: cardSpacing,
         padding: padding,
         canvasWidth: w,
@@ -188,6 +199,12 @@ function newGame() {
     
     const deck = createDeck();
     
+    // Preserve settings but reset game
+    const savedDrawMode = gameState.drawMode;
+    const savedTimed = gameState.timed;
+    const savedHints = gameState.hintsEnabled;
+    const savedAnims = gameState.animationsEnabled;
+    
     gameState = {
         deck: [],
         tableau: Array(7).fill().map(() => []),
@@ -197,10 +214,10 @@ function newGame() {
         score: 0,
         moves: 0,
         startTime: Date.now(),
-        drawMode: gameState.drawMode,
-        timed: gameState.timed,
-        hintsEnabled: gameState.hintsEnabled,
-        animationsEnabled: gameState.animationsEnabled,
+        drawMode: savedDrawMode,
+        timed: savedTimed,
+        hintsEnabled: savedHints,
+        animationsEnabled: savedAnims,
         moveHistory: [],
         redoStack: []
     };
@@ -226,7 +243,7 @@ function newGame() {
     }
 }
 
-// Render Game Board
+// Render Game Board - NEW LAYOUT
 function render() {
     const w = layoutPositions.canvasWidth;
     const h = layoutPositions.canvasHeight;
@@ -235,10 +252,49 @@ function render() {
     ctx.fillStyle = COLORS.GREEN;
     ctx.fillRect(0, 0, w, h);
     
-    // Draw foundations
+    // Draw stock (LEFT SIDE)
+    drawCardSlot(layoutPositions.stockX, layoutPositions.topRowY, '');
+    if (gameState.stock.length > 0) {
+        drawCardBack(layoutPositions.stockX, layoutPositions.topRowY);
+        // Stock count
+        ctx.fillStyle = COLORS.WHITE;
+        ctx.font = `bold ${11 * scale}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.fillText(gameState.stock.length, layoutPositions.stockX + cardSize.width / 2, layoutPositions.topRowY + cardSize.height + 12 * scale);
+    } else if (gameState.waste.length > 0) {
+        // Show recycle icon
+        ctx.fillStyle = COLORS.GOLD;
+        ctx.font = `${20 * scale}px Arial`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('↻', layoutPositions.stockX + cardSize.width / 2, layoutPositions.topRowY + cardSize.height / 2);
+    }
+    
+    // Draw waste (next to stock)
+    drawCardSlot(layoutPositions.wasteX, layoutPositions.topRowY, '');
+    
+    // Draw waste cards based on draw mode
+    if (gameState.waste.length > 0) {
+        if (gameState.drawMode === 3 && gameState.waste.length >= 2) {
+            // Show last 3 cards offset
+            const cardsToShow = Math.min(3, gameState.waste.length);
+            for (let i = 0; i < cardsToShow; i++) {
+                const cardIndex = gameState.waste.length - cardsToShow + i;
+                const card = gameState.waste[cardIndex];
+                const offsetX = i * (20 * scale);
+                drawCard(card, layoutPositions.wasteX + offsetX, layoutPositions.topRowY);
+            }
+        } else {
+            // Show just the top card
+            const card = gameState.waste[gameState.waste.length - 1];
+            drawCard(card, layoutPositions.wasteX, layoutPositions.topRowY);
+        }
+    }
+    
+    // Draw foundations (RIGHT SIDE)
     for (let i = 0; i < 4; i++) {
-        const x = layoutPositions.startX + i * layoutPositions.cardSpacing;
-        const y = layoutPositions.foundationY;
+        const x = layoutPositions.foundationStartX + i * layoutPositions.cardSpacing;
+        const y = layoutPositions.topRowY;
         
         drawCardSlot(x, y, SUIT_SYMBOLS[SUITS[i]]);
         
@@ -248,40 +304,16 @@ function render() {
         }
     }
     
-    // Draw stock
-    const stockX = layoutPositions.startX;
-    const stockY = layoutPositions.stockY;
-    drawCardSlot(stockX, stockY, '');
-    
-    if (gameState.stock.length > 0) {
-        drawCardBack(stockX, stockY);
-        // Draw stock count
-        ctx.fillStyle = COLORS.WHITE;
-        ctx.font = `bold ${12 * scale}px Arial`;
-        ctx.textAlign = 'center';
-        ctx.fillText(gameState.stock.length, stockX + cardSize.width / 2, stockY + cardSize.height + 15 * scale);
-    }
-    
-    // Draw waste
-    const wasteX = layoutPositions.startX + layoutPositions.cardSpacing;
-    const wasteY = layoutPositions.stockY;
-    drawCardSlot(wasteX, wasteY, '');
-    
-    if (gameState.waste.length > 0) {
-        const card = gameState.waste[gameState.waste.length - 1];
-        drawCard(card, wasteX, wasteY);
-    }
-    
-    // Draw tableau
+    // Draw tableau (all 7 columns)
     for (let i = 0; i < 7; i++) {
-        const x = layoutPositions.startX + i * layoutPositions.cardSpacing;
+        const x = layoutPositions.tableauStartX + i * layoutPositions.cardSpacing;
         const pile = gameState.tableau[i];
         
         if (pile.length === 0) {
             drawCardSlot(x, layoutPositions.tableauY, '');
         } else {
             pile.forEach((card, j) => {
-                const y = layoutPositions.tableauY + j * (20 * scale);
+                const y = layoutPositions.tableauY + j * (22 * scale);
                 
                 // Skip if dragging
                 if (dragState && dragState.from.type === 'tableau' && 
@@ -297,7 +329,7 @@ function render() {
     // Draw dragging cards
     if (dragState) {
         dragState.cards.forEach((card, i) => {
-            const offsetY = i * (20 * scale);
+            const offsetY = i * (22 * scale);
             const x = dragState.x - dragState.offsetX;
             const y = dragState.y - dragState.offsetY + offsetY;
             drawCard(card, x, y, true);
@@ -348,7 +380,7 @@ function drawCard(card, x, y, isDragging = false) {
         ctx.restore();
         
         // Center symbol
-        ctx.font = `${28 * scale}px Arial`;
+        ctx.font = `${32 * scale}px Arial`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(SUIT_SYMBOLS[card.suit], x + cardSize.width / 2, y + cardSize.height / 2);
@@ -396,7 +428,7 @@ function drawCardSlot(x, y, label = '') {
     
     if (label) {
         ctx.fillStyle = COLORS.GOLD;
-        ctx.font = `${18 * scale}px Arial`;
+        ctx.font = `${20 * scale}px Arial`;
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText(label, x + cardSize.width / 2, y + cardSize.height / 2);
@@ -495,22 +527,20 @@ function handleDoubleClick(e) {
     }
 }
 
-// Get Card at Position
+// Get Card at Position - UPDATED FOR NEW LAYOUT
 function getCardAt(x, y) {
     // Check stock
-    if (isInBounds(x, y, layoutPositions.startX, layoutPositions.stockY, cardSize.width, cardSize.height)) {
+    if (isInBounds(x, y, layoutPositions.stockX, layoutPositions.topRowY, cardSize.width, cardSize.height)) {
         if (gameState.stock.length > 0) {
             return { type: 'stock' };
         }
-        // Check for recycle
         if (gameState.stock.length === 0 && gameState.waste.length > 0) {
             return { type: 'recycle' };
         }
     }
     
     // Check waste
-    const wasteX = layoutPositions.startX + layoutPositions.cardSpacing;
-    if (isInBounds(x, y, wasteX, layoutPositions.stockY, cardSize.width, cardSize.height)) {
+    if (isInBounds(x, y, layoutPositions.wasteX, layoutPositions.topRowY, cardSize.width, cardSize.height)) {
         if (gameState.waste.length > 0) {
             return { type: 'waste', pile: 0, index: gameState.waste.length - 1 };
         }
@@ -518,8 +548,8 @@ function getCardAt(x, y) {
     
     // Check foundations
     for (let i = 0; i < 4; i++) {
-        const fx = layoutPositions.startX + i * layoutPositions.cardSpacing;
-        if (isInBounds(x, y, fx, layoutPositions.foundationY, cardSize.width, cardSize.height)) {
+        const fx = layoutPositions.foundationStartX + i * layoutPositions.cardSpacing;
+        if (isInBounds(x, y, fx, layoutPositions.topRowY, cardSize.width, cardSize.height)) {
             return { type: 'foundation', pile: i };
         }
     }
@@ -527,10 +557,10 @@ function getCardAt(x, y) {
     // Check tableau (bottom to top for better selection)
     for (let i = 0; i < 7; i++) {
         const pile = gameState.tableau[i];
-        const pileX = layoutPositions.startX + i * layoutPositions.cardSpacing;
+        const pileX = layoutPositions.tableauStartX + i * layoutPositions.cardSpacing;
         
         for (let j = pile.length - 1; j >= 0; j--) {
-            const cardY = layoutPositions.tableauY + j * (20 * scale);
+            const cardY = layoutPositions.tableauY + j * (22 * scale);
             if (isInBounds(x, y, pileX, cardY, cardSize.width, cardSize.height)) {
                 return { type: 'tableau', pile: i, index: j };
             }
@@ -540,22 +570,22 @@ function getCardAt(x, y) {
     return null;
 }
 
-// Get Drop Target
+// Get Drop Target - UPDATED FOR NEW LAYOUT
 function getDropTarget(x, y) {
     // Check foundations
     for (let i = 0; i < 4; i++) {
-        const fx = layoutPositions.startX + i * layoutPositions.cardSpacing;
-        if (isInBounds(x, y, fx, layoutPositions.foundationY, cardSize.width, cardSize.height)) {
+        const fx = layoutPositions.foundationStartX + i * layoutPositions.cardSpacing;
+        if (isInBounds(x, y, fx, layoutPositions.topRowY, cardSize.width, cardSize.height)) {
             return { type: 'foundation', pile: i };
         }
     }
     
     // Check tableau
     for (let i = 0; i < 7; i++) {
-        const tx = layoutPositions.startX + i * layoutPositions.cardSpacing;
+        const tx = layoutPositions.tableauStartX + i * layoutPositions.cardSpacing;
         const pile = gameState.tableau[i];
         const maxY = pile.length > 0 ? 
-            layoutPositions.tableauY + pile.length * (20 * scale) + cardSize.height : 
+            layoutPositions.tableauY + pile.length * (22 * scale) + cardSize.height : 
             layoutPositions.tableauY + cardSize.height;
         
         if (isInBounds(x, y, tx, layoutPositions.tableauY, cardSize.width, maxY - layoutPositions.tableauY)) {
@@ -589,14 +619,13 @@ function handlePointerDown(x, y) {
     if (clicked.type === 'waste') {
         const card = gameState.waste[gameState.waste.length - 1];
         if (card.faceUp) {
-            const wasteX = layoutPositions.startX + layoutPositions.cardSpacing;
             dragState = {
                 from: clicked,
                 cards: [card],
                 x: x,
                 y: y,
-                offsetX: x - wasteX,
-                offsetY: y - layoutPositions.stockY
+                offsetX: x - layoutPositions.wasteX,
+                offsetY: y - layoutPositions.topRowY
             };
             render();
         }
@@ -609,8 +638,8 @@ function handlePointerDown(x, y) {
         
         if (card.faceUp) {
             const cards = pile.slice(clicked.index);
-            const pileX = layoutPositions.startX + clicked.pile * layoutPositions.cardSpacing;
-            const cardY = layoutPositions.tableauY + clicked.index * (20 * scale);
+            const pileX = layoutPositions.tableauStartX + clicked.pile * layoutPositions.cardSpacing;
+            const cardY = layoutPositions.tableauY + clicked.index * (22 * scale);
             
             dragState = {
                 from: clicked,
@@ -650,24 +679,34 @@ function handlePointerUp(x, y) {
     render();
 }
 
-// Draw from Stock
+// Draw from Stock - FIXED DRAW 3 MODE
 function drawFromStock() {
     if (gameState.stock.length === 0) return;
     
     const move = {
         type: 'draw',
         cards: [],
+        drawCount: gameState.drawMode,
         oldScore: gameState.score
     };
     
-    for (let i = 0; i < gameState.drawMode && gameState.stock.length > 0; i++) {
+    // Draw the specified number of cards
+    const cardsToDraw = Math.min(gameState.drawMode, gameState.stock.length);
+    
+    for (let i = 0; i < cardsToDraw; i++) {
         const card = gameState.stock.pop();
         card.faceUp = true;
         gameState.waste.push(card);
         move.cards.push(card);
     }
     
-    gameState.score = Math.max(0, gameState.score - gameState.drawMode);
+    // Scoring: -1 per card in draw-1, -3 total in draw-3
+    if (gameState.drawMode === 1) {
+        gameState.score = Math.max(0, gameState.score - 1);
+    } else {
+        gameState.score = Math.max(0, gameState.score - 3);
+    }
+    
     gameState.moves++;
     gameState.moveHistory.push(move);
     gameState.redoStack = [];
@@ -700,6 +739,7 @@ function recycleWaste() {
     
     updateUI();
     render();
+    showMessage('Waste recycled to stock');
 }
 
 // Move Card
@@ -751,7 +791,7 @@ function moveCard(fromType, fromPile, fromIndex, toType, toPile, count) {
     render();
 }
 
-// Undo Move
+// Undo Move - FIXED FOR DRAW MODE
 function undo() {
     if (gameState.moveHistory.length === 0) return;
     
@@ -809,6 +849,7 @@ function redo() {
             c.faceUp = true;
             gameState.waste.push(c);
         });
+        gameState.score = Math.max(0, gameState.score - (move.drawCount === 1 ? 1 : 3));
     } else if (move.type === 'recycle') {
         while (gameState.waste.length > 0) {
             const card = gameState.waste.pop();
@@ -816,6 +857,7 @@ function redo() {
             gameState.stock.push(card);
         }
         gameState.stock.reverse();
+        gameState.score = Math.max(0, gameState.score - 100);
     } else if (move.type === 'move') {
         // Remove from source
         if (move.from.type === 'waste') {
@@ -830,15 +872,17 @@ function redo() {
         // Add to destination
         if (move.to.type === 'foundation') {
             gameState.foundations[move.to.pile].push(...move.cards);
+            gameState.score += 10 * move.cards.length;
         } else if (move.to.type === 'tableau') {
             gameState.tableau[move.to.pile].push(...move.cards);
+            if (move.from.type === 'waste' || move.from.type === 'foundation') {
+                gameState.score += 5 * move.cards.length;
+            }
         }
     }
     
     gameState.moveHistory.push(move);
     gameState.moves++;
-    gameState.score = gameState.score + (move.type === 'move' ? 
-        (move.to.type === 'foundation' ? 10 : 5) * move.cards.length : 0);
     
     updateUI();
     render();
@@ -955,7 +999,7 @@ function autoComplete() {
     }
     
     let movesMade = 0;
-    let maxMoves = 100; // Safety limit
+    let maxMoves = 100;
     
     while (movesMade < maxMoves) {
         let moved = false;
@@ -1110,6 +1154,7 @@ function toggleDrawMode() {
     gameState.drawMode = gameState.drawMode === 1 ? 3 : 1;
     document.getElementById('drawToggle').textContent = `Draw ${gameState.drawMode}`;
     saveSettings();
+    showMessage(`Draw mode: ${gameState.drawMode} card${gameState.drawMode > 1 ? 's' : ''}`);
 }
 
 function toggleTimed() {
