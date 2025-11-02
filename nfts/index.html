@@ -449,17 +449,20 @@
   </style>
 </head>
 <body>
-  <!-- Header -->
   <header class="header">
     <div class="header__container">
-      <a href="../index.html" class="header__logo">Casino Society</a>
-      <nav class="header__nav">
+      <a href="../index.html" class="header__logo" aria-label="Casino Society Home">Casino Society</a>
+      <button class="header__menu-toggle" aria-label="Toggle navigation menu" id="menu-toggle" aria-expanded="false">
+        <span class="hamburger"></span>
+      </button>
+      <nav class="header__nav" id="mobile-menu" aria-label="Main navigation">
         <ul class="header__nav-list">
-          <li><a href="../index.html#about">About</a></li>
-          <li><a href="../index.html#ethos">Ethos</a></li>
-          <li><a href="../index.html#collections">NFT Collections</a></li>
-          <li><a href="../index.html#memes">Memes</a></li>
-          <li><a href="../index.html#faq">FAQ</a></li>
+          <li><a href="../index.html#about" class="header__nav-link">About</a></li>
+          <li><a href="../index.html#ethos" class="header__nav-link">Ethos</a></li>
+          <li><a href="../index.html#collections" class="header__nav-link">NFT Collections</a></li>
+          <li><a href="../index.html#memes" class="header__nav-link">Memes</a></li>
+          <li><a href="../index.html#games" class="header__nav-link">Games</a></li>
+          <li><a href="../index.html#faq" class="header__nav-link">FAQ</a></li>
         </ul>
       </nav>
     </div>
@@ -809,5 +812,18 @@
     // Initialize
     loadNFTs();
   </script>
+
+  <footer class="footer">
+    <div class="footer__container">
+      <p class="footer__text">&copy; 2025 Casino Society. All rights reserved. Send ourselves and each other higher. No Crying in the Casino.</p>
+      <div class="footer__social">
+        <a href="https://x.com/CasinoSociety_" class="footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="Follow us on X">X</a>
+        <span class="footer__social-divider">|</span>
+        <a href="https://discord.gg/68hXWT4VAZ" class="footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">Discord</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../script.js"></script>
 </body>
 </html>
