@@ -48,7 +48,7 @@ let stats = {
 let dragState = null;
 
 // Canvas Dimensions
-let cardSize = { width: 80, height: 115 };
+let cardSize = { width: 110, height: 158 };
 let scale = 1;
 let layoutPositions = {};
 
@@ -111,18 +111,18 @@ function init() {
 // Canvas Resize - BETTER SPACE USAGE
 function resizeCanvas() {
     const container = canvas.parentElement;
-    const maxWidth = Math.min(container.clientWidth - 16, 1100);
+    const maxWidth = Math.min(container.clientWidth - 16, 1400);
     const dpr = window.devicePixelRatio || 1;
     
     canvas.width = maxWidth * dpr;
-    canvas.height = (maxWidth * 0.7) * dpr;
+    canvas.height = (maxWidth * 0.75) * dpr;
     
     canvas.style.width = maxWidth + 'px';
-    canvas.style.height = (maxWidth * 0.7) + 'px';
+    canvas.style.height = (maxWidth * 0.75) + 'px';
     
     scale = maxWidth / 1100;
-    cardSize.width = 80 * scale;
-    cardSize.height = 115 * scale;
+    cardSize.width = 110 * scale;
+    cardSize.height = 158 * scale;
     
     ctx.scale(dpr, dpr);
     calculateLayout();
@@ -133,7 +133,7 @@ function resizeCanvas() {
 function calculateLayout() {
     const w = canvas.width / (window.devicePixelRatio || 1);
     const h = canvas.height / (window.devicePixelRatio || 1);
-    const padding = 12 * scale;
+    const padding = 8 * scale;
     const cardSpacing = cardSize.width + padding;
     
     // Total width for 7 columns
@@ -141,8 +141,8 @@ function calculateLayout() {
     const startX = (w - totalWidth) / 2;
     
     // PROPER LAYOUT: Stock/Waste on left, Foundations on right, same row
-    const topRowY = 20 * scale;
-    const tableauY = topRowY + cardSize.height + 30 * scale;
+    const topRowY = 12 * scale;
+    const tableauY = topRowY + cardSize.height + 20 * scale;
     
     layoutPositions = {
         // Stock and waste on LEFT side
@@ -313,7 +313,7 @@ function render() {
             drawCardSlot(x, layoutPositions.tableauY, '');
         } else {
             pile.forEach((card, j) => {
-                const y = layoutPositions.tableauY + j * (22 * scale);
+                const y = layoutPositions.tableauY + j * (28 * scale);
                 
                 // Skip if dragging
                 if (dragState && dragState.from.type === 'tableau' && 
@@ -329,7 +329,7 @@ function render() {
     // Draw dragging cards
     if (dragState) {
         dragState.cards.forEach((card, i) => {
-            const offsetY = i * (22 * scale);
+            const offsetY = i * (28 * scale);
             const x = dragState.x - dragState.offsetX;
             const y = dragState.y - dragState.offsetY + offsetY;
             drawCard(card, x, y, true);
@@ -560,7 +560,7 @@ function getCardAt(x, y) {
         const pileX = layoutPositions.tableauStartX + i * layoutPositions.cardSpacing;
         
         for (let j = pile.length - 1; j >= 0; j--) {
-            const cardY = layoutPositions.tableauY + j * (22 * scale);
+            const cardY = layoutPositions.tableauY + j * (28 * scale);
             if (isInBounds(x, y, pileX, cardY, cardSize.width, cardSize.height)) {
                 return { type: 'tableau', pile: i, index: j };
             }
@@ -585,7 +585,7 @@ function getDropTarget(x, y) {
         const tx = layoutPositions.tableauStartX + i * layoutPositions.cardSpacing;
         const pile = gameState.tableau[i];
         const maxY = pile.length > 0 ? 
-            layoutPositions.tableauY + pile.length * (22 * scale) + cardSize.height : 
+            layoutPositions.tableauY + pile.length * (28 * scale) + cardSize.height : 
             layoutPositions.tableauY + cardSize.height;
         
         if (isInBounds(x, y, tx, layoutPositions.tableauY, cardSize.width, maxY - layoutPositions.tableauY)) {
@@ -639,7 +639,7 @@ function handlePointerDown(x, y) {
         if (card.faceUp) {
             const cards = pile.slice(clicked.index);
             const pileX = layoutPositions.tableauStartX + clicked.pile * layoutPositions.cardSpacing;
-            const cardY = layoutPositions.tableauY + clicked.index * (22 * scale);
+            const cardY = layoutPositions.tableauY + clicked.index * (28 * scale);
             
             dragState = {
                 from: clicked,
