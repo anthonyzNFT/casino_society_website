@@ -3,35 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="description" content="Casino Society Solitaire: Epic Klondike with luxury casino twists.">
-    <meta property="og:title" content="Casino Society - Solitaire">
-    <meta property="og:description" content="Play Casino Society's exclusive Solitaire game with a luxurious casino twist.">
-    <meta property="og:image" content="https://anthonyznft.github.io/casino_society_website/assets/casino_brand.png">
-    <meta property="og:url" content="https://anthonyznft.github.io/casino_society_website/Solitaire/">
+    <meta name="description" content="Play Casino Society Solitaire - A luxury-themed Klondike Solitaire game with casino aesthetics. Test your skills and climb the ranks!">
+    <meta name="keywords" content="casino solitaire, klondike solitaire, card game, browser game, free solitaire">
+    <meta property="og:title" content="Casino Society Solitaire - Luxury Card Game">
+    <meta property="og:description" content="Play Casino Society's exclusive Solitaire game with luxurious casino styling. Free to play, no download required.">
+    <meta property="og:image" content="https://anthonyznft.github.io/casino_society_website/assets/solitaire_game.png">
+    <meta property="og:url" content="https://anthonyznft.github.io/casino_society_website/solitaire/">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Casino Society - Solitaire">
-    <meta name="twitter:description" content="Play Casino Society's exclusive Solitaire game with a luxurious casino twist.">
-    <meta name="twitter:image" content="https://anthonyznft.github.io/casino_society_website/assets/casino_brand.png">
+    <meta name="twitter:title" content="Casino Society Solitaire - Luxury Card Game">
+    <meta name="twitter:description" content="Play Casino Society's exclusive Solitaire game with luxurious casino styling.">
+    <meta name="twitter:image" content="https://anthonyznft.github.io/casino_society_website/assets/solitaire_game.png">
     <title>Casino Solitaire - Casino Society</title>
-    <link rel="canonical" href="https://anthonyznft.github.io/casino_society_website/Solitaire/">
+    <link rel="canonical" href="https://anthonyznft.github.io/casino_society_website/solitaire/">
     <link rel="stylesheet" href="../styles.css">
     <link rel="stylesheet" href="solitaire.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
 </head>
 <body class="solitaire-page">
     <header class="header">
         <div class="header__container">
-            <a href="../index.html" class="header__logo">Casino Society</a>
-            <nav class="header__nav" id="mobile-menu">
+            <a href="../index.html" class="header__logo" aria-label="Casino Society Home">Casino Society</a>
+            <button class="header__menu-toggle" aria-label="Toggle navigation menu" id="menu-toggle" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+            <nav class="header__nav" id="mobile-menu" aria-label="Main navigation">
                 <ul class="header__nav-list">
                     <li><a href="../index.html#about" class="header__nav-link">About</a></li>
                     <li><a href="../index.html#ethos" class="header__nav-link">Ethos</a></li>
                     <li><a href="../index.html#collections" class="header__nav-link">NFT Collections</a></li>
                     <li><a href="../index.html#memes" class="header__nav-link">Memes</a></li>
+                    <li><a href="../index.html#games" class="header__nav-link">Games</a></li>
                     <li><a href="../index.html#faq" class="header__nav-link">FAQ</a></li>
                 </ul>
-                <button class="header__menu-toggle" aria-label="Toggle Menu" id="menu-toggle">☰</button>
             </nav>
         </div>
     </header>
@@ -75,7 +82,6 @@
         <div id="message" class="message" role="alert" aria-live="polite"></div>
     </main>
 
-    <!-- Settings Modal -->
     <div id="settingsModal" class="modal">
         <div class="modal-content">
             <h2>⚙️ Settings</h2>
@@ -99,7 +105,6 @@
         </div>
     </div>
 
-    <!-- Stats Modal -->
     <div id="statsModal" class="modal">
         <div class="modal-content">
             <h2>📊 Statistics</h2>
@@ -132,7 +137,6 @@
         </div>
     </div>
 
-    <!-- Win Modal -->
     <div id="winModal" class="modal">
         <div class="modal-content win-content">
             <div class="win-message">🎉 YOU WIN! 🎉</div>
@@ -145,11 +149,11 @@
 
     <footer class="footer">
         <div class="footer__container">
-            <p>© 2025 Casino Society. All rights reserved. Send ourselves and each other higher. No Crying in the Casino.</p>
+            <p class="footer__text">&copy; 2025 Casino Society. All rights reserved. Send ourselves and each other higher. No Crying in the Casino.</p>
             <div class="footer__social">
-                <a href="https://x.com/CasinoSociety_" class="footer__social-link">X</a>
+                <a href="https://x.com/CasinoSociety_" class="footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="Follow us on X">X</a>
                 <span class="footer__social-divider">|</span>
-                <a href="https://discord.gg/68hXWT4VAZ" class="footer__social-link">Discord</a>
+                <a href="https://discord.gg/68hXWT4VAZ" class="footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">Discord</a>
             </div>
         </div>
     </footer>
