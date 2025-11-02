@@ -3,47 +3,31 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Browse all 300 Casino Society NFT PFPs. Each unique character celebrates culture, discipline, and the casino ethos. View on xrp.cafe.">
-  <meta name="keywords" content="Casino Society NFTs, XRPL NFT gallery, casino PFPs, XRP NFT collection, 300 NFTs, xrp.cafe">
-  <meta name="author" content="Casino Society">
-  
-  <meta property="og:title" content="Casino Society NFT Gallery - 300 Exclusive PFPs">
-  <meta property="og:description" content="Explore all 300 unique Casino Society NFT PFPs with detailed character information and direct marketplace links.">
-  <meta property="og:image" content="https://anthonyznft.github.io/casino_society_website/assets/b_garlinghouse.png">
-  <meta property="og:url" content="https://anthonyznft.github.io/casino_society_website/nfts/">
-  <meta property="og:type" content="website">
-  
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Casino Society NFT Gallery - 300 Exclusive PFPs">
-  <meta name="twitter:description" content="Explore all 300 unique Casino Society NFT PFPs.">
-  <meta name="twitter:image" content="https://anthonyznft.github.io/casino_society_website/assets/b_garlinghouse.png">
-  
-  <link rel="canonical" href="https://anthonyznft.github.io/casino_society_website/nfts/">
-  <link rel="icon" href="../favicon.ico" type="image/x-icon">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Arial&display=swap" rel="stylesheet">
+  <title>Casino Society - NFT Gallery</title>
+  <meta name="description" content="Explore 300 exclusive Casino Society NFT PFPs with detailed information and direct links to xrp.cafe">
   <link rel="stylesheet" href="../styles.css">
-  
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "Casino Society NFT Gallery",
-    "description": "Complete gallery of 300 unique Casino Society NFT PFPs",
-    "url": "https://anthonyznft.github.io/casino_society_website/nfts/",
-    "numberOfItems": 300,
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "Casino Society",
-      "url": "https://anthonyznft.github.io/casino_society_website/"
-    }
-  }
-  </script>
-  
-  <title>Casino Society NFT Gallery | All 300 Exclusive PFPs</title>
-  
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Arial&display=swap" rel="stylesheet">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
   <style>
+    :root {
+      --gold: #E6D39E;
+      --black: #141414;
+      --red: #C8102E;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
     .gallery-hero {
       text-align: center;
       padding: 4rem 1rem 2rem;
@@ -171,7 +155,10 @@
     .nft-card::before {
       content: '';
       position: absolute;
-      inset: 0;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
       background: linear-gradient(180deg, transparent, rgba(200,16,46,0.1));
       opacity: 0;
       transition: opacity 0.3s;
@@ -227,6 +214,7 @@
       margin: 0;
     }
 
+    /* Modal Styles */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -296,6 +284,10 @@
       padding: 2rem;
     }
 
+    .modal-image-section {
+      position: relative;
+    }
+
     .modal-image {
       width: 100%;
       height: auto;
@@ -359,10 +351,8 @@
       padding-top: 1rem;
     }
 
-    .btn-primary {
+    .btn {
       flex: 1;
-      background: var(--gold);
-      color: var(--black);
       padding: 0.875rem 1.5rem;
       border-radius: 8px;
       font-weight: 600;
@@ -374,23 +364,21 @@
       border: none;
     }
 
+    .btn-primary {
+      background: var(--gold);
+      color: var(--black);
+    }
+
     .btn-primary:hover {
-      background: var(--gold-light);
+      background: #f5e4af;
       transform: translateY(-2px);
       box-shadow: 0 6px 16px rgba(230,211,158,0.3);
     }
 
     .btn-secondary {
-      flex: 1;
       background: transparent;
       border: 1px solid var(--gold);
       color: var(--gold);
-      padding: 0.875rem 1.5rem;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: all 0.3s;
     }
 
     .btn-secondary:hover {
@@ -435,7 +423,7 @@
     }
 
     .back-to-top:hover {
-      background: var(--gold-light);
+      background: #f5e4af;
       transform: translateY(-4px);
     }
 
@@ -461,10 +449,11 @@
   </style>
 </head>
 <body>
-  <header class="header" role="banner">
+  <!-- Header -->
+  <header class="header">
     <div class="header__container">
-      <a href="../index.html" class="header__logo" aria-label="Casino Society Home">Casino Society</a>
-      <nav class="header__nav" role="navigation" aria-label="Main navigation">
+      <a href="../index.html" class="header__logo">Casino Society</a>
+      <nav class="header__nav">
         <ul class="header__nav-list">
           <li><a href="../index.html#about">About</a></li>
           <li><a href="../index.html#ethos">Ethos</a></li>
@@ -476,17 +465,19 @@
     </div>
   </header>
 
-  <section class="gallery-hero" aria-labelledby="gallery-title">
-    <h1 id="gallery-title">Casino Society PFP Gallery</h1>
+  <!-- Hero Section -->
+  <section class="gallery-hero">
+    <h1>Casino Society PFP Gallery</h1>
     <p>Explore 300 exclusive NFTs celebrating culture, discipline, and effort. Click any card to view full details.</p>
   </section>
 
-  <div class="controls-bar" role="search">
+  <!-- Controls Bar -->
+  <div class="controls-bar">
     <div class="controls-wrapper">
       <div class="search-box">
-        <span class="search-icon" aria-hidden="true">🔍</span>
+        <span class="search-icon">🔍</span>
         <input 
-          type="search" 
+          type="text" 
           id="searchInput" 
           placeholder="Search by name, character, or movie..."
           aria-label="Search NFTs">
@@ -496,33 +487,39 @@
         <option value="desc">NFT # (High to Low)</option>
         <option value="name">Name (A-Z)</option>
       </select>
-      <span class="results-info" id="resultsInfo" role="status" aria-live="polite">Loading...</span>
+      <span class="results-info" id="resultsInfo">Loading...</span>
     </div>
   </div>
 
+  <!-- Gallery Container -->
   <div class="gallery-container">
-    <div id="galleryGrid" class="gallery-grid" role="list"></div>
-    <div id="loadingState" class="loading" role="status">Loading NFT collection...</div>
-    <div id="noResults" class="no-results" style="display:none" role="status">
+    <div id="galleryGrid" class="gallery-grid"></div>
+    <div id="loadingState" class="loading">Loading NFT collection...</div>
+    <div id="noResults" class="no-results" style="display:none">
       No NFTs found matching your search.
     </div>
   </div>
 
-  <div id="nftModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <!-- Modal -->
+  <div id="nftModal" class="modal-overlay">
     <div class="modal-content">
       <button class="modal-close" id="modalClose" aria-label="Close modal">×</button>
       <div id="modalBody" class="modal-body"></div>
     </div>
   </div>
 
+  <!-- Back to Top Button -->
   <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
 
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script>
+    // State
     let allNFTs = [];
     let filteredNFTs = [];
     let currentSort = 'asc';
     
+    // DOM Elements
     const galleryGrid = document.getElementById('galleryGrid');
     const loadingState = document.getElementById('loadingState');
     const noResults = document.getElementById('noResults');
@@ -534,17 +531,30 @@
     const modalClose = document.getElementById('modalClose');
     const backToTop = document.getElementById('backToTop');
 
+    // Utility Functions
     function stripBOM(str) {
       return str ? str.replace(/^\uFEFF/, '').trim() : str;
     }
 
-    function extractImageUrl(value, nftNumber) {
-      if (!value) return `images/${nftNumber}.png`;
+    function extractImageUrl(value) {
+      if (!value) return '../assets/b_garlinghouse.png';
+      
       const str = String(value).trim();
-      if (str.match(/^\d+\.(png|jpg|jpeg|svg|webp)$/i)) return `images/${str}`;
-      const filenameMatch = str.match(/(\d+(?:_batch_\d+)?\.(png|svg|jpg|jpeg|webp))/i);
-      if (filenameMatch) return `images/${filenameMatch[1]}`;
-      return `images/${nftNumber}.png`;
+      
+      // Extract from Airtable format: filename (url)
+      const parenMatch = str.match(/\((https?:\/\/[^)]+)\)/);
+      if (parenMatch) return parenMatch[1];
+      
+      // Direct URL
+      const urlMatch = str.match(/https?:\/\/[^\s)]+/);
+      if (urlMatch) return urlMatch[0];
+      
+      // Local file
+      if (str.match(/\.(png|jpg|jpeg|svg|webp)$/i)) {
+        return `../assets/${str}`;
+      }
+      
+      return '../assets/b_garlinghouse.png';
     }
 
     function escapeHtml(text) {
@@ -554,13 +564,14 @@
       return div.innerHTML;
     }
 
+    // Render Functions
     function createNFTCard(nft) {
       const card = document.createElement('div');
       card.className = 'nft-card';
-      card.setAttribute('role', 'listitem');
+      card.setAttribute('role', 'button');
       card.setAttribute('tabindex', '0');
       
-      const imageUrl = extractImageUrl(nft.image, nft.nft_number);
+      const imageUrl = extractImageUrl(nft.image);
       const name = nft.name || nft.NFT || `NFT #${nft.nft_number}`;
       const character = nft.character || nft.Character || '';
       
@@ -605,13 +616,17 @@
       loadingState.style.display = 'none';
       
       const fragment = document.createDocumentFragment();
-      filteredNFTs.forEach(nft => fragment.appendChild(createNFTCard(nft)));
+      filteredNFTs.forEach(nft => {
+        fragment.appendChild(createNFTCard(nft));
+      });
+      
       galleryGrid.appendChild(fragment);
       resultsInfo.textContent = `${filteredNFTs.length} NFT${filteredNFTs.length !== 1 ? 's' : ''}`;
     }
 
+    // Modal Functions
     function openModal(nft) {
-      const imageUrl = extractImageUrl(nft.image, nft.nft_number);
+      const imageUrl = extractImageUrl(nft.image);
       const name = nft.name || nft.NFT || `NFT #${nft.nft_number}`;
       const character = nft.character || nft.Character || '';
       const movieTv = nft.movie_tv || nft.movie || '';
@@ -629,16 +644,44 @@
         </div>
         <div class="modal-details-section">
           <div>
-            <h2 class="modal-title" id="modal-title">${escapeHtml(name)}</h2>
+            <h2 class="modal-title">${escapeHtml(name)}</h2>
             <p class="modal-number">NFT #${nft.nft_number}</p>
           </div>
-          ${character ? `<div class="detail-row"><p class="detail-label">Character</p><p class="detail-value">${escapeHtml(character)}</p></div>` : ''}
-          ${movieTv ? `<div class="detail-row"><p class="detail-label">Appears In</p><p class="detail-value">${escapeHtml(movieTv)}</p></div>` : ''}
-          ${description ? `<div class="detail-row"><p class="detail-label">Description</p><p class="detail-value">${escapeHtml(description)}</p></div>` : ''}
-          ${quotes ? `<div class="quote-section">${escapeHtml(quotes)}</div>` : ''}
+          
+          ${character ? `
+            <div class="detail-row">
+              <p class="detail-label">Character</p>
+              <p class="detail-value">${escapeHtml(character)}</p>
+            </div>
+          ` : ''}
+          
+          ${movieTv ? `
+            <div class="detail-row">
+              <p class="detail-label">Appears In</p>
+              <p class="detail-value">${escapeHtml(movieTv)}</p>
+            </div>
+          ` : ''}
+          
+          ${description ? `
+            <div class="detail-row">
+              <p class="detail-label">Description</p>
+              <p class="detail-value">${escapeHtml(description)}</p>
+            </div>
+          ` : ''}
+          
+          ${quotes ? `
+            <div class="quote-section">
+              ${escapeHtml(quotes)}
+            </div>
+          ` : ''}
+          
           <div class="modal-actions">
-            ${cafeLink ? `<a href="${cafeLink}" target="_blank" rel="noopener noreferrer" class="btn-primary">View on xrp.cafe</a>` : ''}
-            <button class="btn-secondary" onclick="closeModal()">Close</button>
+            ${cafeLink ? `
+              <a href="${cafeLink}" target="_blank" rel="noopener" class="btn btn-primary">
+                View on xrp.cafe
+              </a>
+            ` : ''}
+            <button class="btn btn-secondary" onclick="closeModal()">Close</button>
           </div>
         </div>
       `;
@@ -652,39 +695,52 @@
       document.body.style.overflow = '';
     }
 
+    // Filter and Sort
     function filterAndSort() {
       const query = searchInput.value.toLowerCase().trim();
       
+      // Filter
       if (query) {
         filteredNFTs = allNFTs.filter(nft => {
           const name = (nft.name || nft.NFT || '').toLowerCase();
           const character = (nft.character || nft.Character || '').toLowerCase();
           const movie = (nft.movie_tv || nft.movie || '').toLowerCase();
           const description = (nft.description || nft.Description || '').toLowerCase();
-          return name.includes(query) || character.includes(query) || movie.includes(query) || description.includes(query);
+          
+          return name.includes(query) || 
+                 character.includes(query) || 
+                 movie.includes(query) ||
+                 description.includes(query);
         });
       } else {
         filteredNFTs = [...allNFTs];
       }
       
+      // Sort
       filteredNFTs.sort((a, b) => {
         const numA = parseInt(a.nft_number) || 0;
         const numB = parseInt(b.nft_number) || 0;
         
         switch(currentSort) {
-          case 'desc': return numB - numA;
+          case 'desc':
+            return numB - numA;
           case 'name':
             const nameA = (a.name || a.NFT || '').toLowerCase();
             const nameB = (b.name || b.NFT || '').toLowerCase();
             return nameA.localeCompare(nameB);
-          default: return numA - numB;
+          default: // 'asc'
+            return numA - numB;
         }
       });
       
       renderGallery();
     }
 
-    searchInput.addEventListener('input', filterAndSort);
+    // Event Listeners
+    searchInput.addEventListener('input', () => {
+      filterAndSort();
+    });
+
     sortSelect.addEventListener('change', (e) => {
       currentSort = e.target.value;
       filterAndSort();
@@ -696,17 +752,25 @@
     });
 
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+      if (e.key === 'Escape' && modal.classList.contains('active')) {
+        closeModal();
+      }
     });
 
+    // Back to Top
     window.addEventListener('scroll', () => {
-      backToTop.classList.toggle('visible', window.scrollY > 500);
+      if (window.scrollY > 500) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
     });
 
     backToTop.addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    // Load CSV Data
     async function loadNFTs() {
       try {
         const response = await fetch('NFTs.csv');
@@ -718,14 +782,17 @@
           header: true,
           skipEmptyLines: true,
           complete: (results) => {
+            // Clean up BOM and normalize data
             allNFTs = results.data.map(row => {
               const cleaned = {};
               Object.keys(row).forEach(key => {
-                cleaned[stripBOM(key)] = row[key];
+                const cleanKey = stripBOM(key);
+                cleaned[cleanKey] = row[key];
               });
               return cleaned;
-            }).filter(nft => nft.nft_number);
+            }).filter(nft => nft.nft_number); // Only include rows with nft_number
             
+            console.log(`Loaded ${allNFTs.length} NFTs`);
             filterAndSort();
           },
           error: (error) => {
@@ -739,6 +806,7 @@
       }
     }
 
+    // Initialize
     loadNFTs();
   </script>
 </body>
