@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Casino Society Slot Machine - Spin to win exclusive NFTs and XRP tokens!">
+    <title>Casino Society Slots - Play & Win</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="slot-machine.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
+</head>
+<body class="slot-page">
+    <header class="header">
+        <div class="header__container">
+            <a href="../index.html" class="header__logo" aria-label="Casino Society Home">Casino Society</a>
+            <button class="header__menu-toggle" aria-label="Toggle navigation menu" id="menu-toggle" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+            <nav class="header__nav" id="mobile-menu" aria-label="Main navigation">
+                <ul class="header__nav-list">
+                    <li><a href="../index.html#about" class="header__nav-link">About</a></li>
+                    <li><a href="../index.html#ethos" class="header__nav-link">Ethos</a></li>
+                    <li><a href="../index.html#collections" class="header__nav-link">NFT Collections</a></li>
+                    <li><a href="../index.html#memes" class="header__nav-link">Memes</a></li>
+                    <li><a href="../index.html#games" class="header__nav-link">Games</a></li>
+                    <li><a href="../index.html#faq" class="header__nav-link">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="slot-main">
+        <div class="slot-container">
+            <div class="slot-header">
+                <h1 class="slot-title">🎰 CASINO SOCIETY SLOTS 🎰</h1>
+                <div class="mode-toggle">
+                    <button class="mode-btn active" id="freePlayBtn">Free Play</button>
+                    <button class="mode-btn" id="realPlayBtn">Real Play</button>
+                </div>
+            </div>
+
+            <div class="game-stats">
+                <div class="stat-box">
+                    <div class="stat-label">Balance</div>
+                    <div class="stat-value" id="balance">1000 XRP</div>
+                </div>
+                <div class="stat-box jackpot-box">
+                    <div class="stat-label">Jackpot 💰</div>
+                    <div class="stat-value jackpot-value" id="jackpot">1,250 XRP</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-label">Total Spins</div>
+                    <div class="stat-value" id="totalSpins">0</div>
+                </div>
+            </div>
+
+            <div class="slot-machine">
+                <div class="machine-top">
+                    <div class="marquee-lights"></div>
+                    <div class="machine-sign">CASINO SOCIETY</div>
+                </div>
+
+                <div class="machine-body">
+                    <div class="reels-container">
+                        <div class="reel" id="reel1">
+                            <div class="reel-strip"></div>
+                        </div>
+                        <div class="reel" id="reel2">
+                            <div class="reel-strip"></div>
+                        </div>
+                        <div class="reel" id="reel3">
+                            <div class="reel-strip"></div>
+                        </div>
+                    </div>
+
+                    <div class="win-line"></div>
+
+                    <div class="lever-container">
+                        <button class="lever" id="lever" aria-label="Pull lever to spin">
+                            <div class="lever-handle"></div>
+                            <div class="lever-ball"></div>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="machine-bottom">
+                    <div class="bet-selector">
+                        <div class="bet-label">SELECT BET</div>
+                        <div class="bet-buttons">
+                            <button class="bet-btn active" data-bet="1">1 XRP</button>
+                            <button class="bet-btn" data-bet="2">2 XRP</button>
+                            <button class="bet-btn" data-bet="5">5 XRP</button>
+                        </div>
+                    </div>
+
+                    <button class="spin-button" id="spinButton">
+                        <span class="spin-text">SPIN</span>
+                        <span class="spin-cost">(1 XRP)</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="controls-panel">
+                <button class="control-btn" id="soundToggle" aria-label="Toggle sound">
+                    <span class="sound-icon">🔊</span>
+                </button>
+                <button class="control-btn" id="infoBtn" aria-label="Game info">
+                    <span>ℹ️</span>
+                </button>
+                <button class="control-btn" id="historyBtn" aria-label="Spin history">
+                    <span>📊</span>
+                </button>
+            </div>
+
+            <div class="prize-pool-display">
+                <h3 class="pool-title">🏆 PRIZE POOL</h3>
+                <div class="prize-tiers">
+                    <div class="tier-display legendary">
+                        <span class="tier-icon">💎</span>
+                        <span class="tier-name">Legendary</span>
+                        <span class="tier-count" id="legendaryCount">5</span>
+                    </div>
+                    <div class="tier-display epic">
+                        <span class="tier-icon">⭐</span>
+                        <span class="tier-name">Epic</span>
+                        <span class="tier-count" id="epicCount">20</span>
+                    </div>
+                    <div class="tier-display rare">
+                        <span class="tier-icon">🔔</span>
+                        <span class="tier-name">Rare</span>
+                        <span class="tier-count" id="rareCount">50</span>
+                    </div>
+                    <div class="tier-display common">
+                        <span class="tier-icon">🍒</span>
+                        <span class="tier-name">Common</span>
+                        <span class="tier-count" id="commonCount">75</span>
+                    </div>
+                </div>
+                <div class="pool-total">Total: <span id="totalPrizes">150</span> prizes available</div>
+            </div>
+
+            <div class="recent-wins">
+                <h3 class="wins-title">Recent Wins 🎉</h3>
+                <div class="wins-list" id="winsList">
+                    <div class="no-wins">No wins yet - be the first!</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="winModal">
+        <div class="modal-content win-modal">
+            <button class="modal-close" id="closeWin">×</button>
+            <div class="confetti-container"></div>
+            <div class="win-content">
+                <div class="win-message" id="winMessage">YOU WIN!</div>
+                <div class="prize-display">
+                    <div class="prize-image-container">
+                        <img src="" alt="Prize" id="prizeImage" class="prize-image">
+                    </div>
+                    <div class="prize-details">
+                        <h3 class="prize-name" id="prizeName"></h3>
+                        <div class="prize-tier" id="prizeTier"></div>
+                        <div class="prize-value" id="prizeValue"></div>
+                    </div>
+                </div>
+                <div class="win-actions">
+                    <button class="btn btn-primary" id="claimPrize">Claim Prize</button>
+                    <button class="btn btn-secondary" id="spinAgain">Spin Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="infoModal">
+        <div class="modal-content info-modal">
+            <button class="modal-close" id="closeInfo">×</button>
+            <h2>How to Play</h2>
+            <div class="info-content">
+                <div class="info-section">
+                    <h3>🎰 Game Modes</h3>
+                    <p><strong>Free Play:</strong> Start with 1000 XRP demo credits. Perfect for practice!</p>
+                    <p><strong>Real Play:</strong> Connect your XRP wallet and play for real prizes. Every spin is a winner!</p>
+                </div>
+                <div class="info-section">
+                    <h3>🎮 How to Spin</h3>
+                    <ol>
+                        <li>Select your bet amount (1, 2, or 5 XRP)</li>
+                        <li>Click SPIN or pull the lever</li>
+                        <li>Watch the reels spin and stop</li>
+                        <li>Collect your prize!</li>
+                    </ol>
+                </div>
+                <div class="info-section">
+                    <h3>🏆 Prize Tiers (Real Play)</h3>
+                    <table class="odds-table">
+                        <tr><th>Bet</th><th>Legendary</th><th>Epic</th><th>Rare</th><th>Common</th><th>Consolation</th></tr>
+                        <tr><td>1 XRP</td><td>1%</td><td>5%</td><td>15%</td><td>30%</td><td>49%</td></tr>
+                        <tr><td>2 XRP</td><td>3%</td><td>10%</td><td>25%</td><td>40%</td><td>22%</td></tr>
+                        <tr><td>5 XRP</td><td>8%</td><td>20%</td><td>35%</td><td>30%</td><td>7%</td></tr>
+                    </table>
+                    <p><strong>Consolation Prize:</strong> Get back 80% of your bet or a small prize!</p>
+                </div>
+                <div class="info-section">
+                    <h3>💎 Winning Combinations</h3>
+                    <ul>
+                        <li>7️⃣ 7️⃣ 7️⃣ = Legendary Prize</li>
+                        <li>💎 💎 💎 = Epic Prize</li>
+                        <li>⭐ ⭐ ⭐ = Epic Prize</li>
+                        <li>🔔 🔔 🔔 = Rare Prize</li>
+                        <li>🍒 🍒 🍒 = Common Prize</li>
+                        <li>Any 2 matching = Consolation</li>
+                    </ul>
+                </div>
+                <div class="info-section">
+                    <h3>🎁 Jackpot</h3>
+                    <p>Every 250th spin wins the accumulated JACKPOT! The jackpot grows with every bet placed.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="historyModal">
+        <div class="modal-content history-modal">
+            <button class="modal-close" id="closeHistory">×</button>
+            <h2>Your Spin History</h2>
+            <div class="history-stats">
+                <div class="history-stat">
+                    <div class="history-stat-label">Total Spins</div>
+                    <div class="history-stat-value" id="historyTotalSpins">0</div>
+                </div>
+                <div class="history-stat">
+                    <div class="history-stat-label">Total Wagered</div>
+                    <div class="history-stat-value" id="historyWagered">0 XRP</div>
+                </div>
+                <div class="history-stat">
+                    <div class="history-stat-label">Total Won</div>
+                    <div class="history-stat-value" id="historyWon">0 XRP</div>
+                </div>
+                <div class="history-stat">
+                    <div class="history-stat-label">Win Rate</div>
+                    <div class="history-stat-value" id="historyWinRate">0%</div>
+                </div>
+            </div>
+            <div class="history-list" id="historyList">
+                <div class="no-history">No spins yet</div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <p class="footer__text">&copy; 2025 Casino Society. All rights reserved. Send ourselves and each other higher. No Crying in the Casino.</p>
+            <div class="footer__social">
+                <a href="https://x.com/CasinoSociety_" class="footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="Follow us on X">X</a>
+                <span class="footer__social-divider">|</span>
+                <a href="https://discord.gg/68hXWT4VAZ" class="footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="Join our Discord">Discord</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="slot-machine.js"></script>
+</body>
+</html>
