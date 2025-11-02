@@ -3,62 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Page not found on Casino Society. Return to home for exclusive NFT collections.">
-    <meta name="keywords" content="casino society, NFT 404, XRP NFT">
-    <meta property="og:title" content="Casino Society - 404 Not Found">
-    <meta property="og:description" content="Page not found. Return to explore Casino Society's NFT collections.">
+    <meta name="description" content="Page not found on Casino Society. Return home to explore our exclusive NFT collections.">
+    <meta name="robots" content="noindex, follow">
+    
+    <meta property="og:title" content="404 - Page Not Found | Casino Society">
+    <meta property="og:description" content="The page you're looking for doesn't exist. Return to explore Casino Society NFTs.">
     <meta property="og:image" content="https://anthonyznft.github.io/casino_society_website/assets/404-placeholder.webp">
     <meta property="og:url" content="https://anthonyznft.github.io/casino_society_website/404.html">
-    <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Casino Society - 404 Not Found">
-    <meta name="twitter:description" content="Page not found. Return to explore Casino Society's NFT collections.">
-    <meta name="twitter:image" content="https://anthonyznft.github.io/casino_society_website/assets/404-placeholder.webp">
-    <title>Casino Society - 404 Not Found</title>
-    <link rel="canonical" href="https://anthonyznft.github.io/casino_society_website/404.html">
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Arial&display=swap" rel="stylesheet">
+    
+    <title>404 - Page Not Found | Casino Society</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Arial&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header class="header">
+    <header class="header" role="banner">
         <div class="header__container">
-            <a href="index.html" class="header__logo">Casino Society</a>
-            <nav class="header__nav" id="mobile-menu">
-                <ul class="header__nav-list">
+            <a href="index.html" class="header__logo" aria-label="Casino Society Home">Casino Society</a>
+            <nav class="header__nav" role="navigation" aria-label="Main navigation">
+                <button class="header__menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">☰</button>
+                <ul class="header__nav-list" id="mobile-menu">
                     <li><a href="index.html#about" class="header__nav-link">About</a></li>
                     <li><a href="index.html#ethos" class="header__nav-link">Ethos</a></li>
                     <li><a href="index.html#collections" class="header__nav-link">NFT Collections</a></li>
                     <li><a href="index.html#memes" class="header__nav-link">Memes</a></li>
                     <li><a href="index.html#faq" class="header__nav-link">FAQ</a></li>
                 </ul>
-                <button class="header__menu-toggle" aria-label="Toggle Menu" id="menu-toggle">☰</button>
             </nav>
         </div>
     </header>
 
-    <main class="main">
+    <main class="main" role="main">
         <section class="section error">
             <div class="section__container">
                 <h1 class="section__title">404 - Page Not Found</h1>
-                <p>Looks like you've hit a bad hand. Head back to the tables.</p>
-                <img loading="lazy" src="assets/404-placeholder.webp" alt="Casino-themed 404 image" class="nfts__image">
+                <p>Looks like you've hit a bad hand. Time to head back to the tables.</p>
+                <img loading="lazy" src="assets/404-placeholder.webp" alt="Casino themed 404 error illustration" class="nfts__image" width="400" height="400">
                 <a href="index.html" class="btn">Return Home</a>
             </div>
         </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" role="contentinfo">
         <div class="footer__container">
-            <p>© 2025 Casino Society. All rights reserved. Send ourselves and each other higher. No Crying in the Casino.</p>
+            <p>&copy; 2025 Casino Society. All rights reserved. Send ourselves and each other higher. No Crying in the Casino.</p>
             <div class="footer__social">
-                <a href="https://x.com/CasinoSociety_" class="footer__social-link">X</a>
-                <span class="footer__social-divider">|</span>
-                <a href="https://discord.gg/68hXWT4VAZ" class="footer__social-link">Discord</a>
+                <a href="https://x.com/CasinoSociety_" class="footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="Casino Society on X">X</a>
+                <span class="footer__social-divider" aria-hidden="true">|</span>
+                <a href="https://discord.gg/68hXWT4VAZ" class="footer__social-link" target="_blank" rel="noopener noreferrer" aria-label="Casino Society Discord">Discord</a>
             </div>
         </div>
     </footer>
 
-    <script src="script.js" async></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
